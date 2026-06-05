@@ -1,6 +1,13 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import InPageNav from '../components/InPageNav.astro';
 import { slugifyTag, tagPath } from '../lib/routes';
+
+interface HeadingItem {
+  depth: number;
+  slug: string;
+  text: string;
+}
 
 interface Props {
   title: string;
@@ -8,9 +15,10 @@ interface Props {
   path: string;
   publishDate: Date;
   tags?: string[];
+  headings?: HeadingItem[];
 }
 
-const { title, description, path, publishDate, tags = [] } = Astro.props;
+const { title, description, path, publishDate, tags = [], headings = [] } = Astro.props;
 ---
 
 <BaseLayout
@@ -20,45 +28,83 @@ const { title, description, path, publishDate, tags = [] } = Astro.props;
   type="article"
   publishedTime={publishDate.toISOString()}
 >
-  <article class="reading-flow surface article-shell">
-    <header class="article-head">
-      <span class="eyebrow">Publicacao</span>
-      <h1>{title}</h1>
-      <p class="lede">{description}</p>
-      <div class="meta-row">
-        <time datetime={publishDate.toISOString()}>{publishDate.toLocaleDateString('pt-BR')}</time>
-        <span>{tags.length} etiqueta(s)</span>
-      </div>
-      {tags.length > 0 && (
-        <ul class="tag-list" aria-label="Etiquetas da publicacao">
-          {tags.map((tag) => (
-            <li><a class="tag-pill" href={tagPath(slugifyTag(tag))}>{tag}</a></li>
-          ))}
-        </ul>
-      )}
-    </header>
+  <div class="article-grid">
+    <aside class="rail sticky-rail">
+      <InPageNav headings={headings} title="nesta página" />
+    </aside>
 
-    <div class="prose">
-      <slot />
-    </div>
-  </article>
+    <article class="reading-flow surface article-shell" id="topo">
+      <header class="article-head">
+        <div class="topline">
+          <span class="eyebrow">post</span>
+          <time datetime={publishDate.toISOString()}>{publishDate.toISOString().slice(0, 10)}</time>
+        </div>
+        <h1>{title}</h1>
+        <p class="lede">{description}</p>
+        <div class="meta-row">
+          <span>{tags.length} tags</span>
+        </div>
+        {tags.length > 0 && (
+          <ul class="tag-list" aria-label="Etiquetas da publicacao">
+            {tags.map((tag) => (
+              <li><a class="tag-pill" href={tagPath(slugifyTag(tag))}>{tag}</a></li>
+            ))}
+          </ul>
+        )}
+      </header>
+
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+  </div>
 </BaseLayout>
 
 <style>
+  .article-grid {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .rail {
+    min-width: 0;
+  }
+
   .article-shell {
-    padding: clamp(1.5rem, 4vw, 2.5rem);
+    width: 100%;
+    padding: clamp(1.25rem, 3vw, 1.8rem);
   }
 
   .article-head {
     display: grid;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 0.85rem;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.8rem;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.86rem;
   }
 
   h1 {
     margin: 0;
-    font-size: clamp(2.5rem, 6vw, 4.3rem);
+    font-size: clamp(2rem, 5vw, 3.8rem);
     line-height: 0.96;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.06em;
+  }
+
+  @media (max-width: 920px) {
+    .article-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

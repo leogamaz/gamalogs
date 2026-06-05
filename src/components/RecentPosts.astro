@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import InPageNav from './InPageNav.astro';
 import PostCard from './PostCard.astro';
 
 interface Props {
@@ -7,53 +8,116 @@ interface Props {
 }
 
 const { posts = [] } = Astro.props as Props;
+
+type MonthBucket = {
+  id: string;
+  label: string;
+  posts: CollectionEntry<'posts'>[];
+};
+
+const archiveMap = new Map<string, MonthBucket>();
+
+for (const post of posts) {
+  const date = post.data.publishDate;
+  const year = String(date.getFullYear());
+  const monthNumber = String(date.getMonth() + 1).padStart(2, '0');
+  const monthLabel = date.toLocaleString('pt-BR', { month: 'long' });
+  const key = `${year}-${monthNumber}`;
+
+  if (!archiveMap.has(key)) {
+    archiveMap.set(key, {
+      id: `arquivo-${year}-${monthNumber}`,
+      label: `${year} - ${monthLabel}`,
+      posts: [],
+    });
+  }
+
+  archiveMap.get(key)?.posts.push(post);
+}
+
+const archiveBuckets = [...archiveMap.values()];
+const navItems = archiveBuckets.map((bucket) => ({ depth: 1, slug: bucket.id, text: bucket.label }));
+
+const ranks = new Map<string, string>();
+let rankCounter = 142;
+
+for (const post of posts) {
+  ranks.set(post.slug, `#${String(rankCounter++).padStart(4, '0')}`);
+}
 ---
 
-<section class="recent">
-  <div class="header">
-    <div>
-      <span class="eyebrow">Recentes</span>
-      <h2 class="section-title">Notas para abrir a conversa.</h2>
-    </div>
-    <p class="lede">Publicacoes em ordem cronologica, com resumo curto e caminho claro para leitura completa.</p>
-  </div>
+<section class="home-archive" id="topo">
+  <aside class="rail sticky-rail">
+    <InPageNav items={navItems} title="nesta página" includeTopLevel={true} />
+  </aside>
 
-  <div class="grid">
-    {posts.map((post) => (
-      <PostCard
-        slug={post.slug}
-        title={post.data.title}
-        summary={post.data.summary}
-        publishDate={post.data.publishDate}
-        tags={post.data.tags}
-      />
+  <article class="timeline">
+    {archiveBuckets.map((bucket) => (
+      <section class="archive-block" id={bucket.id}>
+        <h2>{bucket.label}</h2>
+
+        <div class="list">
+          {bucket.posts.map((post) => (
+            <PostCard
+              rank={ranks.get(post.slug) ?? '#0000'}
+              slug={post.slug}
+              title={post.data.title}
+              summary={post.data.summary}
+              publishDate={post.data.publishDate}
+              tags={post.data.tags}
+              readingMinutes={Math.max(1, Math.round(post.body.split(/\s+/).filter(Boolean).length / 220))}
+            />
+          ))}
+        </div>
+      </section>
     ))}
-  </div>
+  </article>
 </section>
 
 <style>
-  .recent {
+  .home-archive {
     display: grid;
-    gap: 1.5rem;
-  }
-
-  .header {
-    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
     gap: 1rem;
-    grid-template-columns: 1.6fr 1fr;
-    align-items: end;
+    align-items: start;
   }
 
-  .grid {
+  .rail {
+    min-width: 0;
+  }
+
+  .timeline {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem;
   }
 
-  @media (max-width: 860px) {
-    .header,
-    .grid {
+  .archive-block {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .archive-block h2 {
+    margin: 0;
+  }
+
+  .archive-block h2 {
+    color: var(--accent);
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    scroll-margin-top: 6rem;
+  }
+
+  .list {
+    display: grid;
+    gap: 0.15rem;
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 920px) {
+    .home-archive {
       grid-template-columns: 1fr;
     }
   }
+
 </style>

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import InPageNav from '../../components/InPageNav.astro';
 import { pagePath, SITE } from '../../lib/routes';
 
 export async function getStaticPaths() {
@@ -13,27 +14,61 @@ export async function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const { Content } = await render(page);
+const { Content, headings } = await render(page);
 ---
 
 <BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={pagePath(page.slug)}>
-  <article class="reading-flow surface article-shell prose">
-    <span class="eyebrow">Pagina institucional</span>
-    <h1>{page.data.title}</h1>
-    {page.data.summary && <p class="lede">{page.data.summary}</p>}
-    <Content />
-  </article>
+  <div class="article-grid">
+    <aside class="rail sticky-rail">
+      <InPageNav headings={headings} title="nesta página" />
+    </aside>
+
+    <article class="reading-flow surface article-shell prose" id="topo">
+      <header class="article-head">
+        <span class="eyebrow">page</span>
+        <h1>{page.data.title}</h1>
+        {page.data.summary && <p class="lede">{page.data.summary}</p>}
+      </header>
+      <Content />
+    </article>
+  </div>
 </BaseLayout>
 
 <style>
+  .article-grid {
+    display: grid;
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .rail {
+    min-width: 0;
+  }
+
   .article-shell {
-    padding: 1.75rem;
+    padding: 1.25rem;
+  }
+
+  .article-head {
+    display: grid;
+    gap: 0.8rem;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.4rem;
+    border-bottom: 1px solid var(--line);
   }
 
   h1 {
-    margin-top: 0.85rem;
-    font-size: clamp(2.4rem, 6vw, 4rem);
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     line-height: 0.98;
     letter-spacing: -0.05em;
+    text-transform: lowercase;
+  }
+
+  @media (max-width: 920px) {
+    .article-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

@@ -25,21 +25,23 @@ const { tag } = Astro.props as Props;
   description={`Publicacoes agrupadas pela etiqueta ${tag.name}.`}
   path={tagPath(tag.slug)}
 >
-  <section class="tag-page page-stack-inner">
-    <div>
-      <span class="eyebrow">Etiqueta</span>
+  <section class="tag-page reading-flow">
+    <div class="intro surface">
+      <span class="eyebrow">tag</span>
       <h1 class="section-title">{tag.name}</h1>
-      <p class="lede">Todas as publicacoes ligadas a este assunto, mantendo a navegacao por contexto.</p>
+      <p class="lede">{tag.posts.length} posts ligados a este tema.</p>
     </div>
 
-    <div class="tag-grid">
-      {tag.posts.map((post) => (
+    <div class="tag-listing">
+      {tag.posts.map((post, index) => (
         <PostCard
+          rank={`#${String(142 + index).padStart(4, '0')}`}
           slug={post.slug}
           title={post.data.title}
           summary={post.data.summary}
           publishDate={post.data.publishDate}
           tags={post.data.tags}
+          readingMinutes={Math.max(1, Math.round(post.body.split(/\s+/).filter(Boolean).length / 220))}
         />
       ))}
     </div>
@@ -47,13 +49,17 @@ const { tag } = Astro.props as Props;
 </BaseLayout>
 
 <style>
-  .page-stack-inner {
+  .tag-page {
     display: grid;
     gap: 1.5rem;
   }
 
-  .tag-grid {
+  .intro {
+    padding: 1.2rem;
+  }
+
+  .tag-listing {
     display: grid;
-    gap: 1rem;
+    gap: 0.15rem;
   }
 </style>

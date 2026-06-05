@@ -1,85 +1,120 @@
 ---
-interface Props {
-  title: string;
-  description: string;
+interface FilterLink {
+  label: string;
+  href: string;
+  count: number;
 }
 
-const { title, description } = Astro.props;
+interface Props {
+  count?: number;
+  filters?: FilterLink[];
+}
+
+const { count = 0, filters = [] } = Astro.props;
 ---
 
-<section class="hero surface">
-  <div class="hero-copy">
-    <span class="eyebrow">Edicao estatica</span>
-    <h1>{title}</h1>
-    <p>{description}</p>
-    <div class="actions">
-      <a class="button-link primary" href="/pt/archive/">Ver arquivo</a>
-      <a class="button-link secondary" href="/pt/sobre/">Ler manifesto</a>
-    </div>
+<section class="filter-bar surface" aria-label="Filtros da pagina inicial">
+  <span class="label">filter:</span>
+
+  <div class="chips">
+    <a class="chip active" href="/pt/">all</a>
+    {filters.map((filter) => (
+      <a class="chip" href={filter.href}>{filter.label}</a>
+    ))}
   </div>
 
-  <div class="hero-note" aria-hidden="true">
-    <div>
-      <strong>Leitura antes do brilho</strong>
-      <p>Pouco ruído, muito contraste, rotas estaveis e uma pagina inicial que convida a continuar.</p>
-    </div>
-  </div>
+  <p class="count">{String(count).padStart(2, '0')} posts</p>
 </section>
 
 <style>
-  .hero {
+  .filter-bar {
     display: grid;
-    grid-template-columns: minmax(0, 1.8fr) minmax(16rem, 0.9fr);
-    gap: 1.5rem;
-    padding: clamp(1.5rem, 4vw, 3rem);
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.55rem 0.95rem;
+    margin-bottom: 0.85rem;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: rgba(8, 11, 13, 0.92);
+    position: relative;
   }
 
-  .hero-copy {
-    display: grid;
-    gap: 1rem;
+  .filter-bar::before,
+  .filter-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--line);
   }
 
-  h1 {
+  .filter-bar::before {
+    top: 0;
+  }
+
+  .filter-bar::after {
+    bottom: 0;
+  }
+
+  .label,
+  .count {
     margin: 0;
-    font-size: clamp(3rem, 8vw, 5.5rem);
-    line-height: 0.94;
-    letter-spacing: -0.06em;
-  }
-
-  p {
-    margin: 0;
-    font-size: 1.08rem;
     color: var(--muted);
-    max-width: 36rem;
+    font-size: 0.82rem;
+    line-height: 1;
   }
 
-  .actions {
+  .label {
+    color: var(--muted);
+    text-transform: lowercase;
+  }
+
+  .chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 0.5rem;
+    gap: 0.5rem;
   }
 
-  .hero-note {
-    display: grid;
-    align-items: end;
-    padding: 1rem;
-    border-radius: calc(var(--radius) - 8px);
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.78)),
-      radial-gradient(circle at top right, rgba(239, 179, 111, 0.35), transparent 55%);
-    border: 1px solid rgba(71, 40, 27, 0.1);
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.28rem 0.72rem;
+    border: 1px solid rgba(58, 79, 88, 0.95);
+    border-radius: 0.32rem;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: lowercase;
+    font-size: 0.82rem;
+    line-height: 1;
+    transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
   }
 
-  .hero-note strong {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-size: 1.1rem;
+  .chip:hover,
+  .chip:focus-visible,
+  .chip.active {
+    color: var(--accent);
+    border-color: rgba(124, 255, 114, 0.75);
+    background: rgba(124, 255, 114, 0.04);
+  }
+
+  .count {
+    text-align: right;
+    min-width: max-content;
   }
 
   @media (max-width: 800px) {
-    .hero {
+    .filter-bar {
       grid-template-columns: 1fr;
+      gap: 0.65rem;
+      padding: 0.65rem 0.8rem;
+    }
+
+    .count {
+      text-align: left;
     }
   }
 </style>

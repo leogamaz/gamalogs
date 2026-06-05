@@ -32,9 +32,11 @@ const grouped = Object.entries(
   path={archivePath()}
 >
   <section class="surface archive reading-flow archive-shell">
-    <span class="eyebrow">Cronologia</span>
-    <h1>Arquivo por data</h1>
-    <p class="lede">A lista abaixo mantem a ordem de publicacao visivel para releitura e navegacao calma.</p>
+    <div class="archive-head">
+      <span class="eyebrow">archive</span>
+      <h1>arquivo por data</h1>
+      <p class="lede">A linha do tempo deixa a leitura sequencial e o histórico sempre acessivel.</p>
+    </div>
 
     <div class="timeline">
       {grouped.map(([year, months]) => (
@@ -63,7 +65,20 @@ const grouped = Object.entries(
 
 <style>
   .archive-shell {
-    padding: 1.75rem;
+    padding: 1.25rem;
+  }
+
+  .archive-head {
+    display: grid;
+    gap: 0.7rem;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .timeline {
+    display: grid;
+    gap: 1.6rem;
   }
 
   h1,
@@ -71,26 +86,40 @@ const grouped = Object.entries(
   h3,
   p {
     margin-top: 0;
+    margin-bottom: 0;
   }
 
-  .timeline {
-    display: grid;
-    gap: 2rem;
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.05em;
+  }
+
+  h2 {
+    color: var(--accent);
+    margin-bottom: 0.55rem;
+  }
+
+  h3 {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 0.45rem;
   }
 
   .month-block {
     display: grid;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.9rem;
+    margin-top: 0.95rem;
   }
 
   .day-block {
-    padding-left: 1rem;
-    border-left: 2px solid rgba(176, 74, 36, 0.2);
+    padding-left: 0.9rem;
+    border-left: 1px solid rgba(124, 255, 114, 0.18);
+    color: var(--text);
   }
 
   ul {
     margin: 0;
     padding-left: 1rem;
+    color: var(--muted);
   }
 </style>

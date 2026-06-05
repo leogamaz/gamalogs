@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getTagMap } from '../../../lib/content';
+import { SITE, tagPath } from '../../../lib/routes';
+
+const tagMap = await getTagMap();
+const tags = [...tagMap.values()].sort((left, right) => right.posts.length - left.posts.length || left.name.localeCompare(right.name));
+---
+
+<BaseLayout
+  title={`Tags | ${SITE.name}`}
+  description="Navegue pelos assuntos do blog por etiqueta e encontre rapidamente o contexto de cada texto."
+  path="/pt/tags/"
+>
+  <section class="surface tags-shell reading-flow">
+    <div class="tags-head">
+      <span class="eyebrow">tags</span>
+      <h1>assuntos em jogo</h1>
+      <p class="lede">Uma visão rápida dos temas mais recorrentes, com caminho direto para a leitura.</p>
+    </div>
+
+    <div class="tags-grid">
+      {tags.map((tag) => (
+        <a class="tag-card" href={tagPath(tag.slug)}>
+          <strong>{tag.name}</strong>
+          <span>{String(tag.posts.length).padStart(2, '0')} posts</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .tags-shell {
+    padding: 1.25rem;
+  }
+
+  .tags-head {
+    display: grid;
+    gap: 0.7rem;
+    padding-bottom: 1.1rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    letter-spacing: -0.05em;
+    text-transform: lowercase;
+  }
+
+  .tags-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 0.75rem;
+  }
+
+  .tag-card {
+    display: grid;
+    gap: 0.3rem;
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .tag-card strong {
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .tag-card span {
+    color: var(--muted);
+    font-size: 0.86rem;
+  }
+</style>
