@@ -93,6 +93,19 @@
 - **FR-004**: System MUST [data requirement, e.g., "persist user preferences"]
 - **FR-005**: System MUST [behavior, e.g., "log all security events"]
 
+### Content, SEO & Localization Requirements *(mandatory for public pages)*
+
+- **SEO-001**: Each public page MUST define title, description, canonical URL, Open
+  Graph metadata, and Twitter/X card metadata.
+- **SEO-002**: Pages with translated counterparts MUST define language-specific URLs
+  and hreflang alternates for Portuguese and English.
+- **SEO-003**: Content pages MUST define slug, language, publish date, summary, tags,
+  category/content type, and translation availability.
+- **SEO-004**: Features that create indexable pages MUST state sitemap, RSS, robots,
+  and structured data impact where relevant.
+- **UX-001**: Public page requirements MUST include mobile behavior, keyboard access,
+  semantic HTML expectations, and reading/navigation affordances.
+
 *Example of marking unclear requirements:*
 
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
@@ -100,8 +113,11 @@
 
 ### Key Entities *(include if feature involves data)*
 
-- **[Entity 1]**: [What it represents, key attributes without implementation]
-- **[Entity 2]**: [What it represents, relationships to other entities]
+- **Post**: Technical note or article with language, date, slug, tags, summary,
+  category, body content, and optional translation reference.
+- **Amazing Topic**: Special editorial page with language, slug, summary, visual theme,
+  design concept, body content, and optional translation reference.
+- **Tag**: Language-aware topic label used for navigation and content discovery.
 
 ## Success Criteria *(mandatory)*
 

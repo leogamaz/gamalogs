@@ -9,7 +9,7 @@ description: "Task list template for feature implementation"
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification. SEO, accessibility, routing, responsive, and build/type validation tasks MUST be included whenever the feature touches public pages.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -22,6 +22,7 @@ description: "Task list template for feature implementation"
 ## Path Conventions
 
 - **Single project**: `src/`, `tests/` at repository root
+- **Static Astro content site**: `src/content/`, `src/pages/`, `src/components/`, `src/layouts/`, `src/styles/`, `public/`
 - **Web app**: `backend/src/`, `frontend/src/`
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
 - Paths shown below assume single project - adjust based on plan.md structure
@@ -63,12 +64,12 @@ description: "Task list template for feature implementation"
 
 Examples of foundational tasks (adjust based on your project):
 
-- [ ] T004 Setup database schema and migrations framework
-- [ ] T005 [P] Implement authentication/authorization framework
-- [ ] T006 [P] Setup API routing and middleware structure
-- [ ] T007 Create base models/entities that all stories depend on
-- [ ] T008 Configure error handling and logging infrastructure
-- [ ] T009 Setup environment configuration management
+- [ ] T004 Setup typed content collections/frontmatter validation in src/content/
+- [ ] T005 [P] Configure language-aware route helpers for /pt/ and /en/
+- [ ] T006 [P] Configure shared SEO metadata helpers for public pages
+- [ ] T007 Create base layouts for normal posts and Amazing pages
+- [ ] T008 Configure RSS, sitemap, robots, and canonical URL generation
+- [ ] T009 Setup build/type/lint validation commands
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -155,7 +156,9 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
-- [ ] TXXX Security hardening
+- [ ] TXXX Validate SEO metadata, hreflang, RSS, sitemap, robots, and canonical URLs
+- [ ] TXXX Validate responsive layout, keyboard navigation, and semantic HTML
+- [ ] TXXX Review dependency additions and remove unnecessary client-side JavaScript
 - [ ] TXXX Run quickstart.md validation
 
 ---

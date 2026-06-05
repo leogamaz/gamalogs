@@ -40,7 +40,23 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+The plan MUST answer each gate from `.specify/memory/constitution.md`:
+
+- Static-first: Does the feature avoid backend services, databases, authentication, and
+  runtime CMS requirements for the MVP?
+- Content model: Are Markdown/MDX content files, required frontmatter, dates, slugs,
+  tags, categories, and content type identified?
+- Bilingual routing: Are affected `/pt/` and `/en/` URLs, translation availability, and
+  language switching behavior defined?
+- SEO: Are title, description, canonical URL, hreflang, Open Graph, Twitter/X cards,
+  sitemap, robots, RSS, and structured data impacts covered where relevant?
+- Reading experience: Does the design preserve readable typography, chronology,
+  archive navigation, tag navigation, and semantic HTML?
+- Amazing boundaries: If this is an Amazing page, is the page-specific visual concept
+  documented without compromising global navigation, accessibility, mobile layout, or
+  indexing?
+- Performance and accessibility: Are responsive behavior, keyboard access, contrast,
+  semantic structure, minimal JavaScript, and dependency justification addressed?
 
 ## Project Structure
 
@@ -77,20 +93,23 @@ tests/
 ├── integration/
 └── unit/
 
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
+# [REMOVE IF UNUSED] Option 2: Static Astro content site
+src/
+├── components/
+├── content/
+│   ├── posts/
+│   └── amazing/
+├── layouts/
+├── pages/
+│   ├── pt/
+│   └── en/
+└── styles/
 
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
+public/
+└── [static assets]
+
+tests/ or e2e/
+└── [accessibility, routing, and rendering checks if configured]
 
 # [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
 api/
