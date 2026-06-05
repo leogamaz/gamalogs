@@ -39,7 +39,9 @@ const { count = 0, filters = [] } = Astro.props;
     border-radius: 0;
     box-shadow: none;
     background: rgba(8, 11, 13, 0.92);
-    position: relative;
+    position: sticky;
+    top: 5rem;
+    z-index: 15;
   }
 
   .filter-bar::before,
@@ -111,6 +113,8 @@ const { count = 0, filters = [] } = Astro.props;
       grid-template-columns: 1fr;
       gap: 0.65rem;
       padding: 0.65rem 0.8rem;
+      position: static;
+      top: auto;
     }
 
     .count {

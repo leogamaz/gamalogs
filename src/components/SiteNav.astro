@@ -16,35 +16,50 @@ function isActive(href: string) {
 ---
 
 <nav class="site-nav surface" aria-label="Navegacao principal">
-  <a class="brand" href={ptPath('/')}>
-    <span class="prompt">~/</span>
-    <strong>gamalogs</strong>
-    <span class="caret" aria-hidden="true">▍</span>
-  </a>
+  <div class="site-nav-inner">
+    <a class="brand" href={ptPath('/')}>
+      <span class="prompt">~/</span>
+      <strong>gamalogs</strong>
+      <span class="caret" aria-hidden="true">▍</span>
+    </a>
 
-  <div class="links">
-    {links.map((link) => (
-      <a class:list={[isActive(link.href) && 'active']} href={link.href}>
-        {link.label}
-      </a>
-    ))}
+    <div class="links">
+      {links.map((link) => (
+        <a class:list={[isActive(link.href) && 'active']} href={link.href}>
+          {link.label}
+        </a>
+      ))}
+    </div>
   </div>
 </nav>
 
 <style>
   .site-nav {
+    width: 100dvw;
+    margin-inline: calc(50% - 50dvw);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    margin-top: 0;
+    margin-bottom: 0;
+    background: rgba(7, 10, 12, 0.88);
+    backdrop-filter: blur(16px);
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-nav-inner {
+    width: min(calc(100% - 2rem), var(--content));
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.9rem 1.1rem;
-    position: sticky;
-    top: 0.75rem;
-    z-index: 20;
-    margin-top: 0.75rem;
-    margin-bottom: 0.4rem;
-    background: rgba(7, 10, 12, 0.88);
-    backdrop-filter: blur(16px);
+    padding: 0.9rem 0;
   }
 
   .brand {
@@ -94,9 +109,14 @@ function isActive(href: string) {
 
   @media (max-width: 720px) {
     .site-nav {
-      align-items: flex-start;
-      flex-direction: column;
       position: static;
+      width: 100%;
+      margin-inline: 0;
+    }
+
+    .site-nav-inner {
+      width: 100%;
+      padding: 0.9rem 1.1rem;
     }
   }
 
