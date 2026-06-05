@@ -1,0 +1,37 @@
+- main [ref=e2]:
+  - navigation "Navegacao principal" [ref=e3]:
+    - link "CF Caderno de Frente Notas para a web que ficam" [ref=e4] [cursor=pointer]:
+      - /url: /pt/
+      - generic [ref=e5]: CF
+      - generic [ref=e6]:
+        - strong [ref=e7]: Caderno de Frente
+        - generic [ref=e8]: Notas para a web que ficam
+    - generic [ref=e9]:
+      - link "Inicio" [ref=e10] [cursor=pointer]:
+        - /url: /pt/
+      - link "Arquivo" [ref=e11] [cursor=pointer]:
+        - /url: /pt/archive/
+      - link "Sobre" [ref=e12] [cursor=pointer]:
+        - /url: /pt/sobre/
+  - generic [ref=e13]:
+    - generic [ref=e14]: Cronologia
+    - heading "Arquivo por data" [level=1] [ref=e15]
+    - paragraph [ref=e16]: A lista abaixo mantem a ordem de publicacao visivel para releitura e navegacao calma.
+    - generic [ref=e18]:
+      - heading "2026" [level=2] [ref=e19]
+      - generic [ref=e20]:
+        - heading "junho" [level=3] [ref=e21]
+        - generic [ref=e22]:
+          - paragraph [ref=e23]: 04/06
+          - list [ref=e24]:
+            - listitem [ref=e25]:
+              - link "Bem-vindo ao Caderno de Frente" [ref=e26] [cursor=pointer]:
+                - /url: /pt/posts/bem-vindo-ao-caderno/
+      - generic [ref=e27]:
+        - heading "maio" [level=3] [ref=e28]
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: 28/05
+          - list [ref=e31]:
+            - listitem [ref=e32]:
+              - link "Cronologia com calmaria" [ref=e33] [cursor=pointer]:
+                - /url: /pt/posts/cronologia-com-calmaria/

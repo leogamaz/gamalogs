@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { pagePath, SITE } from '../../lib/routes';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', ({ data }) => data.language === 'pt');
+
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={pagePath(page.slug)}>
+  <article class="reading-flow surface article-shell prose">
+    <span class="eyebrow">Pagina institucional</span>
+    <h1>{page.data.title}</h1>
+    {page.data.summary && <p class="lede">{page.data.summary}</p>}
+    <Content />
+  </article>
+</BaseLayout>
+
+<style>
+  .article-shell {
+    padding: 1.75rem;
+  }
+
+  h1 {
+    margin-top: 0.85rem;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+  }
+</style>

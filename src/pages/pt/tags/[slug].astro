@@ -1,0 +1,59 @@
+---
+import type { TagBucket } from '../../../lib/content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PostCard from '../../../components/PostCard.astro';
+import { getTagMap } from '../../../lib/content';
+import { SITE, tagPath } from '../../../lib/routes';
+
+export async function getStaticPaths() {
+  const tagMap = await getTagMap();
+  return [...tagMap.values()].map((tag) => ({
+    params: { slug: tag.slug },
+    props: { tag },
+  }));
+}
+
+interface Props {
+  tag: TagBucket;
+}
+
+const { tag } = Astro.props as Props;
+---
+
+<BaseLayout
+  title={`Etiqueta: ${tag.name} | ${SITE.name}`}
+  description={`Publicacoes agrupadas pela etiqueta ${tag.name}.`}
+  path={tagPath(tag.slug)}
+>
+  <section class="tag-page page-stack-inner">
+    <div>
+      <span class="eyebrow">Etiqueta</span>
+      <h1 class="section-title">{tag.name}</h1>
+      <p class="lede">Todas as publicacoes ligadas a este assunto, mantendo a navegacao por contexto.</p>
+    </div>
+
+    <div class="tag-grid">
+      {tag.posts.map((post) => (
+        <PostCard
+          slug={post.slug}
+          title={post.data.title}
+          summary={post.data.summary}
+          publishDate={post.data.publishDate}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-stack-inner {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .tag-grid {
+    display: grid;
+    gap: 1rem;
+  }
+</style>

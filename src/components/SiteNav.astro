@@ -1,0 +1,95 @@
+---
+import { archivePath, pagePath, ptPath } from '../lib/routes';
+
+const pathname = Astro.url.pathname;
+const links = [
+  { href: ptPath('/'), label: 'Inicio' },
+  { href: archivePath(), label: 'Arquivo' },
+  { href: pagePath('sobre'), label: 'Sobre' },
+];
+---
+
+<nav class="site-nav surface" aria-label="Navegacao principal">
+  <a class="brand" href={ptPath('/')}>
+    <span class="brand-mark">CF</span>
+    <span>
+      <strong>Caderno de Frente</strong>
+      <small>Notas para a web que ficam</small>
+    </span>
+  </a>
+
+  <div class="links">
+    {links.map((link) => (
+      <a class:list={[pathname === link.href && 'active']} href={link.href}>
+        {link.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+  }
+
+  .brand strong,
+  .brand small {
+    display: block;
+  }
+
+  .brand small {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-deep), var(--accent));
+    color: #fff7ef;
+    font-family: 'Avenir Next Condensed', 'Trebuchet MS', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .links a {
+    padding: 0.65rem 0.9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .links a.active,
+  .links a:hover,
+  .links a:focus-visible {
+    color: var(--accent-deep);
+    background: rgba(176, 74, 36, 0.08);
+  }
+
+  @media (max-width: 720px) {
+    .site-nav {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

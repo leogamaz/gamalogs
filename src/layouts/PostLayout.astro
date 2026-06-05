@@ -1,0 +1,64 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { slugifyTag, tagPath } from '../lib/routes';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  publishDate: Date;
+  tags?: string[];
+}
+
+const { title, description, path, publishDate, tags = [] } = Astro.props;
+---
+
+<BaseLayout
+  title={`${title} | Caderno de Frente`}
+  description={description}
+  path={path}
+  type="article"
+  publishedTime={publishDate.toISOString()}
+>
+  <article class="reading-flow surface article-shell">
+    <header class="article-head">
+      <span class="eyebrow">Publicacao</span>
+      <h1>{title}</h1>
+      <p class="lede">{description}</p>
+      <div class="meta-row">
+        <time datetime={publishDate.toISOString()}>{publishDate.toLocaleDateString('pt-BR')}</time>
+        <span>{tags.length} etiqueta(s)</span>
+      </div>
+      {tags.length > 0 && (
+        <ul class="tag-list" aria-label="Etiquetas da publicacao">
+          {tags.map((tag) => (
+            <li><a class="tag-pill" href={tagPath(slugifyTag(tag))}>{tag}</a></li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article-shell {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .article-head {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, 6vw, 4.3rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+  }
+</style>

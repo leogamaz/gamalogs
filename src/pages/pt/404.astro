@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/routes';
+---
+
+<BaseLayout
+  title={`Nao encontrado | ${SITE.name}`}
+  description="A pagina procurada nao esta disponivel, mas voce ainda pode continuar navegando pelo blog."
+  path="/pt/404/"
+  noindex={true}
+>
+  <section class="surface reading-flow not-found">
+    <span class="eyebrow">Erro de rota</span>
+    <h1>Pagina nao encontrada</h1>
+    <p class="lede">O endereco nao existe ou foi alterado. Use os caminhos abaixo para voltar ao fluxo do blog.</p>
+    <div class="actions">
+      <a class="button-link primary" href="/pt/">Voltar ao inicio</a>
+      <a class="button-link secondary" href="/pt/archive/">Abrir arquivo</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  h1,
+  p {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getPublishedPosts } from '../../../lib/content';
+import { archivePath, postPath, SITE } from '../../../lib/routes';
+
+const posts = await getPublishedPosts();
+type DayPosts = Record<string, CollectionEntry<'posts'>[]>;
+type MonthBuckets = Record<string, DayPosts>;
+type ArchiveBuckets = Record<string, MonthBuckets>;
+
+const grouped = Object.entries(
+  posts.reduce<ArchiveBuckets>((accumulator, post) => {
+    const date = post.data.publishDate;
+    const year = String(date.getFullYear());
+    const month = date.toLocaleString('pt-BR', { month: 'long' });
+    const day = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+
+    accumulator[year] ??= {};
+    accumulator[year][month] ??= {};
+    accumulator[year][month][day] ??= [];
+    accumulator[year][month][day].push(post);
+
+    return accumulator;
+  }, {})
+).sort((left, right) => Number(right[0]) - Number(left[0]));
+---
+
+<BaseLayout
+  title={`Arquivo | ${SITE.name}`}
+  description="Navegue pelas publicacoes em ordem cronologica, com agrupamento por ano, mes e dia."
+  path={archivePath()}
+>
+  <section class="surface archive reading-flow archive-shell">
+    <span class="eyebrow">Cronologia</span>
+    <h1>Arquivo por data</h1>
+    <p class="lede">A lista abaixo mantem a ordem de publicacao visivel para releitura e navegacao calma.</p>
+
+    <div class="timeline">
+      {grouped.map(([year, months]) => (
+        <section>
+          <h2>{year}</h2>
+          {Object.entries(months).map(([month, days]) => (
+            <div class="month-block">
+              <h3>{month}</h3>
+              {Object.entries(days).map(([day, dayPosts]) => (
+                <div class="day-block">
+                  <p>{day}</p>
+                  <ul>
+                    {dayPosts.map((post) => (
+                      <li><a href={postPath(post.slug)}>{post.data.title}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          ))}
+        </section>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .archive-shell {
+    padding: 1.75rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  .timeline {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .month-block {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .day-block {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(176, 74, 36, 0.2);
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1rem;
+  }
+</style>

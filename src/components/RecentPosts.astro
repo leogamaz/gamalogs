@@ -1,0 +1,59 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+
+interface Props {
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { posts = [] } = Astro.props as Props;
+---
+
+<section class="recent">
+  <div class="header">
+    <div>
+      <span class="eyebrow">Recentes</span>
+      <h2 class="section-title">Notas para abrir a conversa.</h2>
+    </div>
+    <p class="lede">Publicacoes em ordem cronologica, com resumo curto e caminho claro para leitura completa.</p>
+  </div>
+
+  <div class="grid">
+    {posts.map((post) => (
+      <PostCard
+        slug={post.slug}
+        title={post.data.title}
+        summary={post.data.summary}
+        publishDate={post.data.publishDate}
+        tags={post.data.tags}
+      />
+    ))}
+  </div>
+</section>
+
+<style>
+  .recent {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .header {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1.6fr 1fr;
+    align-items: end;
+  }
+
+  .grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 860px) {
+    .header,
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

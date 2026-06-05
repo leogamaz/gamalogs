@@ -1,0 +1,42 @@
+- main [ref=e2]:
+  - navigation "Navegacao principal" [ref=e3]:
+    - link "CF Caderno de Frente Notas para a web que ficam" [ref=e4] [cursor=pointer]:
+      - /url: /pt/
+      - generic [ref=e5]: CF
+      - generic [ref=e6]:
+        - strong [ref=e7]: Caderno de Frente
+        - generic [ref=e8]: Notas para a web que ficam
+    - generic [ref=e9]:
+      - link "Inicio" [ref=e10] [cursor=pointer]:
+        - /url: /pt/
+      - link "Arquivo" [ref=e11] [cursor=pointer]:
+        - /url: /pt/archive/
+      - link "Sobre" [ref=e12] [cursor=pointer]:
+        - /url: /pt/sobre/
+  - article [ref=e13]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: Publicacao
+      - heading "Bem-vindo ao Caderno de Frente" [level=1] [ref=e16]
+      - paragraph [ref=e17]: Um primeiro rascunho sobre como organizar um blog estatico com foco em leitura, ritmo e clareza.
+      - generic [ref=e18]:
+        - time [ref=e19]: 04/06/2026
+        - generic [ref=e20]: 2 etiqueta(s)
+      - list "Etiquetas da publicacao" [ref=e21]:
+        - listitem [ref=e22]:
+          - link "editorial" [ref=e23] [cursor=pointer]:
+            - /url: /pt/tags/editorial/
+        - listitem [ref=e24]:
+          - link "astro" [ref=e25] [cursor=pointer]:
+            - /url: /pt/tags/astro/
+    - generic [ref=e26]:
+      - heading "O que entra primeiro" [level=2] [ref=e27]
+      - paragraph [ref=e28]: Um blog tecnico nao precisa nascer barulhento. Ele precisa nascer legivel, estavel e facil de continuar.
+      - heading "Prioridades da primeira versao" [level=3] [ref=e29]
+      - list [ref=e30]:
+        - listitem [ref=e31]: pagina inicial clara
+        - listitem [ref=e32]: leitura confortavel em desktop e mobile
+        - listitem [ref=e33]: rotas previsiveis
+        - listitem [ref=e34]: metadados consistentes
+      - code [ref=e36]:
+        - generic [ref=e37]: const principio = 'leitura antes do enfeite';
+      - paragraph [ref=e38]: Esse principio orienta o resto da estrutura.

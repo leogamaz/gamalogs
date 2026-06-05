@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import HomeHero from '../../components/HomeHero.astro';
+import RecentPosts from '../../components/RecentPosts.astro';
+import { getPublishedPosts } from '../../lib/content';
+import { SITE } from '../../lib/routes';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title={`${SITE.name} | Pagina inicial`} description={SITE.description} path="/pt/">
+  <HomeHero title={SITE.name} description={SITE.description} />
+
+  {
+    posts.length > 0 ? (
+      <RecentPosts posts={posts} />
+    ) : (
+      <EmptyState
+        title="Ainda sem publicacoes"
+        description="O caderno esta sendo montado. As primeiras notas vao aparecer aqui em ordem cronologica."
+      />
+    )
+  }
+</BaseLayout>

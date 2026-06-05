@@ -1,0 +1,31 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="empty surface" aria-live="polite">
+  <span class="eyebrow">Em preparacao</span>
+  <h2>{title}</h2>
+  <p>{description}</p>
+</section>
+
+<style>
+  .empty {
+    display: grid;
+    gap: 0.85rem;
+    padding: 1.5rem;
+  }
+
+  .empty h2,
+  .empty p {
+    margin: 0;
+  }
+
+  .empty p {
+    color: var(--muted);
+  }
+</style>

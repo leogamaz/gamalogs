@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/routes';
+---
+
+<BaseLayout
+  title={`Nao encontrado | ${SITE.name}`}
+  description="Rota tecnica de erro para a build estatica do blog."
+  path="/404/"
+  noindex={true}
+>
+  <section class="surface reading-flow not-found">
+    <span class="eyebrow">Erro de rota</span>
+    <h1>Pagina nao encontrada</h1>
+    <p class="lede">Use a rota principal em portugues para continuar navegando.</p>
+    <a class="button-link primary" href="/pt/">Ir para /pt/</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  h1,
+  p {
+    margin: 0;
+  }
+</style>
