@@ -1,0 +1,114 @@
+- main [ref=e2]:
+  - navigation "Navegacao principal" [ref=e3]:
+    - generic [ref=e4]:
+      - link "~/ gamalogs" [ref=e5] [cursor=pointer]:
+        - /url: /pt/
+        - generic [ref=e6]: ~/
+        - strong [ref=e7]: gamalogs
+        - generic [ref=e8]: ▍
+      - generic [ref=e9]:
+        - link "archive" [ref=e10] [cursor=pointer]:
+          - /url: /pt/archive/
+          - generic [ref=e11]: archive
+          - img [ref=e12]:
+            - img [ref=e13]
+        - link "tags" [ref=e16] [cursor=pointer]:
+          - /url: /pt/tags/
+          - generic [ref=e17]: tags
+          - img [ref=e18]:
+            - img [ref=e19]
+        - link "rss" [ref=e22] [cursor=pointer]:
+          - /url: /rss.xml
+          - generic [ref=e23]: rss
+          - img [ref=e24]:
+            - img [ref=e25]
+        - link "about" [ref=e29] [cursor=pointer]:
+          - /url: /pt/sobre/
+          - generic [ref=e30]: about
+          - img [ref=e31]:
+            - img [ref=e32]
+  - generic [ref=e34]:
+    - complementary [ref=e35]:
+      - navigation "nesta página" [ref=e36]:
+        - generic [ref=e37]:
+          - generic [ref=e39]: nesta página
+          - list [ref=e40]:
+            - listitem [ref=e41]:
+              - link "Topo" [ref=e42] [cursor=pointer]:
+                - /url: "#topo"
+            - listitem [ref=e43]:
+              - link "2026 - junho" [ref=e44] [cursor=pointer]:
+                - /url: "#arquivo-2026-06"
+            - listitem [ref=e45]:
+              - link "2026 - maio" [ref=e46] [cursor=pointer]:
+                - /url: "#arquivo-2026-05"
+    - article [ref=e47]:
+      - generic [ref=e48]:
+        - heading "2026 - junho" [level=2] [ref=e49]
+        - generic [ref=e50]:
+          - article [ref=e51]:
+            - generic [ref=e53]: E
+            - generic [ref=e54]:
+              - heading "Bem-vindo ao Caderno de Frente3" [level=3] [ref=e55]:
+                - link "Bem-vindo ao Caderno de Frente3" [ref=e56] [cursor=pointer]:
+                  - /url: /pt/posts/bem-vindo-ao-caderno/
+              - generic [ref=e57]:
+                - generic [ref=e58]: 1 min · read →
+                - generic [ref=e59]: 2 tags
+              - list "Etiquetas da publicacao" [ref=e60]:
+                - listitem [ref=e61]:
+                  - link "editorial" [ref=e62] [cursor=pointer]:
+                    - /url: /pt/tags/editorial/
+                - listitem [ref=e63]:
+                  - link "astro" [ref=e64] [cursor=pointer]:
+                    - /url: /pt/tags/astro/
+          - article [ref=e65]:
+            - generic [ref=e67]: A
+            - generic [ref=e68]:
+              - heading "Meu novo post2" [level=3] [ref=e69]:
+                - link "Meu novo post2" [ref=e70] [cursor=pointer]:
+                  - /url: /pt/posts/teste-copy/
+              - generic [ref=e71]:
+                - generic [ref=e72]: 1 min · read →
+                - generic [ref=e73]: 2 tags
+              - list "Etiquetas da publicacao" [ref=e74]:
+                - listitem [ref=e75]:
+                  - link "astro" [ref=e76] [cursor=pointer]:
+                    - /url: /pt/tags/astro/
+                - listitem [ref=e77]:
+                  - link "frontend" [ref=e78] [cursor=pointer]:
+                    - /url: /pt/tags/frontend/
+          - article [ref=e79]:
+            - generic [ref=e81]: A
+            - generic [ref=e82]:
+              - heading "Meu novo post" [level=3] [ref=e83]:
+                - link "Meu novo post" [ref=e84] [cursor=pointer]:
+                  - /url: /pt/posts/teste/
+              - generic [ref=e85]:
+                - generic [ref=e86]: 1 min · read →
+                - generic [ref=e87]: 2 tags
+              - list "Etiquetas da publicacao" [ref=e88]:
+                - listitem [ref=e89]:
+                  - link "astro" [ref=e90] [cursor=pointer]:
+                    - /url: /pt/tags/astro/
+                - listitem [ref=e91]:
+                  - link "frontend" [ref=e92] [cursor=pointer]:
+                    - /url: /pt/tags/frontend/
+      - generic [ref=e93]:
+        - heading "2026 - maio" [level=2] [ref=e94]
+        - article [ref=e96]:
+          - generic [ref=e98]: "N"
+          - generic [ref=e99]:
+            - heading "Cronologia com calmaria" [level=3] [ref=e100]:
+              - link "Cronologia com calmaria" [ref=e101] [cursor=pointer]:
+                - /url: /pt/posts/cronologia-com-calmaria/
+            - generic [ref=e102]:
+              - generic [ref=e103]: 1 min · read →
+              - generic [ref=e104]: 2 tags
+            - list "Etiquetas da publicacao" [ref=e105]:
+              - listitem [ref=e106]:
+                - link "navegacao" [ref=e107] [cursor=pointer]:
+                  - /url: /pt/tags/navegacao/
+              - listitem [ref=e108]:
+                - link "conteudo" [ref=e109] [cursor=pointer]:
+                  - /url: /pt/tags/conteudo/
