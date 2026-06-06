@@ -28,4 +28,11 @@ const { title, description } = Astro.props;
   .empty p {
     color: var(--muted);
   }
+
+  @media (max-width: 399px) {
+    .empty {
+      gap: 0.65rem;
+      padding: 0.95rem 0.8rem;
+    }
+  }
 </style>

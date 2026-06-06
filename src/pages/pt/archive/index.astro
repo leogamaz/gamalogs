@@ -122,4 +122,47 @@ const grouped = Object.entries(
     padding-left: 1rem;
     color: var(--muted);
   }
+
+  @media (max-width: 399px) {
+    .archive-shell {
+      padding: 0.95rem 0.8rem;
+    }
+
+    .archive-head {
+      gap: 0.55rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 0.95rem;
+    }
+
+    .timeline {
+      gap: 1.15rem;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 12vw, 2.25rem);
+    }
+
+    h2 {
+      margin-bottom: 0.4rem;
+      font-size: 1.18rem;
+    }
+
+    h3 {
+      margin-bottom: 0.32rem;
+      font-size: 0.86rem;
+    }
+
+    .month-block {
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+
+    .day-block {
+      padding-left: 0.65rem;
+    }
+
+    ul {
+      padding-left: 0.85rem;
+    }
+  }
 </style>

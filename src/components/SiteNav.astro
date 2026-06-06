@@ -30,6 +30,15 @@ const icons: Record<IconName, string> = {
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
   `,
 } as const;
+
+const inPageIcons = {
+  menu: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+  `,
+  close: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  `,
+} as const;
 ---
 
 <nav class="site-nav surface" aria-label="Navegacao principal">
@@ -62,9 +71,101 @@ const icons: Record<IconName, string> = {
           />
         </a>
       ))}
+
+      <button
+        class="inpage-toggle"
+        type="button"
+        aria-label="Abrir nesta página"
+        aria-expanded="false"
+        aria-controls="in-page-nav-panel"
+        data-in-page-nav-toggle
+        data-in-page-nav-button
+      >
+        <span class="sr-only">nesta página</span>
+        <span class="inpage-icon inpage-icon-menu" aria-hidden="true" set:html={inPageIcons.menu} />
+        <span class="inpage-icon inpage-icon-close" aria-hidden="true" set:html={inPageIcons.close} />
+      </button>
     </div>
   </div>
 </nav>
+
+<script is:inline>
+  if (!window.__siteNavInPageToggleBound) {
+    window.__siteNavInPageToggleBound = true;
+
+    const syncButton = () => {
+      const button = document.querySelector('[data-in-page-nav-button]');
+      const navs = document.querySelectorAll('[data-in-page-nav]');
+
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      if (!navs.length) {
+        button.hidden = true;
+        return;
+      }
+
+      button.hidden = false;
+
+      const open = Array.from(navs).some((nav) => nav.getAttribute('data-open') === 'true');
+      const mobile = window.matchMedia('(max-width: 920px)').matches;
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', `${open ? 'Fechar' : 'Abrir'} nesta página`);
+      document.body.classList.toggle('in-page-nav-open', open && mobile);
+    };
+
+    const setOpen = (open) => {
+      const navs = document.querySelectorAll('[data-in-page-nav]');
+
+      navs.forEach((nav) => {
+        nav.setAttribute('data-open', String(open));
+      });
+
+      syncButton();
+    };
+
+    const init = () => {
+      syncButton();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const button = target.closest('[data-in-page-nav-toggle]');
+      if (!button) return;
+
+      const navs = document.querySelectorAll('[data-in-page-nav]');
+      if (!navs.length) return;
+
+      const shouldOpen = !Array.from(navs).some((nav) => nav.getAttribute('data-open') === 'true');
+      setOpen(shouldOpen);
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+      if (!target.closest('[data-in-page-nav] a')) return;
+
+      setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+
+      setOpen(false);
+    });
+
+    window.addEventListener('resize', syncButton);
+  }
+</script>
 
 <style>
   .site-nav {
@@ -142,6 +243,36 @@ const icons: Record<IconName, string> = {
     flex: none;
   }
 
+  .inpage-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.75rem;
+    color: var(--muted);
+    border: 1px solid transparent;
+    background: transparent;
+    transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .inpage-icon {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none;
+  }
+
+  .inpage-icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   .links a.active,
   .links a:hover,
   .links a:focus-visible {
@@ -150,11 +281,28 @@ const icons: Record<IconName, string> = {
     background: rgba(124, 255, 114, 0.05);
   }
 
-  @media (max-width: 720px) {
+  .inpage-toggle:hover,
+  .inpage-toggle:focus-visible {
+    color: var(--accent);
+    border-color: rgba(124, 255, 114, 0.2);
+    background: rgba(124, 255, 114, 0.05);
+  }
+
+  .inpage-toggle[aria-expanded='false'] .inpage-icon-menu,
+  .inpage-toggle[aria-expanded='true'] .inpage-icon-close {
+    display: inline-flex;
+  }
+
+  .inpage-toggle[aria-expanded='true'] {
+    color: var(--accent);
+  }
+
+  @media (max-width: 920px) {
     .site-nav {
-      position: static;
-      width: 100%;
-      margin-inline: 0;
+      position: sticky;
+      width: 100dvw;
+      margin-inline: calc(50% - 50dvw);
+      z-index: 30;
     }
 
     .site-nav-inner {
@@ -165,6 +313,58 @@ const icons: Record<IconName, string> = {
     .links a {
       width: 2.5rem;
       height: 2.5rem;
+    }
+
+    .inpage-toggle {
+      display: inline-flex;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
+  @media (max-width: 399px) {
+    .site-nav {
+      width: 100%;
+      max-width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      margin-inline: 0;
+    }
+
+    .site-nav-inner {
+      gap: 0.45rem;
+      padding: 0.65rem 0.55rem;
+    }
+
+    .brand {
+      gap: 0.2rem;
+      min-width: 0;
+      font-size: 0.88rem;
+    }
+
+    .brand strong {
+      max-width: 5.2rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .links {
+      flex: none;
+      gap: 0.2rem;
+    }
+
+    .links a,
+    .inpage-toggle {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.62rem;
+    }
+
+    .nav-icon,
+    .inpage-icon {
+      width: 1rem;
+      height: 1rem;
     }
   }
 

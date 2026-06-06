@@ -75,4 +75,35 @@ const tags = [...tagMap.values()].sort((left, right) => right.posts.length - lef
     color: var(--muted);
     font-size: 0.86rem;
   }
+
+  @media (max-width: 399px) {
+    .tags-shell {
+      padding: 0.95rem 0.8rem;
+    }
+
+    .tags-head {
+      gap: 0.55rem;
+      padding-bottom: 0.85rem;
+      margin-bottom: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 12vw, 2.25rem);
+    }
+
+    .tags-grid {
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+    }
+
+    .tag-card {
+      gap: 0.2rem;
+      padding: 0.75rem 0.8rem;
+      border-radius: 10px;
+    }
+
+    .tag-card span {
+      font-size: 0.78rem;
+    }
+  }
 </style>

@@ -20,25 +20,26 @@ const navItems = [
 ];
 ---
 
-<nav class="toc surface" aria-label={title}>
-  <div class="toc-head">
-    <span class="eyebrow">{title}</span>
-  </div>
+<nav class="toc surface" id="in-page-nav-panel" aria-label={title} data-in-page-nav data-open="false">
+  <div class="toc-panel">
+    <div class="toc-head">
+      <span class="eyebrow">{title}</span>
+    </div>
 
-  <ul>
-    {navItems.map((item) => (
-      <li class:list={[item.depth > 2 && 'indent']}>
-        <a href={`#${item.slug}`}>{item.text}</a>
-      </li>
-    ))}
-  </ul>
+    <ul>
+      {navItems.map((item) => (
+        <li class:list={[item.depth > 2 && 'indent']}>
+          <a href={`#${item.slug}`}>{item.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </nav>
 
 <style>
   .toc {
-    padding: 0.95rem; 
-    background:rgba(255, 255, 255, 0.014)00;
-    border-radius: 7px
+    padding: 0.95rem;
+    border-radius: 12px;
   }
 
   .toc-head {
@@ -71,6 +72,77 @@ const navItems = [
 
   .indent a {
     padding-left: 0.75rem;
+  }
+
+  @media (max-width: 920px) {
+    .toc {
+      position: fixed;
+      inset: 0;
+      z-index: 15;
+      height: 100dvh;
+      padding: 5.8rem 1rem 1.25rem;
+      border-radius: 0;
+      overflow-y: auto;
+      transform: translate3d(0, -100%, 0);
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        transform 400ms cubic-bezier(0.52, 0.16, 0.04, 1),
+        visibility 0s linear 400ms;
+      overscroll-behavior: contain;
+    }
+
+    .toc[data-open='true'] {
+      transform: translate3d(0, 0, 0);
+      visibility: visible;
+      pointer-events: auto;
+      transition: transform 400ms cubic-bezier(0.52, 0.16, 0.04, 1);
+    }
+
+    .toc-panel {
+      display: block;
+      max-width: 34rem;
+      margin: 0 auto;
+    }
+
+    .toc-head {
+      display: block;
+    }
+  }
+
+  @media (max-width: 399px) {
+    .toc {
+      padding: 4.75rem 0.65rem 0.9rem;
+    }
+
+    .toc-panel {
+      max-width: none;
+    }
+
+    .toc-head {
+      padding-bottom: 0.6rem;
+      margin-bottom: 0.55rem;
+    }
+
+    ul {
+      gap: 0.22rem;
+    }
+
+    a {
+      padding: 0.28rem 0;
+      font-size: 0.82rem;
+      line-height: 1.32;
+    }
+
+    .indent a {
+      padding-left: 0.55rem;
+    }
+  }
+
+  @media (min-width: 921px) {
+    .toc-panel {
+      display: block;
+    }
   }
 
 </style>

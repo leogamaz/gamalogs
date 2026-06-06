@@ -62,4 +62,14 @@ const { tag } = Astro.props as Props;
     display: grid;
     gap: 0.15rem;
   }
+
+  @media (max-width: 399px) {
+    .tag-page {
+      gap: 1rem;
+    }
+
+    .intro {
+      padding: 0.95rem 0.8rem;
+    }
+  }
 </style>
