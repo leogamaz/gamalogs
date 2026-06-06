@@ -114,6 +114,13 @@ for (const post of posts) {
     margin-top: 0.2rem;
   }
 
+  @media (min-width: 921px) {
+    .sticky-rail {
+      top: 8rem;
+      max-height: calc(100vh - 9rem);
+    }
+  }
+
   @media (max-width: 920px) {
     .home-archive {
       grid-template-columns: 1fr;

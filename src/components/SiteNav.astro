@@ -2,17 +2,34 @@
 import { archivePath, pagePath, ptPath } from '../lib/routes';
 
 const pathname = Astro.url.pathname;
-const links = [
-  { href: archivePath(), label: 'archive' },
-  { href: '/pt/tags/', label: 'tags' },
-  { href: '/rss.xml', label: 'rss' },
-  { href: pagePath('sobre'), label: 'about' },
+type IconName = 'archive' | 'tags' | 'rss' | 'about';
+
+const links: Array<{ href: string; label: string; icon: IconName }> = [
+  { href: archivePath(), label: 'archive', icon: 'archive' },
+  { href: '/pt/tags/', label: 'tags', icon: 'tags' },
+  { href: '/rss.xml', label: 'rss', icon: 'rss' },
+  { href: pagePath('sobre'), label: 'about', icon: 'about' },
 ];
 
 function isActive(href: string) {
   if (href === '/pt/tags/') return pathname.startsWith('/pt/tags');
   return pathname === href;
 }
+
+const icons: Record<IconName, string> = {
+  archive: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive-icon lucide-archive"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+  `,
+  tags: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  `,
+  rss: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss-icon lucide-rss"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+  `,
+  about: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+  `,
+} as const;
 ---
 
 <nav class="site-nav surface" aria-label="Navegacao principal">
@@ -25,8 +42,24 @@ function isActive(href: string) {
 
     <div class="links">
       {links.map((link) => (
-        <a class:list={[isActive(link.href) && 'active']} href={link.href}>
-          {link.label}
+        <a
+          class:list={[isActive(link.href) && 'active']}
+          href={link.href}
+          aria-label={link.label}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          <span class="sr-only">{link.label}</span>
+          <svg
+            class="nav-icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            set:html={icons[link.icon]}
+          />
         </a>
       ))}
     </div>
@@ -43,7 +76,7 @@ function isActive(href: string) {
     z-index: 20;
     margin-top: 0;
     margin-bottom: 0;
-    background: rgba(7, 10, 12, 0.88);
+    background: rgba(7, 10, 12, 0.466);
     backdrop-filter: blur(16px);
     border-radius: 0;
     border-left: 0;
@@ -91,12 +124,22 @@ function isActive(href: string) {
   }
 
   .links a {
-    padding: 0.42rem 0.72rem;
-    border-radius: 0.7rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.75rem;
     text-decoration: none;
     color: var(--muted);
     border: 1px solid transparent;
     transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+  }
+
+  .nav-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: none;
   }
 
   .links a.active,
@@ -117,6 +160,11 @@ function isActive(href: string) {
     .site-nav-inner {
       width: 100%;
       padding: 0.9rem 1.1rem;
+    }
+
+    .links a {
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 

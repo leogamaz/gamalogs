@@ -95,6 +95,7 @@ main {
   backdrop-filter: blur(14px);
 }
 
+
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -180,11 +181,11 @@ main {
 .tag-pill {
   display: inline-flex;
   padding: 0.38rem 0.75rem;
-  border-radius: 999px;
+  border-radius: 8px;
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.02);
   color: var(--text);
-  font-size: 0.88rem;
+  font-size: 0.65rem;
   text-decoration: none;
 }
 
