@@ -1,0 +1,77 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+
+const { href = '/pt/', label = 'Voltar para o Gama Logs' } = Astro.props;
+---
+
+<a class="gamalogs-return" href={href} aria-label="Voltar para Gama Logs">
+  <span class="return-mark" aria-hidden="true">←</span>
+  <span class="return-home" aria-hidden="true">~/</span>
+  <strong>{label}</strong>
+</a>
+
+<style>
+  .gamalogs-return {
+    position: fixed;
+    top: max(0.9rem, env(safe-area-inset-top));
+    left: max(0.9rem, env(safe-area-inset-left));
+    z-index: 10000;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.7rem 0.95rem;
+    border: 1px solid rgba(79, 255, 176, 0.38);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(8, 11, 18, 0.9), rgba(14, 20, 34, 0.82));
+    color: #e8eaf0;
+    text-decoration: none;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(79, 255, 176, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    opacity: 0.96;
+    transition: opacity 160ms ease, transform 160ms ease, border-color 160ms ease;
+  }
+
+  .return-mark {
+    display: grid;
+    place-items: center;
+    width: 1.45rem;
+    height: 1.45rem;
+    border-radius: 999px;
+    background: rgba(79, 255, 176, 0.12);
+    color: #4fffb0;
+    font-size: 0.9rem;
+  }
+
+  .return-home {
+    color: #4fffb0;
+  }
+
+  .gamalogs-return:hover,
+  .gamalogs-return:focus-visible {
+    opacity: 1;
+    transform: translateY(-2px);
+    border-color: rgba(79, 255, 176, 0.42);
+    outline: none;
+  }
+
+  @media (max-width: 700px) {
+    .gamalogs-return {
+      top: auto;
+      bottom: max(0.8rem, env(safe-area-inset-bottom));
+      padding: 0.62rem 0.78rem;
+      font-size: 0.7rem;
+    }
+
+    .return-home {
+      display: none;
+    }
+  }
+</style>
