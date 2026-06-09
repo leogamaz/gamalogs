@@ -1,0 +1,83 @@
+---
+import EmptyState from '../../../components/EmptyState.astro';
+import GuideCard from '../../../components/GuideCard.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getPublishedGuides } from '../../../lib/content';
+import { getGuidePath, guidesPath, SITE } from '../../../lib/routes';
+
+const guides = await getPublishedGuides('en');
+---
+
+<BaseLayout
+  title={`Guides | ${SITE.name}`}
+  description="Special guides with richer structure than a regular post."
+  path={guidesPath('en')}
+  lang="en-US"
+  locale="en_US"
+>
+  <section class="surface reading-flow guides-shell">
+    <header class="guides-head">
+      <span class="eyebrow">guides</span>
+      <h1>Special content</h1>
+      <p class="lede">More elaborate pages with a custom format for guides and references that need stronger visual structure.</p>
+    </header>
+
+    {guides.length > 0 ? (
+      <div class="guides-list">
+        {guides.map((guide) => (
+          <GuideCard
+            href={getGuidePath(guide)}
+            title={guide.data.title}
+            summary={guide.data.summary}
+            publishDate={guide.data.publishDate}
+            tags={guide.data.tags}
+          />
+        ))}
+      </div>
+    ) : (
+      <EmptyState title="No guides published yet" description="Future special guides will appear here." />
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .guides-shell {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+
+  .guides-head {
+    display: grid;
+    gap: 0.7rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .guides-list {
+    display: grid;
+  }
+
+  @media (max-width: 399px) {
+    .guides-shell {
+      gap: 0.95rem;
+      padding: 0.95rem 0.8rem;
+    }
+
+    .guides-head {
+      gap: 0.55rem;
+      padding-bottom: 0.85rem;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 12vw, 2.25rem);
+    }
+  }
+</style>

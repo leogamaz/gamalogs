@@ -13,9 +13,23 @@ interface Props {
   type?: 'website' | 'article';
   publishedTime?: string;
   noindex?: boolean;
+  showSiteNav?: boolean;
+  fullBleed?: boolean;
 }
 
-const { title, description, path, lang = 'pt-BR', locale = 'pt_BR', image, type, publishedTime, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  path,
+  lang = 'pt-BR',
+  locale = 'pt_BR',
+  image,
+  type,
+  publishedTime,
+  noindex = false,
+  showSiteNav = true,
+  fullBleed = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -24,21 +38,30 @@ const { title, description, path, lang = 'pt-BR', locale = 'pt_BR', image, type,
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <SeoHead
-      title={title}
-      description={description}
-      path={path}
+      <SeoHead
+        title={title}
+        description={description}
+        path={path}
       locale={locale}
       image={image}
       type={type}
       publishedTime={publishedTime}
-      noindex={noindex}
-    />
-  </head>
+        noindex={noindex}
+      />
+      <slot name="head" />
+    </head>
   <body>
-    <main class="page-stack">
-      <SiteNav />
+    <main class:list={["page-stack", { "page-stack-full": fullBleed }]}>
+      {showSiteNav && <SiteNav />}
       <slot />
     </main>
   </body>
 </html>
+
+<style>
+  .page-stack-full {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+</style>

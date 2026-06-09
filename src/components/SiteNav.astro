@@ -1,8 +1,8 @@
 ---
-import { archivePath, homePath, pagePath } from '../lib/routes';
+import { archivePath, guidesPath, homePath, pagePath } from '../lib/routes';
 
 const pathname = Astro.url.pathname;
-type IconName = 'archive' | 'tags' | 'rss' | 'about';
+type IconName = 'archive' | 'guides' | 'tags' | 'rss' | 'about';
 const language = pathname.startsWith('/en') ? 'en' : 'pt';
 const aboutSlug = language === 'en' ? 'about' : 'sobre';
 const ui = language === 'en'
@@ -23,6 +23,7 @@ const ui = language === 'en'
 
 const links: Array<{ href: string; label: string; icon: IconName }> = [
   { href: archivePath(language), label: 'archive', icon: 'archive' },
+  { href: guidesPath(language), label: 'guides', icon: 'guides' },
   { href: `/${language}/tags/`, label: 'tags', icon: 'tags' },
   { href: '/rss.xml', label: 'rss', icon: 'rss' },
   { href: pagePath(aboutSlug, language), label: 'about', icon: 'about' },
@@ -30,6 +31,7 @@ const links: Array<{ href: string; label: string; icon: IconName }> = [
 
 function isActive(href: string) {
   if (href.endsWith('/tags/')) return pathname.startsWith(`/${language}/tags`);
+  if (href.endsWith('/guides/')) return pathname.startsWith(`/${language}/guides`);
   if (href.endsWith('/archive/')) return pathname.startsWith(`/${language}/archive`);
   if (href.endsWith('/about/') || href.endsWith('/sobre/')) return pathname.startsWith(`/${language}/${aboutSlug}`);
   return pathname === href;
@@ -38,6 +40,9 @@ function isActive(href: string) {
 const icons: Record<IconName, string> = {
   archive: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-archive-icon lucide-archive"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+  `,
+  guides: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
   `,
   tags: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>

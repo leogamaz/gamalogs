@@ -10,6 +10,7 @@ export const SITE = {
 export type Language = 'pt' | 'en';
 
 type PostRouteEntry = Pick<CollectionEntry<'posts'>, 'id' | 'slug' | 'data'>;
+type GuideRouteEntry = Pick<CollectionEntry<'guides'>, 'slug' | 'data'>;
 
 export function homePath(language: Language = 'pt') {
   return `/${language}/`;
@@ -17,6 +18,14 @@ export function homePath(language: Language = 'pt') {
 
 export function postPath(slug: string, language: Language = 'pt') {
   return `/${language}/posts/${slug}/`;
+}
+
+export function guidePath(slug: string, language: Language = 'pt') {
+  return `/${language}/guides/${slug}/`;
+}
+
+export function guidesPath(language: Language = 'pt') {
+  return `/${language}/guides/`;
 }
 
 export function getPostRouteSlug(post: PostRouteEntry) {
@@ -36,6 +45,10 @@ export function getPostRouteSlug(post: PostRouteEntry) {
 
 export function getPostPath(post: PostRouteEntry) {
   return postPath(getPostRouteSlug(post), post.data.language);
+}
+
+export function getGuidePath(guide: GuideRouteEntry) {
+  return guidePath(guide.slug, guide.data.language);
 }
 
 export function tagPath(slug: string, language: Language = 'pt') {

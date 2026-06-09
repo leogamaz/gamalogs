@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getGuideTranslationPath } from '../../../lib/content';
+import GuideLayout from '../../../layouts/GuideLayout.astro';
+import { getGuidePath } from '../../../lib/routes';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides', ({ data }) => data.language === 'en' && !data.draft);
+
+  return Promise.all(
+    guides.map(async (guide) => ({
+      params: { slug: guide.slug },
+      props: {
+        guide,
+        languageHref: await getGuideTranslationPath(guide, 'pt'),
+      },
+    }))
+  );
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+---
+
+<GuideLayout
+  title={guide.data.title}
+  description={guide.data.summary}
+  path={getGuidePath(guide)}
+  publishDate={guide.data.publishDate}
+  language="en"
+>
+  <Content />
+</GuideLayout>

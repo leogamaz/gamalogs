@@ -1,0 +1,1915 @@
+<!-- NAV STICKY -->
+<nav class="sticky-nav" id="sticky-nav">
+  <div class="nav-inner">
+    <span class="nav-logo">speckit</span>
+    <div class="nav-sep"></div>
+    <div class="nav-links">
+      <a class="nav-link active" href="#sec-hero">Início</a>
+      <a class="nav-link" href="#sec-camadas">2 Camadas</a>
+      <a class="nav-link" href="#sec-fluxo">Fluxo do Agente</a>
+      <a class="nav-link" href="#sec-terminal">Terminal</a>
+      <a class="nav-link" href="#sec-regra">Regra de Ouro</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="sec-hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-badge">Spec Kit 0.8.13 · Maio 2026</div>
+
+  <h1>
+    <span class="grad">Spec-Driven</span><br>
+    Development
+  </h1>
+
+  <p class="hero-sub">
+    O guia completo de todos os comandos, fluxos e boas práticas para usar o Spec Kit do começo ao fim de um projeto real.
+  </p>
+
+  <p class="hero-version">
+    <span>specify-cli</span> · instalação via <span>uv tool install</span>
+  </p>
+
+  <div class="scroll-hint">
+    <span>EXPLORAR</span>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+
+
+<!-- QUICK COMMANDS STRIP -->
+<section class="quick-strip">
+  <div class="quick-strip-inner">
+    <div class="quick-strip-label">Ir direto para o comando</div>
+    <div class="quick-grid">
+      <a class="quick-btn" href="#cmd-constitution" data-cmd="constitution">
+        <span class="qi">⚖️</span><span class="ql">/speckit.</span><strong>constitution</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-specify" data-cmd="specify">
+        <span class="qi">📋</span><span class="ql">/speckit.</span><strong>specify</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-clarify" data-cmd="clarify">
+        <span class="qi">🔍</span><span class="ql">/speckit.</span><strong>clarify</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-checklist" data-cmd="checklist">
+        <span class="qi">✅</span><span class="ql">/speckit.</span><strong>checklist</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-plan" data-cmd="plan">
+        <span class="qi">🏗️</span><span class="ql">/speckit.</span><strong>plan</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-tasks" data-cmd="tasks">
+        <span class="qi">📝</span><span class="ql">/speckit.</span><strong>tasks</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-analyze" data-cmd="analyze">
+        <span class="qi">🔎</span><span class="ql">/speckit.</span><strong>analyze</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-implement" data-cmd="implement">
+        <span class="qi">⚡</span><span class="ql">/speckit.</span><strong>implement</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-t2i" data-cmd="t2i">
+        <span class="qi">🐙</span><span class="ql">/speckit.</span><strong>taskstoissues</strong>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 2 CAMADAS -->
+<section class="layers-section" id="sec-camadas">
+  <div class="section-label">Visão Geral</div>
+  <h2 class="section-title">O Spec Kit funciona em<br>duas camadas distintas</h2>
+
+  <div class="layers-grid">
+    <div class="layer-card" data-num="1">
+      <div class="layer-tag terminal">Terminal</div>
+      <div class="layer-title">Camada de Setup</div>
+      <p style="color: var(--muted); font-size: 14px;">Instalação, inicialização do projeto, gestão de integrações com agentes de IA, extensões, presets e workflows. Tudo via linha de comando.</p>
+      <div class="layer-code">$ specify init meu-app --integration opencode</div>
+    </div>
+    <div class="layer-card agent-layer" data-num="2">
+      <div class="layer-tag agent">Agente IA</div>
+      <div class="layer-title">Camada de Desenvolvimento</div>
+      <p style="color: var(--muted); font-size: 14px;">O fluxo real de desenvolvimento Spec-Driven: da constituição até a implementação. Comandos usados no chat do agente após o <code style="font-family: Space Mono; font-size: 12px; color: var(--accent)">specify init</code>.</p>
+      <div class="layer-code">/speckit.specify → /speckit.plan → /speckit.implement</div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW PRINCIPAL -->
+<section class="flow-section" id="sec-fluxo">
+  <div class="section-label">Comandos do Agente</div>
+  <h2 class="section-title">O fluxo completo,<br>passo a passo</h2>
+
+  <div class="flow-timeline">
+
+    <!-- CONSTITUTION -->
+    <div class="flow-item c-constitution" id="cmd-constitution">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-constitution">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.constitution</div>
+            <div class="flow-meta">
+              <div class="flow-title">Constituição do Projeto</div>
+              <div class="flow-timing">Uma vez no início — e sempre que mudar uma regra base</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <ul>
+                <li>Regras de arquitetura (Clean Arch, SOLID, etc.)</li>
+                <li>Padrões de qualidade e testes</li>
+                <li>Regras de UX e segurança</li>
+                <li>Padrões de código e nomenclatura</li>
+                <li>Restrições de performance</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <div class="output-files">
+                <span class="output-file">.specify/memory/constitution.md</span>
+              </div>
+              <p style="margin-top: 12px; font-size: 13px; color: var(--muted)">As leis permanentes do projeto. Todo comando posterior vai respeitar essas regras.</p>
+            </div>
+          </div>
+          <div class="code-example">
+            <div class="code-header">
+              <div class="code-dot code-dot-r"></div>
+              <div class="code-dot code-dot-y"></div>
+              <div class="code-dot code-dot-g"></div>
+              <span class="code-filename">exemplo.txt</span>
+            </div>
+            <div class="code-body"><span class="cmd">/speckit.constitution</span>
+<span class="comment"># Leis do projeto — fullstack</span>
+<span class="str">Nenhuma regra de negócio em controller, componente visual ou infraestrutura.
+Backend expõe contratos claros, versionados e documentados.
+Frontend consome APIs por services/hooks isolados.
+Todo comportamento importante deve ter cobertura de testes.
+Nenhuma feature cria conceito duplicado sem verificar existentes.
+UX prioriza estados vazios, loading, erro e feedback claro.
+Segurança: validar no backend, proteger rotas, tratar permissões.
+Performance: evitar N+1, payloads gigantes e renders desnecessários.</span></div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar" title="thinking: high">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">No início de qualquer projeto novo, antes de qualquer outro comando</li>
+                <li class="usual">Ao retomar um projeto antigo sem constituição definida</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">A stack ou arquitetura mudar de forma significativa</li>
+                <li class="also">O time adotar um novo padrão de testes ou segurança</li>
+                <li class="also">Um novo membro entrar e precisar entender as regras do projeto</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIFY -->
+    <div class="flow-item c-specify" id="cmd-specify">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-specify">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.specify</div>
+            <div class="flow-meta">
+              <div class="flow-title">Especificação da Feature</div>
+              <div class="flow-timing">Para cada feature nova ou projeto — sem mencionar stack técnica aqui</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <ul>
+                <li><strong style="color: var(--text)">O QUÊ</strong> o sistema deve fazer</li>
+                <li><strong style="color: var(--text)">POR QUÊ</strong> — motivação de negócio</li>
+                <li>Regras de negócio sem ambiguidade</li>
+                <li>Critérios de sucesso mensuráveis</li>
+                <li>Edge cases e restrições importantes</li>
+              </ul>
+              <p style="margin-top: 12px; font-size: 12px; color: var(--accent3); font-style: italic">⚠ Sem React, Spring, PostgreSQL aqui. A stack vem no /plan.</p>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <div class="output-files">
+                <span class="output-file">specs/001-nome-feature/spec.md</span>
+                <span class="output-file">branch criada</span>
+                <span class="output-file">pasta da feature</span>
+              </div>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após a constituição, para descrever o primeiro módulo ou feature</li>
+                <li class="usual">Início de cada novo ciclo de desenvolvimento</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">Surgir uma demanda fora do escopo atual — atualize a spec antes de implementar</li>
+                <li class="also">A regra de negócio mudar e precisar refletir na documentação</li>
+                <li class="also">Quiser dividir um módulo grande em specs menores e independentes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLARIFY -->
+    <div class="flow-item c-clarify" id="cmd-clarify">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-clarify">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.clarify</div>
+            <div class="flow-meta">
+              <div class="flow-title">Refinamento da Spec</div>
+              <div class="flow-timing">Antes do plano — quando ainda existem ambiguidades na spec</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <ul>
+                <li>Pontos de regra de negócio não óbvios</li>
+                <li>Casos de borda a detalhar</li>
+                <li>Questões de segurança e permissão</li>
+                <li>Telas/fluxos mínimos para MVP</li>
+                <li>Comportamento em valores similares</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <p>Atualização e refinamento do <code style="font-family: Space Mono; font-size: 11px; color: var(--accent)">spec.md</code> — força o agente a não assumir coisas implícitas.</p>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após o /specify, antes de partir para o /plan</li>
+                <li class="usual">Quando a spec tem pontos vagos que o agente poderia interpretar errado</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">O domínio for complexo e envolver regras financeiras, legais ou de segurança</li>
+                <li class="also">Existirem múltiplos comportamentos possíveis para um mesmo caso de uso</li>
+                <li class="also">Quiser garantir que edge cases estão cobertos antes do planejamento técnico</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="flow-item c-checklist" id="cmd-checklist">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-checklist">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.checklist</div>
+            <div class="flow-meta">
+              <div class="flow-title">Validação da Qualidade</div>
+              <div class="flow-timing">Antes do plano — teste unitário dos requisitos</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <ul>
+                <li>Pode ser vazio (usa critérios padrão)</li>
+                <li>Foco em domínio: "valide requisitos de segurança"</li>
+                <li>Validação de estados de erro/loading/vazio</li>
+                <li>Checagem de critérios mensuráveis</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <p>Checklist de qualidade dos requisitos. Aponta buracos antes de gastar tempo no planejamento técnico.</p>
+            </div>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após o /clarify (ou direto após o /specify em fluxos enxutos)</li>
+                <li class="usual">Como gate de qualidade antes de investir tempo no planejamento técnico</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">A spec foi escrita por outra pessoa e você quer validar a completude</li>
+                <li class="also">O escopo cresceu e você quer checar se os critérios de aceite ainda fazem sentido</li>
+                <li class="also">Quiser focar a validação em um domínio específico, como segurança ou UX</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAN -->
+    <div class="flow-item c-plan" id="cmd-plan">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-plan">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.plan</div>
+            <div class="flow-meta">
+              <div class="flow-title">Planejamento Técnico</div>
+              <div class="flow-timing">Depois da spec validada — aqui sim entra a stack e arquitetura</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <ul>
+                <li>Stack completa (framework, linguagem, banco)</li>
+                <li>Arquitetura (monorepo, microservices, etc.)</li>
+                <li>Autenticação e autorização</li>
+                <li>Libs e dependências principais</li>
+                <li>Padrões técnicos obrigatórios</li>
+                <li>Estratégia de testes</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <div class="output-files">
+                <span class="output-file">plan.md</span>
+                <span class="output-file">research.md</span>
+                <span class="output-file">data-model.md</span>
+                <span class="output-file">contracts/</span>
+                <span class="output-file">quickstart.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot" style="opacity:0.5"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: medium-high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após spec validada pelo /checklist, para definir como construir tecnicamente</li>
+                <li class="usual">Uma vez por feature ou módulo, antes de gerar as tasks</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">A stack mudar e o plano anterior precisar ser refeito</li>
+                <li class="also">Uma nova integração ou serviço externo for adicionado ao escopo</li>
+                <li class="also">O modelo de dados precisar de uma revisão arquitetural profunda</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="flow-item c-tasks" id="cmd-tasks">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-tasks">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.tasks</div>
+            <div class="flow-meta">
+              <div class="flow-title">Quebra em Tarefas</div>
+              <div class="flow-timing">Depois do plano — lê plan.md automaticamente</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <p>Normalmente <strong style="color: var(--text)">vazio</strong>. O agente lê <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">plan.md</code>, <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">data-model.md</code>, <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">contracts/</code> e <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">research.md</code> automaticamente.</p>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <div class="output-files">
+                <span class="output-file">tasks.md</span>
+              </div>
+              <p style="margin-top: 8px; font-size: 13px; color: var(--muted)">Tarefas implementáveis, com dependências, marcação de paralelismo e ordem de execução.</p>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot" style="opacity:0.2"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: medium</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Logo após o /plan estar revisado e aprovado</li>
+                <li class="usual">Para transformar a arquitetura em passos concretos e implementáveis</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">O plano foi atualizado e as tasks antigas ficaram desatualizadas</li>
+                <li class="also">Quiser identificar quais tarefas podem ser paralelizadas entre devs</li>
+                <li class="also">Precisar exportar o trabalho para GitHub Issues com o /taskstoissues</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYZE -->
+    <div class="flow-item c-analyze" id="cmd-analyze">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-analyze">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.analyze</div>
+            <div class="flow-meta">
+              <div class="flow-title">Detector de Contradições</div>
+              <div class="flow-timing">Depois das tasks — antes de implementar qualquer coisa</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <p>Normalmente <strong style="color: var(--text)">vazio</strong>. O agente cruza spec, plan e tasks automaticamente.</p>
+            </div>
+            <div class="flow-col">
+              <h4>O que detecta</h4>
+              <ul>
+                <li>Spec fala de X mas tasks não criaram endpoint</li>
+                <li>Plan usa PostgreSQL mas tasks não criaram migration</li>
+                <li>Constitution exige teste mas tasks não incluem testes</li>
+                <li>Modelo sem campos suficientes para a spec</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após gerar as tasks, como último gate antes do /implement</li>
+                <li class="usual">Para garantir que spec, plan e tasks estão consistentes entre si</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">A spec ou o plan mudaram depois que as tasks já foram geradas</li>
+                <li class="also">Suspeitar que algum requisito ficou sem cobertura nas tasks</li>
+                <li class="also">Quiser auditoria antes de um PR grande ou entrega de sprint</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPLEMENT -->
+    <div class="flow-item c-implement" id="cmd-implement">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-implement">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.implement</div>
+            <div class="flow-meta">
+              <div class="flow-title">Implementação Real</div>
+              <div class="flow-timing">Só depois de revisar tudo — executa o tasks.md</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <p>Normalmente <strong style="color: var(--text)">vazio</strong>. O agente executa as tarefas do <code style="font-family: Space Mono; font-size: 11px; color: var(--accent)">tasks.md</code> em sequência.</p>
+              <p style="margin-top: 8px; font-size: 12px; color: var(--accent3); font-style: italic">⚠ O agente pode rodar npm, dotnet e outros comandos locais. Certifique-se de ter as ferramentas instaladas.</p>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <p>Código real. Estrutura de arquivos, entidades, migrations, endpoints, telas, testes — tudo conforme spec + plan + tasks.</p>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot" style="opacity:0.2"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: medium</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após o /analyze confirmar consistência — esse é o momento de codar</li>
+                <li class="usual">Para executar as tasks em sequência, gerando código real</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">Quiser implementar apenas um subconjunto de tasks (informe quais)</li>
+                <li class="also">Retomar uma implementação pausada a partir de uma task específica</li>
+                <li class="also">Precisar re-implementar uma task que gerou bug ou ficou incompleta</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS TO ISSUES (opcional) -->
+    <div class="flow-item c-t2i" id="cmd-t2i">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-t2i">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.taskstoissues</div>
+            <div class="flow-meta">
+              <div class="flow-title">Exportar para GitHub Issues</div>
+              <div class="flow-timing">Opcional — quando quiser transformar tasks em issues no GitHub</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>O que você passa</h4>
+              <ul>
+                <li>Repositório de destino</li>
+                <li>Labels a aplicar</li>
+                <li>Milestone e prioridade</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>O que é gerado</h4>
+              <p>Issues no GitHub criadas a partir do <code style="font-family: Space Mono; font-size: 11px; color: #a29bfe">tasks.md</code>, prontas para triagem e atribuição.</p>
+            </div>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Uso usual</h4>
+              <ul>
+                <li class="usual">Após o /tasks, quando o projeto é gerenciado via GitHub Issues</li>
+                <li class="usual">Para sincronizar o backlog do Spec Kit com o board do time</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Também use quando...</h4>
+              <ul>
+                <li class="also">O time não usa o Spec Kit diretamente mas acompanha pelo GitHub</li>
+                <li class="also">Quiser atribuir milestones, labels ou prioridades antes de implementar</li>
+                <li class="also">Precisar recriar as issues após uma revisão grande das tasks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TERMINAL COMMANDS -->
+<section class="terminal-section" id="sec-terminal">
+  <div class="section-label">Camada de Terminal</div>
+  <h2 class="section-title">Comandos <code style="font-family: Space Mono; font-size: clamp(20px,3vw,36px); color: var(--accent4)">specify</code></h2>
+
+  <div class="terminal-tabs">
+    <button class="tab-btn active" data-tab="install">Instalação</button>
+    <button class="tab-btn" data-tab="integration">Integrações</button>
+    <button class="tab-btn" data-tab="extension">Extensões</button>
+    <button class="tab-btn" data-tab="preset">Presets</button>
+    <button class="tab-btn" data-tab="workflow">Workflows</button>
+  </div>
+
+  <div id="tab-install" class="tab-panel active">
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Quando usar</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.13</td><td class="cmd-desc">Instalar globalmente a versão atual (0.8.13)</td></tr>
+        <tr><td class="cmd-mono">uvx --from git+https://github.com/github/spec-kit.git specify init &lt;projeto&gt;</td><td class="cmd-desc">Rodar sem instalar globalmente</td></tr>
+        <tr><td class="cmd-mono">specify init &lt;projeto&gt; --integration opencode</td><td class="cmd-desc">Criar projeto novo já configurado com OpenCode</td></tr>
+        <tr><td class="cmd-mono">specify init --here --integration opencode</td><td class="cmd-desc">Inicializar na pasta atual (projeto existente)</td></tr>
+        <tr><td class="cmd-mono">specify init --here --force --integration opencode</td><td class="cmd-desc">Inicializar em pasta existente, sobrescrevendo</td></tr>
+        <tr><td class="cmd-mono">specify init &lt;projeto&gt; --script sh</td><td class="cmd-desc">Forçar scripts Bash/Zsh</td></tr>
+        <tr><td class="cmd-mono">specify init &lt;projeto&gt; --script ps</td><td class="cmd-desc">Forçar scripts PowerShell</td></tr>
+        <tr><td class="cmd-mono">specify check</td><td class="cmd-desc">Verificar se todas as ferramentas necessárias estão instaladas</td></tr>
+        <tr><td class="cmd-mono">specify version</td><td class="cmd-desc">Ver versão atual do CLI</td></tr>
+        <tr><td class="cmd-mono">specify version --features</td><td class="cmd-desc">Ver recursos suportados nessa versão</td></tr>
+        <tr><td class="cmd-mono">specify self check</td><td class="cmd-desc">Verificar se existe versão mais nova disponível</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tab-integration" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Quando usar</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify integration list</td><td class="cmd-desc">Ver todos os agentes de IA suportados</td></tr>
+        <tr><td class="cmd-mono">specify integration install &lt;key&gt;</td><td class="cmd-desc">Adicionar integração (ex: opencode, claude, copilot, cursor-agent)</td></tr>
+        <tr><td class="cmd-mono">specify integration uninstall [key]</td><td class="cmd-desc">Remover integração instalada</td></tr>
+        <tr><td class="cmd-mono">specify integration switch &lt;key&gt;</td><td class="cmd-desc">Trocar a integração padrão ativa</td></tr>
+        <tr><td class="cmd-mono">specify integration use &lt;key&gt;</td><td class="cmd-desc">Usar integração já instalada sem mudar o padrão</td></tr>
+        <tr><td class="cmd-mono">specify integration upgrade [key]</td><td class="cmd-desc">Atualizar arquivos da integração para versão mais nova</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(79,255,176,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      Agentes suportados: <code style="color: var(--accent); font-family: Space Mono; font-size: 11px">copilot · claude · codex · gemini · roo · opencode · qwen · cursor-agent · windsurf</code>
+    </div>
+  </div>
+
+  <div id="tab-extension" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Quando usar</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify extension search [query]</td><td class="cmd-desc">Procurar extensões disponíveis no catálogo</td></tr>
+        <tr><td class="cmd-mono">specify extension add &lt;name&gt;</td><td class="cmd-desc">Instalar uma extensão (Jira, GitHub Issues, Security Review, etc.)</td></tr>
+        <tr><td class="cmd-mono">specify extension remove &lt;name&gt;</td><td class="cmd-desc">Remover extensão instalada</td></tr>
+        <tr><td class="cmd-mono">specify extension list</td><td class="cmd-desc">Listar extensões instaladas no projeto</td></tr>
+        <tr><td class="cmd-mono">specify extension info &lt;name&gt;</td><td class="cmd-desc">Ver detalhes de uma extensão específica</td></tr>
+        <tr><td class="cmd-mono">specify extension update [name]</td><td class="cmd-desc">Atualizar uma ou todas as extensões</td></tr>
+        <tr><td class="cmd-mono">specify extension enable &lt;name&gt;</td><td class="cmd-desc">Habilitar extensão desativada</td></tr>
+        <tr><td class="cmd-mono">specify extension disable &lt;name&gt;</td><td class="cmd-desc">Desabilitar sem remover</td></tr>
+        <tr><td class="cmd-mono">specify extension set-priority &lt;name&gt; &lt;priority&gt;</td><td class="cmd-desc">Resolver conflito de prioridade entre extensões</td></tr>
+        <tr><td class="cmd-mono">specify extension catalog list</td><td class="cmd-desc">Listar catálogos de extensões disponíveis</td></tr>
+        <tr><td class="cmd-mono">specify extension catalog add &lt;url&gt;</td><td class="cmd-desc">Adicionar catálogo externo de extensões</td></tr>
+        <tr><td class="cmd-mono">specify extension catalog remove &lt;name&gt;</td><td class="cmd-desc">Remover catálogo</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(124,109,250,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      💡 Extensão = <strong style="color: var(--text)">adicionar capacidade nova</strong> ao fluxo (Jira, GitHub Issues, wireframe, QA, arquitetura, security review, etc.)
+    </div>
+  </div>
+
+  <div id="tab-preset" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Quando usar</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify preset search [query]</td><td class="cmd-desc">Procurar presets disponíveis</td></tr>
+        <tr><td class="cmd-mono">specify preset add [preset_id]</td><td class="cmd-desc">Instalar um preset</td></tr>
+        <tr><td class="cmd-mono">specify preset remove &lt;preset_id&gt;</td><td class="cmd-desc">Remover preset instalado</td></tr>
+        <tr><td class="cmd-mono">specify preset list</td><td class="cmd-desc">Listar presets instalados</td></tr>
+        <tr><td class="cmd-mono">specify preset info &lt;preset_id&gt;</td><td class="cmd-desc">Ver detalhes de um preset</td></tr>
+        <tr><td class="cmd-mono">specify preset resolve &lt;name&gt;</td><td class="cmd-desc">Ver qual template será usado para determinado comando</td></tr>
+        <tr><td class="cmd-mono">specify preset enable &lt;preset_id&gt;</td><td class="cmd-desc">Habilitar preset desativado</td></tr>
+        <tr><td class="cmd-mono">specify preset disable &lt;preset_id&gt;</td><td class="cmd-desc">Desabilitar sem remover</td></tr>
+        <tr><td class="cmd-mono">specify preset set-priority &lt;preset_id&gt; &lt;priority&gt;</td><td class="cmd-desc">Definir prioridade entre presets conflitantes</td></tr>
+        <tr><td class="cmd-mono">specify preset catalog list</td><td class="cmd-desc">Listar catálogos de presets</td></tr>
+        <tr><td class="cmd-mono">specify preset catalog add &lt;url&gt;</td><td class="cmd-desc">Adicionar catálogo de presets externo</td></tr>
+        <tr><td class="cmd-mono">specify preset catalog remove &lt;name&gt;</td><td class="cmd-desc">Remover catálogo</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(255,214,102,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      💡 Preset = <strong style="color: var(--text)">mudar o formato e comportamento dos templates existentes</strong> (ex: preset de compliance, preset da empresa, preset para arquitetura específica)
+    </div>
+  </div>
+
+  <div id="tab-workflow" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Comando</th><th>Quando usar</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify workflow run &lt;source&gt;</td><td class="cmd-desc">Rodar fluxo automatizado (ex: Full SDD Cycle)</td></tr>
+        <tr><td class="cmd-mono">specify workflow resume &lt;run_id&gt;</td><td class="cmd-desc">Retomar fluxo que pausou ou falhou</td></tr>
+        <tr><td class="cmd-mono">specify workflow status [run_id]</td><td class="cmd-desc">Ver status atual de um workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow list</td><td class="cmd-desc">Listar workflows instalados</td></tr>
+        <tr><td class="cmd-mono">specify workflow add &lt;source&gt;</td><td class="cmd-desc">Instalar novo workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow remove &lt;workflow_id&gt;</td><td class="cmd-desc">Remover workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow search [query]</td><td class="cmd-desc">Procurar workflows disponíveis no catálogo</td></tr>
+        <tr><td class="cmd-mono">specify workflow info &lt;workflow_id&gt;</td><td class="cmd-desc">Ver detalhes de um workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow catalog list</td><td class="cmd-desc">Listar catálogos de workflows</td></tr>
+        <tr><td class="cmd-mono">specify workflow catalog add &lt;url&gt;</td><td class="cmd-desc">Adicionar catálogo externo</td></tr>
+        <tr><td class="cmd-mono">specify workflow catalog remove &lt;index&gt;</td><td class="cmd-desc">Remover catálogo</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(38,222,129,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      💡 Workflow = <strong style="color: var(--text)">automatizar sequência de comandos</strong> com gates e checkpoints. O "Full SDD Cycle" encadeia specify → plan → tasks → implement com pontos de revisão.
+    </div>
+  </div>
+</section>
+
+<!-- REGRA DE OURO -->
+<section class="golden-section" id="sec-regra">
+  <div class="section-label">Regra de Ouro</div>
+  <h2 class="section-title">O fluxo ideal para<br>projetos reais</h2>
+
+  <div class="golden-flow">
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(255,209,102,0.1)">⚖️</div>
+      <div class="step-name">constitution</div>
+      <div class="step-desc">Leis permanentes</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(79,255,176,0.1)">📋</div>
+      <div class="step-name">specify</div>
+      <div class="step-desc">Problema e regras de negócio</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(168,237,234,0.1)">🔍</div>
+      <div class="step-name">clarify</div>
+      <div class="step-desc">Remove ambiguidades</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(124,109,250,0.1)">✅</div>
+      <div class="step-name">checklist</div>
+      <div class="step-desc">Valida requisitos</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(247,183,49,0.1)">🏗️</div>
+      <div class="step-name">plan</div>
+      <div class="step-desc">Stack e arquitetura</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(255,107,107,0.1)">📝</div>
+      <div class="step-name">tasks</div>
+      <div class="step-desc">Passos implementáveis</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(253,150,68,0.1)">🔎</div>
+      <div class="step-name">analyze</div>
+      <div class="step-desc">Detecta contradições</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(38,222,129,0.1)">⚡</div>
+      <div class="step-name">implement</div>
+      <div class="step-desc">Código real</div>
+    </div>
+  </div>
+
+  <div class="pattern-box">
+    <div class="pattern-title">🔄 Nova demanda fora do escopo? Nunca implementa direto.</div>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px">Sempre que surgir algo novo, rode primeiro:</p>
+    <div class="code-example" style="margin: 0;">
+      <div class="code-body"><span class="cmd">/speckit.specify</span>
+<span class="str">Atualize a spec atual para incluir a nova demanda abaixo, sem criar
+conceitos duplicados e mantendo compatibilidade com a arquitetura existente:
+
+[nova demanda]</span>
+
+<span class="comment"># Depois repita normalmente:</span>
+<span class="cmd">/speckit.plan</span> → <span class="cmd">/speckit.tasks</span> → <span class="cmd">/speckit.analyze</span> → <span class="cmd">/speckit.implement</span></div>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    <div class="warning-title">⚠ Antipadrões do vibe coding</div>
+    <ul class="warning-list">
+      <li>Pedir "faz tudo de uma vez" em um prompt gigante sem spec, plan ou tasks</li>
+      <li>Implementar diretamente sem passar pelo fluxo (entidade duplicada garantida)</li>
+      <li>Colocar stack técnica no <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">/speckit.specify</code> — ela pertence ao <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">/speckit.plan</code></li>
+      <li>Pular o <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">/speckit.analyze</code> e ir direto pro implement — contradições viram bugs</li>
+      <li>Não usar a <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">constitution</code> — sem leis globais o agente inventa padrões a cada feature</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Spec Kit <span>0.8.13</span> · github/spec-kit · <span>Spec-Driven Development</span></p>
+  <p style="margin-top: 8px; opacity: 0.5">Guia gerado a partir da documentação oficial — Maio 2026</p>
+</footer>
+
+<style is:global>
+:root {
+    --bg: #080b12;
+    --surface: #0e1422;
+    --surface2: #141926;
+    --border: rgba(255,255,255,0.07);
+    --accent: #4fffb0;
+    --accent2: #7c6dfa;
+    --accent3: #ff6b6b;
+    --accent4: #ffd166;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --code-bg: #0a0d16;
+    --glow: rgba(79,255,176,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ANIMATED GRID BACKGROUND */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,255,176,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,255,176,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+  }
+  .hero-orb-1 { width: 600px; height: 600px; background: rgba(79,255,176,0.08); top: -100px; left: -200px; }
+  .hero-orb-2 { width: 500px; height: 500px; background: rgba(124,109,250,0.1); bottom: -100px; right: -150px; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(79,255,176,0.08);
+    border: 1px solid rgba(79,255,176,0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeSlideDown 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    animation: fadeSlideDown 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span.grad {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    max-width: 600px;
+    margin: 24px auto 0;
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 300;
+    animation: fadeSlideDown 0.6s 0.2s ease both;
+  }
+
+  .hero-version {
+    margin-top: 40px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    animation: fadeSlideDown 0.6s 0.3s ease both;
+  }
+
+  .hero-version span {
+    color: var(--accent4);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.1em;
+    animation: fadeSlideDown 0.6s 0.5s ease both;
+  }
+
+  .scroll-arrow {
+    width: 24px; height: 24px;
+    border: 1.5px solid var(--muted);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: bounce 2s infinite;
+  }
+
+  /* LAYERS INTRO */
+  .layers-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  .section-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    line-height: 1.1;
+  }
+
+  .layers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .layer-card {
+    background: var(--surface);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .layer-card:hover { background: var(--surface2); }
+  .layer-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -20px; right: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.02);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .layer-tag {
+    display: inline-block;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .layer-tag.terminal { background: rgba(255,214,102,0.1); color: var(--accent4); border: 1px solid rgba(255,214,102,0.2); }
+  .layer-tag.agent { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.2); }
+
+  .layer-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .layer-code {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--accent4);
+    background: var(--code-bg);
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-top: 16px;
+    border-left: 2px solid var(--accent4);
+  }
+  .layer-card.agent-layer .layer-code { color: var(--accent); border-color: var(--accent); }
+
+  /* MAIN FLOW */
+  .flow-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .flow-timeline {
+    position: relative;
+    margin-top: 16px;
+  }
+
+  .flow-timeline::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent3));
+    opacity: 0.3;
+  }
+
+  .flow-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 24px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+
+  .flow-step-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+  }
+
+  .step-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    box-shadow: 0 0 16px var(--glow);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .flow-item:hover .step-dot {
+    transform: scale(1.4);
+    box-shadow: 0 0 24px var(--accent);
+  }
+
+  .flow-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: default;
+  }
+
+  .flow-card:hover {
+    border-color: rgba(79,255,176,0.25);
+    background: var(--surface2);
+    transform: translateX(6px);
+    box-shadow: -4px 0 0 var(--accent), 0 16px 48px rgba(0,0,0,0.3);
+  }
+
+  .flow-card-inner { position: relative; z-index: 1; }
+
+  .flow-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cmd-pill {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .flow-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .flow-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .flow-timing {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .flow-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .flow-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-weight: 400;
+  }
+
+  .flow-col p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #c0c4d4;
+  }
+
+  .flow-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .flow-col ul li {
+    font-size: 13px;
+    color: #c0c4d4;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .flow-col ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  .code-example {
+    margin-top: 16px;
+    background: var(--code-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .code-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .code-dot-r { background: #ff6b6b; }
+  .code-dot-y { background: var(--accent4); }
+  .code-dot-g { background: var(--accent); }
+
+  .code-filename {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+
+  .code-body {
+    padding: 16px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.8;
+    color: #9aa3c0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+
+  .code-body .cmd { color: var(--accent); font-weight: 700; }
+  .code-body .comment { color: #4a5270; }
+  .code-body .str { color: var(--accent4); }
+  .code-body .kw { color: var(--accent2); }
+
+  /* OUTPUT FILES */
+  .output-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .output-file {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(79,255,176,0.06);
+    color: var(--accent);
+    border: 1px solid rgba(79,255,176,0.15);
+  }
+
+  /* MODEL RECOMMENDATION */
+  .model-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(124,109,250,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(124,109,250,0.2);
+    font-family: 'Geist Mono', monospace;
+    margin-top: 10px;
+  }
+
+  .thinking-bar {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+
+  .thinking-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent2);
+    opacity: 0.3;
+  }
+  .thinking-dot.on { opacity: 1; box-shadow: 0 0 6px var(--accent2); }
+
+  /* TERMINAL SECTION */
+  .terminal-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .terminal-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    padding: 8px 20px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .tab-btn:hover { background: var(--surface2); color: var(--text); }
+  .tab-btn.active { background: var(--surface2); color: var(--accent); border-color: rgba(79,255,176,0.2); }
+
+  .tab-panel {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 0 12px 12px 12px;
+    overflow: hidden;
+  }
+  .tab-panel.active { display: block; }
+
+  .cmd-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .cmd-table thead tr {
+    background: var(--code-bg);
+  }
+
+  .cmd-table th {
+    padding: 12px 20px;
+    text-align: left;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cmd-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+
+  .cmd-table tr:last-child td { border-bottom: none; }
+
+  .cmd-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .cmd-mono {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--accent4);
+    line-height: 1.6;
+  }
+
+  .cmd-desc { color: #b0b8cc; }
+
+  /* GOLDEN RULE */
+  .golden-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .golden-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 40px;
+  }
+
+  .golden-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 90px;
+    padding: 20px 8px;
+    border-radius: 12px;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .golden-step:hover {
+    background: rgba(255,255,255,0.04);
+    transform: translateY(-4px);
+  }
+
+  .step-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  .step-name {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .step-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+    max-width: 80px;
+  }
+
+  .step-arrow {
+    color: var(--muted);
+    font-size: 16px;
+    padding: 0 4px;
+    margin-top: -20px;
+    flex-shrink: 0;
+  }
+
+  /* ANTIPATTERNS */
+  .warning-box {
+    background: rgba(255,107,107,0.06);
+    border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .warning-box::before {
+    content: '⚠';
+    position: absolute;
+    top: -20px; right: 20px;
+    font-size: 100px;
+    opacity: 0.04;
+    line-height: 1;
+  }
+
+  .warning-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent3);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .warning-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .warning-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #c0c4d4;
+  }
+
+  .warning-list li::before {
+    content: '✗';
+    color: var(--accent3);
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  /* SCOPE UPDATE PATTERN */
+  .pattern-box {
+    background: rgba(79,255,176,0.04);
+    border: 1px solid rgba(79,255,176,0.15);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-top: 32px;
+  }
+
+  .pattern-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    text-align: center;
+    padding: 60px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+  }
+
+  footer span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* COLOR SCHEMES PER STEP */
+  .c-constitution { --step-color: #ffd166; }
+  .c-specify      { --step-color: #4fffb0; }
+  .c-clarify      { --step-color: #a8edea; }
+  .c-checklist    { --step-color: #7c6dfa; }
+  .c-plan         { --step-color: #f7b731; }
+  .c-tasks        { --step-color: #ff6b6b; }
+  .c-analyze      { --step-color: #fd9644; }
+  .c-implement    { --step-color: #26de81; }
+  .c-t2i          { --step-color: #a29bfe; }
+
+  .flow-card.c-constitution:hover { border-color: rgba(255,209,102,0.35); box-shadow: -4px 0 0 #ffd166, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-specify:hover      { border-color: rgba(79,255,176,0.35);  box-shadow: -4px 0 0 #4fffb0, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-clarify:hover      { border-color: rgba(168,237,234,0.35); box-shadow: -4px 0 0 #a8edea, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-checklist:hover    { border-color: rgba(124,109,250,0.35); box-shadow: -4px 0 0 #7c6dfa, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-plan:hover         { border-color: rgba(247,183,49,0.35);  box-shadow: -4px 0 0 #f7b731, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-tasks:hover        { border-color: rgba(255,107,107,0.35); box-shadow: -4px 0 0 #ff6b6b, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-analyze:hover      { border-color: rgba(253,150,68,0.35);  box-shadow: -4px 0 0 #fd9644, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-implement:hover    { border-color: rgba(38,222,129,0.35);  box-shadow: -4px 0 0 #26de81, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-t2i:hover          { border-color: rgba(162,155,254,0.35); box-shadow: -4px 0 0 #a29bfe, 0 16px 48px rgba(0,0,0,0.3); }
+
+  .flow-item:hover .step-dot { border-color: var(--step-color); box-shadow: 0 0 20px var(--step-color); }
+
+  .cmd-pill { background: rgba(255,255,255,0.05); color: var(--step-color); border: 1px solid rgba(255,255,255,0.1); }
+
+  .step-icon { background: rgba(255,255,255,0.04); }
+
+  /* NAV STICKY */
+  .sticky-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    height: 52px;
+    background: rgba(8,11,18,0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.3s ease;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    max-width: 1100px;
+  }
+  .nav-logo {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-right: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-sep {
+    width: 1px; height: 20px;
+    background: var(--border);
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 5px 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    background: none;
+    text-decoration: none;
+    display: block;
+  }
+  .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-link.active { color: var(--accent); background: rgba(79,255,176,0.08); border-color: rgba(79,255,176,0.2); }
+  section[id] { scroll-margin-top: 64px; }
+
+  @media (max-width: 700px) {
+    .sticky-nav { padding: 0 10px; }
+    .nav-logo, .nav-sep { display: none; }
+    .nav-link { padding: 5px 8px; font-size: 11px; }
+  }
+
+  @media (max-width: 700px) {
+    .layers-grid { grid-template-columns: 1fr; }
+    .flow-body { grid-template-columns: 1fr; }
+    .flow-item { grid-template-columns: 48px 1fr; }
+    .flow-timeline::before { left: 16px; }
+    .golden-flow { justify-content: center; }
+    .step-arrow { display: none; }
+  }
+
+  /* QUICK COMMANDS STRIP */
+  .quick-strip {
+    position: relative;
+    z-index: 1;
+    padding: 0 24px 64px;
+  }
+
+  .quick-strip-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .quick-strip-label {
+    text-align: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .quick-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .quick-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 400;
+    transition: all 0.2s cubic-bezier(0.23,1,0.32,1);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .quick-btn:hover {
+    background: var(--surface2);
+    color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+
+  .quick-btn .qi {
+    font-size: 14px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .quick-btn .ql {
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .quick-btn:hover .ql { opacity: 1; }
+
+  /* color per command */
+  .quick-btn[data-cmd="constitution"] { --qc: #ffd166; }
+  .quick-btn[data-cmd="specify"]      { --qc: #4fffb0; }
+  .quick-btn[data-cmd="clarify"]      { --qc: #a8edea; }
+  .quick-btn[data-cmd="checklist"]    { --qc: #7c6dfa; }
+  .quick-btn[data-cmd="plan"]         { --qc: #f7b731; }
+  .quick-btn[data-cmd="tasks"]        { --qc: #ff6b6b; }
+  .quick-btn[data-cmd="analyze"]      { --qc: #fd9644; }
+  .quick-btn[data-cmd="implement"]    { --qc: #26de81; }
+  .quick-btn[data-cmd="t2i"]          { --qc: #a29bfe; }
+
+  .quick-btn:hover {
+    border-color: color-mix(in srgb, var(--qc) 40%, transparent);
+    color: var(--qc);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 0 1px color-mix(in srgb, var(--qc) 20%, transparent);
+  }
+
+  .quick-btn:hover .ql { color: var(--qc); opacity: 0.7; }
+
+
+  /* QUANDO USAR */
+  .when-usar {
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+  }
+
+  .when-usar-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-weight: 400;
+  }
+
+  .when-usar-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .when-usar-col ul li {
+    font-size: 13px;
+    color: #b0b8cc;
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .when-usar-col ul li.usual::before {
+    content: '●';
+    position: absolute;
+    left: 0;
+    color: var(--step-color, var(--accent));
+    font-size: 7px;
+    top: 5px;
+  }
+
+  .when-usar-col ul li.also::before {
+    content: '◇';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 9px;
+    top: 3px;
+  }
+
+  @media (max-width: 700px) {
+    .when-usar { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script is:inline>
+function switchTab(id, target) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (target instanceof HTMLElement) target.classList.add('active');
+}
+
+document.querySelectorAll('.tab-btn[data-tab]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = button.getAttribute('data-tab');
+    if (id) switchTab(id, button);
+  });
+});
+
+// NAV: scroll spy
+const navLinks = document.querySelectorAll('.nav-link');
+const secIds = ['sec-hero','sec-camadas','sec-fluxo','sec-terminal','sec-regra'];
+const spyObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+secIds.forEach(id => { const el = document.getElementById(id); if (el) spyObs.observe(el); });
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.flow-card, .layer-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>

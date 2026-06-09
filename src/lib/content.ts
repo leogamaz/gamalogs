@@ -1,8 +1,9 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { getPostPath, homePath, type Language } from './routes';
+import { getGuidePath, getPostPath, homePath, type Language } from './routes';
 
 export type { Language } from './routes';
 export type PostEntry = CollectionEntry<'posts'>;
+export type GuideEntry = CollectionEntry<'guides'>;
 
 export interface TagBucket {
   name: string;
@@ -20,6 +21,11 @@ export async function getPublishedPosts(language: Language = 'pt') {
   return posts.sort((left, right) => right.data.publishDate.valueOf() - left.data.publishDate.valueOf());
 }
 
+export async function getPublishedGuides(language: Language = 'pt') {
+  const guides = await getCollection('guides', ({ data }) => data.language === language && !data.draft);
+  return guides.sort((left, right) => right.data.publishDate.valueOf() - left.data.publishDate.valueOf());
+}
+
 export async function getPostTranslationPath(post: PostEntry, targetLanguage: Language) {
   const posts = await getCollection('posts', ({ data }) => data.language === targetLanguage && !data.draft);
 
@@ -28,6 +34,13 @@ export async function getPostTranslationPath(post: PostEntry, targetLanguage: La
     : posts.find((candidate) => candidate.slug === post.slug);
 
   return translatedPost ? getPostPath(translatedPost) : homePath(targetLanguage);
+}
+
+export async function getGuideTranslationPath(guide: GuideEntry, targetLanguage: Language) {
+  const guides = await getCollection('guides', ({ data }) => data.language === targetLanguage && !data.draft);
+  const translatedGuide = guides.find((candidate) => candidate.data.translationKey === guide.data.translationKey);
+
+  return translatedGuide ? getGuidePath(translatedGuide) : homePath(targetLanguage);
 }
 
 export async function getSitePages(language: Language = 'pt') {

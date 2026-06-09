@@ -15,6 +15,19 @@ const posts = defineCollection({
   }),
 });
 
+const guides = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string().min(1),
+    summary: z.string().min(1),
+    publishDate: z.coerce.date(),
+    language: z.enum(['pt','en']),
+    translationKey: z.string().min(1),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
 const pages = defineCollection({
   type: 'content',
   schema: z.object({
@@ -25,4 +38,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { posts, pages };
+export const collections = { posts, pages, guides };
