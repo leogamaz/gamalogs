@@ -1,0 +1,126 @@
+---
+import { toggleLanguagePath, type Language } from '../lib/routes';
+
+interface Props {
+  href?: string;
+  currentLanguage?: Language;
+  variant?: 'inline' | 'floating';
+}
+
+const pathname = Astro.url.pathname;
+const currentLanguage = Astro.props.currentLanguage ?? (pathname.startsWith('/en') ? 'en' : 'pt');
+const href = Astro.props.href ?? toggleLanguagePath(pathname);
+const variant = Astro.props.variant ?? 'inline';
+
+const labels = {
+  pt: {
+    aria: 'Ler em ingles',
+    eyebrow: 'idioma',
+    label: 'Portugues',
+    code: 'PT',
+  },
+  en: {
+    aria: 'Read in Portuguese',
+    eyebrow: 'language',
+    label: 'English',
+    code: 'EN',
+  },
+} as const;
+
+const copy = labels[currentLanguage];
+---
+
+<a class:list={["language-switch", `language-switch-${variant}`]} href={href} aria-label={copy.aria}>
+  <span class="switch-code">{copy.code}</span>
+  <span class="switch-copy">
+    <span>{copy.eyebrow}</span>
+    <strong>{copy.label}</strong>
+  </span>
+</a>
+
+<style>
+  .language-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--text, #e8eaf0);
+    text-decoration: none;
+    font-family: inherit;
+    transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+  }
+
+  .switch-code {
+    display: grid;
+    place-items: center;
+    min-width: 2rem;
+    height: 2rem;
+    border-radius: 0.55rem;
+    background: rgba(124, 255, 114, 0.08);
+    color: var(--accent, #7cff72);
+    font-weight: 800;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .switch-copy {
+    display: grid;
+    gap: 0.08rem;
+    line-height: 1.1;
+  }
+
+  .switch-copy span {
+    color: var(--muted, #7f8b94);
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .switch-copy strong {
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .language-switch-inline {
+    width: 100%;
+    padding: 0.58rem;
+    border: 1px solid var(--line, rgba(140, 163, 174, 0.16));
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .language-switch-floating {
+    position: fixed;
+    top: max(0.9rem, env(safe-area-inset-top));
+    right: max(0.9rem, env(safe-area-inset-right));
+    z-index: 10000;
+    padding: 0.62rem 0.78rem;
+    border: 1px solid rgba(79, 255, 176, 0.32);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(8, 11, 18, 0.88), rgba(14, 20, 34, 0.78));
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(79, 255, 176, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .language-switch:hover,
+  .language-switch:focus-visible {
+    transform: translateY(-1px);
+    border-color: rgba(124, 255, 114, 0.34);
+    background: rgba(124, 255, 114, 0.045);
+    outline: none;
+  }
+
+  @media (max-width: 700px) {
+    .language-switch-floating {
+      top: auto;
+      right: max(0.8rem, env(safe-area-inset-right));
+      bottom: max(0.8rem, env(safe-area-inset-bottom));
+      padding: 0.54rem 0.62rem;
+    }
+
+    .language-switch-floating .switch-copy {
+      display: none;
+    }
+  }
+</style>
