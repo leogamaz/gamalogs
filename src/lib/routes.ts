@@ -1,11 +1,15 @@
+import type { CollectionEntry } from 'astro:content';
+
 export const SITE = {
-  name: 'Caderno de Frente',
-  description: 'Notas tecnicas, pequenos experimentos e artigos front-end com leitura limpa e foco editorial.',
-  url: 'https://example.com',
+  name: 'Gama Logs',
+  description: 'Notas tecnicas, pequenos experimentos e artigos',
+  url: 'https://gamalogs.com',
   locale: 'pt-BR',
 };
 
 export type Language = 'pt' | 'en';
+
+type PostRouteEntry = Pick<CollectionEntry<'posts'>, 'id' | 'slug' | 'data'>;
 
 export function homePath(language: Language = 'pt') {
   return `/${language}/`;
@@ -13,6 +17,25 @@ export function homePath(language: Language = 'pt') {
 
 export function postPath(slug: string, language: Language = 'pt') {
   return `/${language}/posts/${slug}/`;
+}
+
+export function getPostRouteSlug(post: PostRouteEntry) {
+  const pathParts = post.id.split('/');
+  const parentSegments = pathParts.slice(0, -1).join('/');
+
+  if (parentSegments) {
+    return `${parentSegments}/${post.slug}`;
+  }
+
+  const year = String(post.data.publishDate.getUTCFullYear());
+  const month = String(post.data.publishDate.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(post.data.publishDate.getUTCDate()).padStart(2, '0');
+
+  return `${year}/${month}/${day}/${post.slug}`;
+}
+
+export function getPostPath(post: PostRouteEntry) {
+  return postPath(getPostRouteSlug(post), post.data.language);
 }
 
 export function tagPath(slug: string, language: Language = 'pt') {

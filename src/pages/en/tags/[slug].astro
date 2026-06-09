@@ -3,7 +3,7 @@ import type { TagBucket } from '../../../lib/content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PostCard from '../../../components/PostCard.astro';
 import { getTagMap } from '../../../lib/content';
-import { SITE, tagPath } from '../../../lib/routes';
+import { SITE, getPostPath, tagPath } from '../../../lib/routes';
 
 export async function getStaticPaths() {
   const tagMap = await getTagMap('en');
@@ -38,7 +38,7 @@ const { tag } = Astro.props as Props;
       {tag.posts.map((post, index) => (
         <PostCard
           rank={`#${String(142 + index).padStart(4, '0')}`}
-          slug={post.slug}
+          href={getPostPath(post)}
           title={post.data.title}
           summary={post.data.summary}
           publishDate={post.data.publishDate}

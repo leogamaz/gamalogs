@@ -18,9 +18,10 @@ interface Props {
   tags?: string[];
   headings?: HeadingItem[];
   language?: Language;
+  languageHref?: string;
 }
 
-const { title, description, path, publishDate, tags = [], headings = [], language = 'pt' } = Astro.props;
+const { title, description, path, publishDate, tags = [], headings = [], language = 'pt', languageHref } = Astro.props;
 const locale = language === 'en' ? 'en_US' : 'pt_BR';
 const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
 ---
@@ -36,7 +37,7 @@ const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
 >
   <div class="article-grid">
     <aside class="rail sticky-rail">
-      <InPageNav headings={headings} title={language === 'en' ? 'in this page' : 'nesta página'} />
+      <InPageNav headings={headings} title={language === 'en' ? 'in this page' : 'nesta página'} languageHref={languageHref} />
     </aside>
 
     <article class="reading-flow surface article-shell" id="topo">

@@ -1,29 +1,36 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { getPostTranslationPath } from '../../../lib/content';
 import PostLayout from '../../../layouts/PostLayout.astro';
-import { postPath } from '../../../lib/routes';
+import { getPostPath, getPostRouteSlug } from '../../../lib/routes';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => data.language === 'en' && !data.draft);
 
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  return Promise.all(
+    posts.map(async (post) => ({
+      params: { slug: getPostRouteSlug(post) },
+      props: {
+        post,
+        languageHref: await getPostTranslationPath(post, 'pt'),
+      },
+    }))
+  );
 }
 
-const { post } = Astro.props;
+const { post, languageHref } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
 <PostLayout
   title={post.data.title}
   description={post.data.summary}
-  path={postPath(post.slug, 'en')}
+  path={getPostPath(post)}
   publishDate={post.data.publishDate}
   tags={post.data.tags}
   headings={headings}
   language="en"
+  languageHref={languageHref}
 >
   <Content />
 </PostLayout>

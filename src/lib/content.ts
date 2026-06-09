@@ -1,6 +1,8 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { getPostPath, homePath, type Language } from './routes';
 
-export type Language = 'pt' | 'en';
+export type { Language } from './routes';
+export type PostEntry = CollectionEntry<'posts'>;
 
 export interface TagBucket {
   name: string;
@@ -16,6 +18,16 @@ export interface TagBucket {
 export async function getPublishedPosts(language: Language = 'pt') {
   const posts = await getCollection('posts', ({ data }) => data.language === language && !data.draft);
   return posts.sort((left, right) => right.data.publishDate.valueOf() - left.data.publishDate.valueOf());
+}
+
+export async function getPostTranslationPath(post: PostEntry, targetLanguage: Language) {
+  const posts = await getCollection('posts', ({ data }) => data.language === targetLanguage && !data.draft);
+
+  const translatedPost = post.data.translationKey
+    ? posts.find((candidate) => candidate.data.translationKey === post.data.translationKey)
+    : posts.find((candidate) => candidate.slug === post.slug);
+
+  return translatedPost ? getPostPath(translatedPost) : homePath(targetLanguage);
 }
 
 export async function getSitePages(language: Language = 'pt') {

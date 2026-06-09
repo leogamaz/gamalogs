@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getPublishedPosts } from '../../../lib/content';
-import { archivePath, postPath, SITE } from '../../../lib/routes';
+import { archivePath, getPostPath, SITE } from '../../../lib/routes';
 
 const posts = await getPublishedPosts('en');
 type DayPosts = Record<string, CollectionEntry<'posts'>[]>;
@@ -46,7 +46,7 @@ const grouped = Object.entries(
                   <p>{day}</p>
                   <ul>
                     {dayPosts.map((post) => (
-                      <li><a href={postPath(post.slug, 'en')}>{post.data.title}</a></li>
+                      <li><a href={getPostPath(post)}>{post.data.title}</a></li>
                     ))}
                   </ul>
                 </div>

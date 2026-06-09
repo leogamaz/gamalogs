@@ -1,10 +1,10 @@
 ---
-import { postPath, tagPath, slugifyTag } from '../lib/routes';
+import { tagPath, slugifyTag } from '../lib/routes';
 import type { Language } from '../lib/content';
 
 interface Props {
   rank?: string;
-  slug: string;
+  href: string;
   title: string;
   summary: string;
   publishDate: Date;
@@ -13,7 +13,7 @@ interface Props {
   language?: Language;
 }
 
-const { rank = '#0000', slug, title, summary, publishDate, tags = [], readingMinutes = 1, language = 'pt' } = Astro.props;
+const { href, title, tags = [], readingMinutes = 1, language = 'pt' } = Astro.props;
 const initials = (tags[0] ?? title).slice(0, 1).toUpperCase();
 ---
 
@@ -25,7 +25,7 @@ const initials = (tags[0] ?? title).slice(0, 1).toUpperCase();
   </div>
 
   <div class="card-content">
-    <h3><a href={postPath(slug, language)}>{title}</a></h3>
+    <h3><a href={href}>{title}</a></h3>
     
     <div class="foot">
       <span>{readingMinutes} min · read →</span>

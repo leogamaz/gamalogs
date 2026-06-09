@@ -7,6 +7,7 @@ const posts = defineCollection({
     summary: z.string().min(1),
     publishDate: z.coerce.date(),
     language: z.enum(['pt','en']),
+    translationKey: z.string().min(1).optional(),
     tags: z.array(z.string()).default([]),
     category: z.string().optional(),
     translationAvailable: z.boolean().default(false),

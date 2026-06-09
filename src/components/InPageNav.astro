@@ -4,7 +4,6 @@ import { toggleLanguagePath } from '../lib/routes';
 const pathname = Astro.url.pathname;
 const actualLanguage = pathname.startsWith('/en') ? 'en' : 'pt';
 const nextLanguage = actualLanguage === 'pt' ? 'en' : 'pt';
-const languageHref = toggleLanguagePath(pathname);
 
 interface HeadingItem {
   depth: number;
@@ -17,9 +16,11 @@ interface Props {
   headings?: HeadingItem[];
   title?: string;
   includeTopLevel?: boolean;
+  languageHref?: string;
 }
 
-const { items: providedItems, headings = [], title = 'nesta página', includeTopLevel = false } = Astro.props;
+const { items: providedItems, headings = [], title = 'nesta página', includeTopLevel = false, languageHref: providedLanguageHref } = Astro.props;
+const languageHref = providedLanguageHref ?? toggleLanguagePath(pathname);
 
 const navItems = [
   { slug: 'topo', text: 'Topo', depth: 1 },
