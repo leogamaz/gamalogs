@@ -6,7 +6,7 @@ import { getTagMap } from '../../../lib/content';
 import { SITE, tagPath } from '../../../lib/routes';
 
 export async function getStaticPaths() {
-  const tagMap = await getTagMap();
+  const tagMap = await getTagMap('en');
   return [...tagMap.values()].map((tag) => ({
     params: { slug: tag.slug },
     props: { tag },
@@ -21,15 +21,17 @@ const { tag } = Astro.props as Props;
 ---
 
 <BaseLayout
-  title={`Etiqueta: ${tag.name} | ${SITE.name}`}
-  description={`Publicacoes agrupadas pela etiqueta ${tag.name}.`}
-  path={tagPath(tag.slug)}
+  title={`Tag: ${tag.name} | ${SITE.name}`}
+  description={`Posts grouped under the tag ${tag.name}.`}
+  path={tagPath(tag.slug, 'en')}
+  lang="en-US"
+  locale="en_US"
 >
   <section class="tag-page reading-flow">
     <div class="intro surface">
       <span class="eyebrow">tag</span>
       <h1 class="section-title">{tag.name}</h1>
-      <p class="lede">{tag.posts.length} posts ligados a este tema.</p>
+      <p class="lede">{tag.posts.length} posts linked to this topic.</p>
     </div>
 
     <div class="tag-listing">

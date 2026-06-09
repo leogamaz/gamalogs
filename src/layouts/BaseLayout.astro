@@ -7,17 +7,19 @@ interface Props {
   title: string;
   description: string;
   path: string;
+  lang?: string;
+  locale?: string;
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
   noindex?: boolean;
 }
 
-const { title, description, path, image, type, publishedTime, noindex = false } = Astro.props;
+const { title, description, path, lang = 'pt-BR', locale = 'pt_BR', image, type, publishedTime, noindex = false } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="pt-BR">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,6 +28,7 @@ const { title, description, path, image, type, publishedTime, noindex = false } 
       title={title}
       description={description}
       path={path}
+      locale={locale}
       image={image}
       type={type}
       publishedTime={publishedTime}

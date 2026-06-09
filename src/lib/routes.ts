@@ -5,24 +5,26 @@ export const SITE = {
   locale: 'pt-BR',
 };
 
-export function ptPath(pathname = '/') {
-  return pathname.startsWith('/pt') ? pathname : `/pt${pathname === '/' ? '/' : pathname}`;
+export type Language = 'pt' | 'en';
+
+export function homePath(language: Language = 'pt') {
+  return `/${language}/`;
 }
 
-export function postPath(slug: string) {
-  return `/pt/posts/${slug}/`;
+export function postPath(slug: string, language: Language = 'pt') {
+  return `/${language}/posts/${slug}/`;
 }
 
-export function tagPath(slug: string) {
-  return `/pt/tags/${slug}/`;
+export function tagPath(slug: string, language: Language = 'pt') {
+  return `/${language}/tags/${slug}/`;
 }
 
-export function archivePath() {
-  return '/pt/archive/';
+export function archivePath(language: Language = 'pt') {
+  return `/${language}/archive/`;
 }
 
-export function pagePath(slug: string) {
-  return `/pt/${slug}/`;
+export function pagePath(slug: string, language: Language = 'pt') {
+  return `/${language}/${slug}/`;
 }
 
 export function absoluteUrl(pathname: string, site = SITE.url) {
@@ -36,4 +38,17 @@ export function slugifyTag(tag: string) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+export function toggleLanguagePath(pathname: string) {
+  if (pathname.startsWith('/en')) {
+    if (pathname === '/en/' || pathname === '/en') return '/pt/';
+    return pathname
+      .replace('/en/about/', '/pt/sobre/')
+      .replace('/en/', '/pt/');
+  }
+
+  if (pathname === '/pt/' || pathname === '/pt') return '/en/';
+  return pathname
+    .replace('/pt/sobre/', '/en/about/')
+    .replace('/pt/', '/en/');
 }

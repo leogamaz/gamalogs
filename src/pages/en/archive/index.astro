@@ -4,7 +4,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getPublishedPosts } from '../../../lib/content';
 import { archivePath, postPath, SITE } from '../../../lib/routes';
 
-const posts = await getPublishedPosts('pt');
+const posts = await getPublishedPosts('en');
 type DayPosts = Record<string, CollectionEntry<'posts'>[]>;
 type MonthBuckets = Record<string, DayPosts>;
 type ArchiveBuckets = Record<string, MonthBuckets>;
@@ -13,8 +13,8 @@ const grouped = Object.entries(
   posts.reduce<ArchiveBuckets>((accumulator, post) => {
     const date = post.data.publishDate;
     const year = String(date.getFullYear());
-    const month = date.toLocaleString('pt-BR', { month: 'long' });
-    const day = date.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' });
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    const day = date.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit' });
 
     accumulator[year] ??= {};
     accumulator[year][month] ??= {};
@@ -27,15 +27,13 @@ const grouped = Object.entries(
 ---
 
 <BaseLayout
-  title={`Arquivo | ${SITE.name}`}
-  description="Navegue pelas publicacoes em ordem cronologica, com agrupamento por ano, mes e dia."
-  path={archivePath('pt')}
-  lang="pt-BR"
-  locale="pt_BR"
+  title={`Archive | ${SITE.name}`}
+  description="Browse posts in chronological order, grouped by year, month, and day."
+  path={archivePath('en')}
+  lang="en-US"
+  locale="en_US"
 >
   <section class="surface archive reading-flow archive-shell">
-    
-
     <div class="timeline">
       {grouped.map(([year, months]) => (
         <section>
@@ -48,7 +46,7 @@ const grouped = Object.entries(
                   <p>{day}</p>
                   <ul>
                     {dayPosts.map((post) => (
-                      <li><a href={postPath(post.slug, 'pt')}>{post.data.title}</a></li>
+                      <li><a href={postPath(post.slug, 'en')}>{post.data.title}</a></li>
                     ))}
                   </ul>
                 </div>

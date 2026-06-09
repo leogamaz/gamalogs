@@ -2,12 +2,15 @@
 import type { CollectionEntry } from 'astro:content';
 import InPageNav from './InPageNav.astro';
 import PostCard from './PostCard.astro';
+import type { Language } from '../lib/content';
 
 interface Props {
   posts: CollectionEntry<'posts'>[];
+  language?: Language;
 }
 
-const { posts = [] } = Astro.props as Props;
+const { posts = [], language = 'pt' } = Astro.props as Props;
+const locale = language === 'en' ? 'en-US' : 'pt-BR';
 
 type MonthBucket = {
   id: string;
@@ -21,7 +24,7 @@ for (const post of posts) {
   const date = post.data.publishDate;
   const year = String(date.getFullYear());
   const monthNumber = String(date.getMonth() + 1).padStart(2, '0');
-  const monthLabel = date.toLocaleString('pt-BR', { month: 'long' });
+  const monthLabel = date.toLocaleString(locale, { month: 'long' });
   const key = `${year}-${monthNumber}`;
 
   if (!archiveMap.has(key)) {
@@ -48,7 +51,7 @@ for (const post of posts) {
 
 <section class="home-archive" id="topo">
   <aside class="rail sticky-rail">
-    <InPageNav items={navItems} title="nesta página" includeTopLevel={true} />
+    <InPageNav items={navItems} title={language === 'en' ? 'in this page' : 'nesta página'} includeTopLevel={true} />
   </aside>
 
   <article class="timeline">
@@ -66,6 +69,7 @@ for (const post of posts) {
               publishDate={post.data.publishDate}
               tags={post.data.tags}
               readingMinutes={Math.max(1, Math.round(post.body.split(/\s+/).filter(Boolean).length / 220))}
+              language={post.data.language}
             />
           ))}
         </div>

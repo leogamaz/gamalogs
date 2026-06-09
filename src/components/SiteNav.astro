@@ -1,18 +1,37 @@
 ---
-import { archivePath, pagePath, ptPath } from '../lib/routes';
+import { archivePath, homePath, pagePath } from '../lib/routes';
 
 const pathname = Astro.url.pathname;
 type IconName = 'archive' | 'tags' | 'rss' | 'about';
+const language = pathname.startsWith('/en') ? 'en' : 'pt';
+const aboutSlug = language === 'en' ? 'about' : 'sobre';
+const ui = language === 'en'
+  ? {
+      navLabel: 'Main navigation',
+      openLabel: 'Open in this page',
+      inPageLabel: 'in this page',
+      open: 'Open',
+      close: 'Close',
+    }
+  : {
+      navLabel: 'Navegacao principal',
+      openLabel: 'Abrir nesta página',
+      inPageLabel: 'nesta página',
+      open: 'Abrir',
+      close: 'Fechar',
+    };
 
 const links: Array<{ href: string; label: string; icon: IconName }> = [
-  { href: archivePath(), label: 'archive', icon: 'archive' },
-  { href: '/pt/tags/', label: 'tags', icon: 'tags' },
+  { href: archivePath(language), label: 'archive', icon: 'archive' },
+  { href: `/${language}/tags/`, label: 'tags', icon: 'tags' },
   { href: '/rss.xml', label: 'rss', icon: 'rss' },
-  { href: pagePath('sobre'), label: 'about', icon: 'about' },
+  { href: pagePath(aboutSlug, language), label: 'about', icon: 'about' },
 ];
 
 function isActive(href: string) {
-  if (href === '/pt/tags/') return pathname.startsWith('/pt/tags');
+  if (href.endsWith('/tags/')) return pathname.startsWith(`/${language}/tags`);
+  if (href.endsWith('/archive/')) return pathname.startsWith(`/${language}/archive`);
+  if (href.endsWith('/about/') || href.endsWith('/sobre/')) return pathname.startsWith(`/${language}/${aboutSlug}`);
   return pathname === href;
 }
 
@@ -41,9 +60,9 @@ const inPageIcons = {
 } as const;
 ---
 
-<nav class="site-nav surface" aria-label="Navegacao principal">
+<nav class="site-nav surface" aria-label={ui.navLabel}>
   <div class="site-nav-inner">
-    <a class="brand" href={ptPath('/')}>
+    <a class="brand" href={homePath(language)}>
       <span class="prompt">~/</span>
       <strong>gamalogs</strong>
       <span class="caret" aria-hidden="true">▍</span>
@@ -75,13 +94,16 @@ const inPageIcons = {
       <button
         class="inpage-toggle"
         type="button"
-        aria-label="Abrir nesta página"
+        aria-label={ui.openLabel}
         aria-expanded="false"
         aria-controls="in-page-nav-panel"
         data-in-page-nav-toggle
         data-in-page-nav-button
+        data-in-page-open-text={ui.open}
+        data-in-page-close-text={ui.close}
+        data-in-page-target-text={ui.inPageLabel}
       >
-        <span class="sr-only">nesta página</span>
+        <span class="sr-only">{ui.inPageLabel}</span>
         <span class="inpage-icon inpage-icon-menu" aria-hidden="true" set:html={inPageIcons.menu} />
         <span class="inpage-icon inpage-icon-close" aria-hidden="true" set:html={inPageIcons.close} />
       </button>
@@ -108,8 +130,12 @@ const inPageIcons = {
 
       const open = Array.from(navs).some((nav) => nav.getAttribute('data-open') === 'true');
       const mobile = window.matchMedia('(max-width: 920px)').matches;
+      const openText = button.dataset.inPageOpenText ?? 'Open';
+      const closeText = button.dataset.inPageCloseText ?? 'Close';
+      const targetText = button.dataset.inPageTargetText ?? '';
+
       button.setAttribute('aria-expanded', String(open));
-      button.setAttribute('aria-label', `${open ? 'Fechar' : 'Abrir'} nesta página`);
+      button.setAttribute('aria-label', `${open ? closeText : openText} ${targetText}`.trim());
       document.body.classList.toggle('in-page-nav-open', open && mobile);
     };
 

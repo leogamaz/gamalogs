@@ -1,5 +1,6 @@
 ---
 import { postPath, tagPath, slugifyTag } from '../lib/routes';
+import type { Language } from '../lib/content';
 
 interface Props {
   rank?: string;
@@ -9,9 +10,10 @@ interface Props {
   publishDate: Date;
   tags?: string[];
   readingMinutes?: number;
+  language?: Language;
 }
 
-const { rank = '#0000', slug, title, summary, publishDate, tags = [], readingMinutes = 1 } = Astro.props;
+const { rank = '#0000', slug, title, summary, publishDate, tags = [], readingMinutes = 1, language = 'pt' } = Astro.props;
 const initials = (tags[0] ?? title).slice(0, 1).toUpperCase();
 ---
 
@@ -23,16 +25,16 @@ const initials = (tags[0] ?? title).slice(0, 1).toUpperCase();
   </div>
 
   <div class="card-content">
-    <h3><a href={postPath(slug)}>{title}</a></h3>
+    <h3><a href={postPath(slug, language)}>{title}</a></h3>
     
     <div class="foot">
       <span>{readingMinutes} min · read →</span>
       {tags.length > 0 && <span>{tags.length} tags</span>}
     </div>
     {tags.length > 0 && (
-      <ul class="tag-list" aria-label="Etiquetas da publicacao">
+      <ul class="tag-list" aria-label={language === 'en' ? 'Post tags' : 'Etiquetas da publicacao'}>
         {tags.map((tag) => (
-          <li><a class="tag-pill" href={tagPath(slugifyTag(tag))}>{tag}</a></li>
+          <li><a class="tag-pill" href={tagPath(slugifyTag(tag), language)}>{tag}</a></li>
         ))}
       </ul>
     )}

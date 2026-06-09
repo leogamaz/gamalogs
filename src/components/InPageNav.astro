@@ -1,4 +1,11 @@
 ---
+import { toggleLanguagePath } from '../lib/routes';
+
+const pathname = Astro.url.pathname;
+const actualLanguage = pathname.startsWith('/en') ? 'en' : 'pt';
+const nextLanguage = actualLanguage === 'pt' ? 'en' : 'pt';
+const languageHref = toggleLanguagePath(pathname);
+
 interface HeadingItem {
   depth: number;
   slug: string;
@@ -24,6 +31,9 @@ const navItems = [
   <div class="toc-panel">
     <div class="toc-head">
       <span class="eyebrow">{title}</span>
+      <a class="language-switch" href={languageHref}>
+        {nextLanguage === 'en' ? '🇧🇷' : '🇺🇸🇬🇧'}
+      </a>
     </div>
 
     <ul>
@@ -73,6 +83,18 @@ const navItems = [
   .indent a {
     padding-left: 0.75rem;
   }
+
+  .language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  background: rgba(255,255,255,0.02);
+}
 
   @media (max-width: 920px) {
     .toc {

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../lib/routes';
+---
+
+<BaseLayout
+  title={`Not found | ${SITE.name}`}
+  description="The requested page is not available, but you can still continue browsing the blog."
+  path="/en/404/"
+  lang="en-US"
+  locale="en_US"
+  noindex={true}
+>
+  <section class="surface reading-flow not-found">
+    <span class="eyebrow">Route error</span>
+    <h1>Page not found</h1>
+    <p class="lede">The address does not exist or has changed. Use the links below to get back on track.</p>
+    <div class="actions">
+      <a class="button-link primary" href="/en/">Back to home</a>
+      <a class="button-link secondary" href="/en/archive/">Open archive</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  h1,
+  p {
+    margin: 0;
+  }
+</style>

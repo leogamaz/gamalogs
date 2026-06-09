@@ -5,17 +5,17 @@ import RecentPosts from '../../components/RecentPosts.astro';
 import { getPublishedPosts } from '../../lib/content';
 import { SITE } from '../../lib/routes';
 
-const posts = await getPublishedPosts('pt');
+const posts = await getPublishedPosts('en');
 ---
 
-<BaseLayout title={`${SITE.name} | Pagina inicial`} description={SITE.description} path="/pt/" lang="pt-BR" locale="pt_BR">
+<BaseLayout title={`${SITE.name} | Home`} description={SITE.description} path="/en/" lang="en-US" locale="en_US">
   {
     posts.length > 0 ? (
-      <RecentPosts posts={posts} language="pt" />
+      <RecentPosts posts={posts} language="en" />
     ) : (
       <EmptyState
-        title="Ainda sem publicacoes"
-        description="O caderno esta sendo montado. As primeiras notas vao aparecer aqui em ordem cronologica."
+        title="No posts yet"
+        description="This notebook is still being assembled. The first notes will appear here in chronological order."
       />
     )
   }

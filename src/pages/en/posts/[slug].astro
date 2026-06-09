@@ -4,7 +4,7 @@ import PostLayout from '../../../layouts/PostLayout.astro';
 import { postPath } from '../../../lib/routes';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts', ({ data }) => data.language === 'pt' && !data.draft);
+  const posts = await getCollection('posts', ({ data }) => data.language === 'en' && !data.draft);
 
   return posts.map((post) => ({
     params: { slug: post.slug },
@@ -19,11 +19,11 @@ const { Content, headings } = await render(post);
 <PostLayout
   title={post.data.title}
   description={post.data.summary}
-  path={postPath(post.slug, 'pt')}
+  path={postPath(post.slug, 'en')}
   publishDate={post.data.publishDate}
   tags={post.data.tags}
   headings={headings}
-  language="pt"
+  language="en"
 >
   <Content />
 </PostLayout>

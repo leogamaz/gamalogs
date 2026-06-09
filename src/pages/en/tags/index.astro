@@ -3,16 +3,16 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getTagMap } from '../../../lib/content';
 import { SITE, tagPath } from '../../../lib/routes';
 
-const tagMap = await getTagMap('pt');
+const tagMap = await getTagMap('en');
 const tags = [...tagMap.values()].sort((left, right) => right.posts.length - left.posts.length || left.name.localeCompare(right.name));
 ---
 
 <BaseLayout
   title={`Tags | ${SITE.name}`}
-  description="Navegue pelos assuntos do blog por etiqueta e encontre rapidamente o contexto de cada texto."
-  path="/pt/tags/"
-  lang="pt-BR"
-  locale="pt_BR"
+  description="Browse the blog topics by tag and quickly find the context for each text."
+  path="/en/tags/"
+  lang="en-US"
+  locale="en_US"
 >
   <section class="surface tags-shell reading-flow">
     <div class="tags-head">
@@ -21,7 +21,7 @@ const tags = [...tagMap.values()].sort((left, right) => right.posts.length - lef
 
     <div class="tags-grid">
       {tags.map((tag) => (
-        <a class="tag-card" href={tagPath(tag.slug, 'pt')}>
+        <a class="tag-card" href={tagPath(tag.slug, 'en')}>
           <strong>{tag.name}</strong>
           <span>{String(tag.posts.length).padStart(2, '0')} posts</span>
         </a>

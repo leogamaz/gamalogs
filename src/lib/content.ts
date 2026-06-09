@@ -1,22 +1,29 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 
+export type Language = 'pt' | 'en';
+
 export interface TagBucket {
   name: string;
   slug: string;
   posts: CollectionEntry<'posts'>[];
 }
+// export async function getPublishedPosts() {
+//   const posts = await getCollection('posts', ({ data }) => data.language === 'pt' && !data.draft);
+//   console.log('Posts:', posts);
+//   return posts.sort((left, right) => right.data.publishDate.valueOf() - left.data.publishDate.valueOf());
+// }
 
-export async function getPublishedPosts() {
-  const posts = await getCollection('posts', ({ data }) => data.language === 'pt' && !data.draft);
+export async function getPublishedPosts(language: Language = 'pt') {
+  const posts = await getCollection('posts', ({ data }) => data.language === language && !data.draft);
   return posts.sort((left, right) => right.data.publishDate.valueOf() - left.data.publishDate.valueOf());
 }
 
-export async function getSitePages() {
-  return getCollection('pages', ({ data }) => data.language === 'pt');
+export async function getSitePages(language: Language = 'pt') {
+  return getCollection('pages', ({ data }) => data.language === language);
 }
 
-export async function getTagMap() {
-  const posts = await getPublishedPosts();
+export async function getTagMap(language: Language = 'pt') {
+  const posts = await getPublishedPosts(language);
   const tags = new Map<string, TagBucket>();
 
   for (const post of posts) {

@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import InPageNav from '../components/InPageNav.astro';
 import { slugifyTag, tagPath } from '../lib/routes';
+import type { Language } from '../lib/content';
 
 interface HeadingItem {
   depth: number;
@@ -16,9 +17,12 @@ interface Props {
   publishDate: Date;
   tags?: string[];
   headings?: HeadingItem[];
+  language?: Language;
 }
 
-const { title, description, path, publishDate, tags = [], headings = [] } = Astro.props;
+const { title, description, path, publishDate, tags = [], headings = [], language = 'pt' } = Astro.props;
+const locale = language === 'en' ? 'en_US' : 'pt_BR';
+const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
 ---
 
 <BaseLayout
@@ -27,10 +31,12 @@ const { title, description, path, publishDate, tags = [], headings = [] } = Astr
   path={path}
   type="article"
   publishedTime={publishDate.toISOString()}
+  lang={htmlLang}
+  locale={locale}
 >
   <div class="article-grid">
     <aside class="rail sticky-rail">
-      <InPageNav headings={headings} title="nesta página" />
+      <InPageNav headings={headings} title={language === 'en' ? 'in this page' : 'nesta página'} />
     </aside>
 
     <article class="reading-flow surface article-shell" id="topo">
@@ -45,9 +51,9 @@ const { title, description, path, publishDate, tags = [], headings = [] } = Astr
           <span>{tags.length} tags</span>
         </div>
         {tags.length > 0 && (
-          <ul class="tag-list" aria-label="Etiquetas da publicacao">
+          <ul class="tag-list" aria-label={language === 'en' ? 'Post tags' : 'Etiquetas da publicacao'}>
             {tags.map((tag) => (
-              <li><a class="tag-pill" href={tagPath(slugifyTag(tag))}>{tag}</a></li>
+              <li><a class="tag-pill" href={tagPath(slugifyTag(tag), language)}>{tag}</a></li>
             ))}
           </ul>
         )}
