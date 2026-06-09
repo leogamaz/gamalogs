@@ -1,0 +1,19 @@
+---
+const target = '/pt/';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Gama Logs</title>
+    <script define:vars={{ target }} is:inline>
+      window.location.replace(`${target}${window.location.search}${window.location.hash}`);
+    </script>
+  </head>
+  <body></body>
+</html>

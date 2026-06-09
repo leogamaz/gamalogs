@@ -8,7 +8,4 @@ export default defineConfig({
   output: 'static',
   site,
   integrations: [mdx(), sitemap()],
-  redirects: {
-    '/': '/pt/',
-  },
 });
