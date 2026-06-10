@@ -16,46 +16,97 @@ draft: false
 
 ---
 
-**Spec-Driven Development Structure - 001**
+**Spec Driven Development Structure - 001**
 
-Here we will take a simpler approach, initially without using GitHub SpecKit, to analyze the actual efficiency of using AI in development.
+Here we will take a simpler approach, without initially using GitHub Speckit, to analyze the real efficiency of using AI in development.
 
 ---
 
 **The Idea**
 
-Use `AGENTS.md` with a hierarchy—one file per responsibility: UI/UX, database, API, front-end framework, as needed.
+Use `AGENTS.md` with hierarchy — one file per responsibility: UI/UX, database, API, front-end framework, as needed.
 
-The base structure looks like this:
+The basic structure looks like this:
 
 ```
 .specify/
-  .specs/
-    001-feature/
-      spec.md
-      plan.md
-      tasks.md
-  .memory/
-    constitution.md
-    agents/
-      agentName/
-        AGENT.md
-  PRD.md
 
+.specs/
+
+001-feature/
+spec.md
+plan.md
+tasks.md
+
+.memory/
+constitution.md
+agents/
+agentName/
 AGENT.md
-README.md
+PRD.md
+
+AGENT.md README.md
+
 ```
 
-`constituition.md` acts as guard rails—everything that cannot be violated in the project, under any circumstances. The `PRD.md` file provides context to the AI about the expected final product *(a next test is to run without it, to see if the AI stays on track without this anchor)*.
+`constitution.md` acts as guardrails — everything that cannot be violated in the project, under any circumstances. The `PRD.md` file provides context to the AI ​​about the expected final product *(a future test is to run it without it, to see if the AI ​​stays on track without this anchor)*.
 
-To draft specs, plans, and tasks, I used the `/grill-me` skill precisely to cover points I wouldn’t have thought of on my own.
+To create specs, plans, and tasks, I used the `/grill-me` skill precisely to cover points I wouldn't have imagined on my own.
 
 ---
 
-**First spec: monorepo structure**
+**First spec: Monorepo structure**
 
 Spec created. Plan created. Tasks created.
 
-The files ended up a bit verbose — spec and plan covering the development environment, Docker, database, layers of
+The files ended up being a bit verbose — the spec and plan covering the development environment, Docker, database, infrastructure layers... and in the end the result was **just this:**
 
-Translated with DeepL.com (free version)
+```
+├── AGENTS.md
+├── apps/
+│ ├── api/README.md
+│ ├── mobile/README.md
+│ ├── web/README.md
+│ └── README.md
+├── docs/README.md
+├── infra/
+│ ├── docker/README.md
+│ ├── local/README.md
+│ ├── production/README.md
+│ └── README.md
+├── packages/README.md
+└── README.md
+
+```
+
+A directory tree. With **nothing** implemented.
+
+- `spec.md` → 182 lines, 7,679 characters
+- `plan.md` → 104 lines, 4,560 characters
+- `tasks.md` → 85 lines, 2,845 characters
+
+**To create this.**
+
+---
+
+**Where the real problem lies**
+
+You must be thinking: *"but that's obvious, why not just ask to create the structure directly?"*
+
+That's exactly where the math doesn't add up.
+
+The benefit of AI is that you can technically create a lot of things **without knowing what's being done**. A junior developer might conclude they need a monorepo without even understanding what it is. The AI ​​delivers. They move forward. They get somewhere.
+
+The result? Good. I don't even need to mention the amount of tokens spent. A bloated specification—and we followed the *simple* path, without the verbosity of a complete speckit.
+
+Now think: we have a specification about our monorepo, right? Technically, that's not bad. But look at how many characters were generated **just for that**. And in many of the next requests, the AI ​​will need to reread all of that.
+
+Do you understand the cycle? The more you specify in this way, the more tokens it consumes. The more context the model needs to carry. The greater the chance of hallucination. And this is **just one example**—now imagine more comprehensive requests, one-prompt attempts to obtain an entire feature, people using SDD in any way, generating specs from AI and not from their own knowledge. ---
+
+**What this reveals about SDD in practice**
+
+The `tasks.md` file was the most straightforward—basically saying: *"create the directory and the file in `apps/api/README.md`"*. This made me realize that the most effective approach here would be to use **only plan and tasks** to actually create something. Furthermore, the content of these two files could be drastically reduced to *"create this structure"*—it wouldn't even require a spec for this request.
+
+What does this mean? That **spec-driven development only adds value when the specifier knows what they are specifying.** Otherwise, you're paying dearly—in tokens, in context, in accidental complexity—to receive a directory tree.
+
+**For now, my first impression is simple: SDD isn't the problem. The problem is using SDD as a crutch to avoid thinking.**
