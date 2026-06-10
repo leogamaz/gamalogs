@@ -1,0 +1,61 @@
+---
+
+title: Testing with SDD?
+slug: testing-with-sdd
+summary: Analyze the actual effectiveness of using AI in development with simple SDD.
+publishDate: 2026-06-05
+language: en
+translationKey: teste-com-sdd-001
+tags:
+ - SDD
+ - Speckit
+ - AI
+category: Development
+translationAvailable: true
+draft: false
+
+---
+
+**Spec-Driven Development Structure - 001**
+
+Here we will take a simpler approach, initially without using GitHub SpecKit, to analyze the actual efficiency of using AI in development.
+
+---
+
+**The Idea**
+
+Use `AGENTS.md` with a hierarchy—one file per responsibility: UI/UX, database, API, front-end framework, as needed.
+
+The base structure looks like this:
+
+```
+.specify/
+  .specs/
+    001-feature/
+      spec.md
+      plan.md
+      tasks.md
+  .memory/
+    constitution.md
+    agents/
+      agentName/
+        AGENT.md
+  PRD.md
+
+AGENT.md
+README.md
+```
+
+`constituition.md` acts as guard rails—everything that cannot be violated in the project, under any circumstances. The `PRD.md` file provides context to the AI about the expected final product *(a next test is to run without it, to see if the AI stays on track without this anchor)*.
+
+To draft specs, plans, and tasks, I used the `/grill-me` skill precisely to cover points I wouldn’t have thought of on my own.
+
+---
+
+**First spec: monorepo structure**
+
+Spec created. Plan created. Tasks created.
+
+The files ended up a bit verbose — spec and plan covering the development environment, Docker, database, layers of
+
+Translated with DeepL.com (free version)

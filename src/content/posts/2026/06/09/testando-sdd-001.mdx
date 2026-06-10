@@ -1,0 +1,113 @@
+---
+
+title: Teste com SDD 001
+slug: teste-com-sdd-001
+summary: Analisar a eficiência real do uso de IA no desenvolvimento usando SDD simples.
+publishDate: 2026-06-09
+language: pt
+translationKey: teste-com-sdd-001
+tags:
+ - SDD
+ - Speckit
+ - IA
+category: Desenvolvimento
+translationAvailable: true
+draft: false
+
+---
+
+**Estrutura Spec Driven Development - 001**
+
+Aqui vamos fazer uma abordagem mais simples, sem o uso de github speckit inicialmente, para analisar a eficiência real do uso de IA no desenvolvimento.
+
+---
+
+**A ideia**
+
+Usar `AGENTS.md` com hierarquia — um arquivo por responsabilidade: ui/ux, banco de dados, api, framework front end, conforme a necessidade aparecer.
+
+A estrutura base ficou assim:
+
+```
+.specify/
+  .specs/
+    001-feature/
+      spec.md
+      plan.md
+      tasks.md
+  .memory/
+    constituition.md
+    agents/
+      nomeAgente/
+        AGENT.md
+  PRD.md
+
+AGENT.md
+README.md
+```
+
+`constituition.md` funciona como guard rails — tudo que não pode ser violado no projeto, em hipótese alguma. O `PRD.md` entrega contexto pra IA sobre o produto final esperado *(um próximo teste é rodar sem ele, pra ver se a IA fica nos eixos sem essa âncora)*.
+
+Para elaborar specs, plans e tasks, usei a skill `/grill-me` justamente pra cobrir pontos que eu não teria imaginado sozinho.
+
+---
+
+**Primeira spec: estrutura do monorepo**
+
+Spec criada. Plan criado. Tasks criado.
+
+Os arquivos ficaram um pouco verbosos — spec e plan abordando ambiente de desenvolvimento, Docker, banco de dados, camadas de infraestrutura... pra no final o resultado ser **apenas isso:**
+
+```
+├── AGENTS.md
+├── apps/
+│   ├── api/README.md
+│   ├── mobile/README.md
+│   ├── web/README.md
+│   └── README.md
+├── docs/README.md
+├── infra/
+│   ├── docker/README.md
+│   ├── local/README.md
+│   ├── production/README.md
+│   └── README.md
+├── packages/README.md
+└── README.md
+```
+
+Uma árvore de diretórios. Sem **nada** implementado.
+
+- `spec.md` → 182 linhas, 7.679 caracteres
+- `plan.md` → 104 linhas, 4.560 caracteres
+- `tasks.md` → 85 linhas, 2.845 caracteres
+
+**Para criar isso.**
+
+---
+
+**Onde mora o problema real**
+
+Você deve estar pensando: *"mas isso é óbvio, por que não pedir direto pra criar a estrutura?"*
+
+É exatamente aqui que a conta não fecha.
+
+O benefício da IA é que você tecnicamente consegue criar muita coisa **sem saber o que está sendo feito**. Um dev júnior pode concluir que precisa de um monorepo sem sequer entender o que é. A IA entrega. Ele segue em frente. Chega em algum lugar.
+
+O resultado? Bom. Eu nem preciso mencionar a quantidade de tokens gastos. Uma especificação inchada — e olha que seguimos o caminho *simples*, sem a verbosidade de um speckit completo.
+
+Agora pensa: temos uma especificação sobre nosso monorepo, certo? Tecnicamente isso não é ruim. Mas olha o quanto de caracteres foi gerado **apenas para isso**. E em muitas das próximas solicitações, a IA vai precisar reler tudo isso.
+
+Entende o ciclo? Quanto mais você especifica dessa forma, mais tokens consome. Mais contexto o modelo precisa carregar. Maior a chance de alucinação. E isso é **apenas um exemplo** — agora imagina em solicitações mais abrangentes, tentativas de one-prompt pra obter uma feature inteira, pessoas usando SDD de qualquer forma, gerando specs a partir da IA e não do próprio conhecimento.
+
+---
+
+**O que isso revela sobre SDD na prática**
+
+O `tasks.md` foi o mais direto ao ponto — basicamente dizia: *"crie o diretório e o arquivo em `apps/api/README.md`"*. Isso me fez perceber que o mais efetivo aqui seria usar **apenas plan e tasks** para realmente criar algo. E mais: o conteúdo desses dois arquivos poderia ser drasticamente reduzido a *"crie essa estrutura"* — nem precisaria de spec pra essa solicitação.
+
+O que isso significa? Que **spec driven development só agrega valor quando quem especifica sabe o que está especificando.** Caso contrário, você está pagando caro — em tokens, em contexto, em complexidade acidental — pra receber uma árvore de diretórios.
+
+Nos próximos posts vamos avançar nisso.
+
+---
+    

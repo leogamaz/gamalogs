@@ -1,9 +1,11 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const posts = defineCollection({
-  type: 'content',
+  loader: glob({ base: './src/content/posts', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string().min(1),
+    slug: z.string().min(1),
     summary: z.string().min(1),
     publishDate: z.coerce.date(),
     language: z.enum(['pt','en']),
@@ -16,7 +18,7 @@ const posts = defineCollection({
 });
 
 const guides = defineCollection({
-  type: 'content',
+  loader: glob({ base: './src/content/guides', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string().min(1),
     summary: z.string().min(1),
@@ -29,9 +31,10 @@ const guides = defineCollection({
 });
 
 const pages = defineCollection({
-  type: 'content',
+  loader: glob({ base: './src/content/pages', pattern: '**/*.{md,mdx}' }),
   schema: z.object({
     title: z.string().min(1),
+    slug: z.string().min(1),
     summary: z.string().optional(),
     language: z.enum(['pt','en']),
     kind: z.enum(['about', 'contact', 'generic']).default('generic'),

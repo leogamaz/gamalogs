@@ -31,7 +31,7 @@ export async function getPostTranslationPath(post: PostEntry, targetLanguage: La
 
   const translatedPost = post.data.translationKey
     ? posts.find((candidate) => candidate.data.translationKey === post.data.translationKey)
-    : posts.find((candidate) => candidate.slug === post.slug);
+    : posts.find((candidate) => candidate.data.slug === post.data.slug);
 
   return translatedPost ? getPostPath(translatedPost) : homePath(targetLanguage);
 }

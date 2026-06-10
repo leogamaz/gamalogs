@@ -43,7 +43,7 @@ const { tag } = Astro.props as Props;
           summary={post.data.summary}
           publishDate={post.data.publishDate}
           tags={post.data.tags}
-          readingMinutes={Math.max(1, Math.round(post.body.split(/\s+/).filter(Boolean).length / 220))}
+          readingMinutes={Math.max(1, Math.round((post.body ?? '').split(/\s+/).filter(Boolean).length / 220))}
           language={post.data.language}
         />
       ))}

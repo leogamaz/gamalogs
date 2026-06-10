@@ -9,8 +9,8 @@ export const SITE = {
 
 export type Language = 'pt' | 'en';
 
-type PostRouteEntry = Pick<CollectionEntry<'posts'>, 'id' | 'slug' | 'data'>;
-type GuideRouteEntry = Pick<CollectionEntry<'guides'>, 'slug' | 'data'>;
+type PostRouteEntry = Pick<CollectionEntry<'posts'>, 'id' | 'data'> & { filePath?: string };
+type GuideRouteEntry = Pick<CollectionEntry<'guides'>, 'id' | 'data'>;
 
 export function homePath(language: Language = 'pt') {
   return `/${language}/`;
@@ -29,18 +29,20 @@ export function guidesPath(language: Language = 'pt') {
 }
 
 export function getPostRouteSlug(post: PostRouteEntry) {
-  const pathParts = post.id.split('/');
+  const sourcePath = (post.filePath ?? post.id).replace(/\\/g, '/');
+  const relativePath = sourcePath.replace(/^.*src\/content\/posts\//, '');
+  const pathParts = relativePath.split('/');
   const parentSegments = pathParts.slice(0, -1).join('/');
 
   if (parentSegments) {
-    return `${parentSegments}/${post.slug}`;
+    return `${parentSegments}/${post.data.slug}`;
   }
 
   const year = String(post.data.publishDate.getUTCFullYear());
   const month = String(post.data.publishDate.getUTCMonth() + 1).padStart(2, '0');
   const day = String(post.data.publishDate.getUTCDate()).padStart(2, '0');
 
-  return `${year}/${month}/${day}/${post.slug}`;
+  return `${year}/${month}/${day}/${post.data.slug}`;
 }
 
 export function getPostPath(post: PostRouteEntry) {
@@ -48,7 +50,7 @@ export function getPostPath(post: PostRouteEntry) {
 }
 
 export function getGuidePath(guide: GuideRouteEntry) {
-  return guidePath(guide.slug, guide.data.language);
+  return guidePath(guide.id, guide.data.language);
 }
 
 export function tagPath(slug: string, language: Language = 'pt') {

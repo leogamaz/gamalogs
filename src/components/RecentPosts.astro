@@ -46,7 +46,7 @@ const ranks = new Map<string, string>();
 let rankCounter = 142;
 
 for (const post of posts) {
-  ranks.set(post.slug, `#${String(rankCounter++).padStart(4, '0')}`);
+  ranks.set(post.id, `#${String(rankCounter++).padStart(4, '0')}`);
 }
 ---
 
@@ -63,13 +63,13 @@ for (const post of posts) {
         <div class="list">
           {bucket.posts.map((post) => (
               <PostCard
-                rank={ranks.get(post.slug) ?? '#0000'}
+                rank={ranks.get(post.id) ?? '#0000'}
                 href={getPostPath(post)}
                 title={post.data.title}
                 summary={post.data.summary}
                 publishDate={post.data.publishDate}
               tags={post.data.tags}
-              readingMinutes={Math.max(1, Math.round(post.body.split(/\s+/).filter(Boolean).length / 220))}
+              readingMinutes={Math.max(1, Math.round((post.body ?? '').split(/\s+/).filter(Boolean).length / 220))}
               language={post.data.language}
             />
           ))}

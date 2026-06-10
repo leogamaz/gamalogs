@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 
   return Promise.all(
     guides.map(async (guide) => ({
-      params: { slug: guide.slug },
+      params: { slug: guide.id },
       props: {
         guide,
         languageHref: await getGuideTranslationPath(guide, 'pt'),

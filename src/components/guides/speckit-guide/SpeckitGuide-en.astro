@@ -1,0 +1,1992 @@
+---
+import GamaLogsReturn from '../GamaLogsReturn.astro';
+---
+
+<GamaLogsReturn />
+
+<!-- NAV STICKY -->
+<nav class="sticky-nav" id="sticky-nav">
+  <div class="nav-inner">
+    <span class="nav-logo">speckit</span>
+    <div class="nav-sep"></div>
+    <div class="nav-links">
+      <a class="nav-link active" href="#sec-hero">Home</a>
+      <a class="nav-link" href="#sec-camadas">2 Layers</a>
+      <a class="nav-link" href="#sec-fluxo">Agent Flow</a>
+      <a class="nav-link" href="#sec-terminal">Terminal</a>
+      <a class="nav-link" href="#sec-regra">Golden Rule</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="sec-hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-badge">Spec Kit 0.8.13 · May 2026</div>
+
+  <h1>
+    <span class="grad">Spec-Driven</span><br>
+    Development
+  </h1>
+
+  <p class="hero-sub">
+    The complete guide to all commands, flows, and best practices for using Spec Kit from start to finish on a real project.
+  </p>
+
+  <p class="hero-version">
+    <span>specify-cli</span> · install via <span>uv tool install</span>
+  </p>
+
+  <div class="scroll-hint">
+    <span>EXPLORE</span>
+    <div class="scroll-arrow">↓</div>
+  </div>
+</section>
+
+
+<!-- QUICK COMMANDS STRIP -->
+<section class="quick-strip">
+  <div class="quick-strip-inner">
+    <div class="quick-strip-label">Jump to command</div>
+    <div class="quick-grid">
+      <a class="quick-btn" href="#cmd-constitution" data-cmd="constitution">
+        <span class="qi">⚖️</span><span class="ql">/speckit.</span><strong>constitution</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-specify" data-cmd="specify">
+        <span class="qi">📋</span><span class="ql">/speckit.</span><strong>specify</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-clarify" data-cmd="clarify">
+        <span class="qi">🔍</span><span class="ql">/speckit.</span><strong>clarify</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-checklist" data-cmd="checklist">
+        <span class="qi">✅</span><span class="ql">/speckit.</span><strong>checklist</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-plan" data-cmd="plan">
+        <span class="qi">🏗️</span><span class="ql">/speckit.</span><strong>plan</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-tasks" data-cmd="tasks">
+        <span class="qi">📝</span><span class="ql">/speckit.</span><strong>tasks</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-analyze" data-cmd="analyze">
+        <span class="qi">🔎</span><span class="ql">/speckit.</span><strong>analyze</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-implement" data-cmd="implement">
+        <span class="qi">⚡</span><span class="ql">/speckit.</span><strong>implement</strong>
+      </a>
+      <a class="quick-btn" href="#cmd-t2i" data-cmd="t2i">
+        <span class="qi">🐙</span><span class="ql">/speckit.</span><strong>taskstoissues</strong>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 2 LAYERS -->
+<section class="layers-section" id="sec-camadas">
+  <div class="section-label">Overview</div>
+  <h2 class="section-title">Spec Kit works in<br>two distinct layers</h2>
+
+  <div class="layers-grid">
+    <div class="layer-card" data-num="1">
+      <div class="layer-tag terminal">Terminal</div>
+      <div class="layer-title">Setup Layer</div>
+      <p style="color: var(--muted); font-size: 14px;">Installation, project initialization, AI agent integration management, extensions, presets, and workflows. All via command line.</p>
+      <div class="layer-code">$ specify init my-app --integration opencode</div>
+    </div>
+    <div class="layer-card agent-layer" data-num="2">
+      <div class="layer-tag agent">AI Agent</div>
+      <div class="layer-title">Development Layer</div>
+      <p style="color: var(--muted); font-size: 14px;">The real Spec-Driven development flow: from the constitution all the way to implementation. Commands used in the agent chat after <code style="font-family: Space Mono; font-size: 12px; color: var(--accent)">specify init</code>.</p>
+      <div class="layer-code">/speckit.specify → /speckit.plan → /speckit.implement</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN FLOW -->
+<section class="flow-section" id="sec-fluxo">
+  <div class="section-label">Agent Commands</div>
+  <h2 class="section-title">The complete flow,<br>step by step</h2>
+
+  <div class="flow-timeline">
+
+    <!-- CONSTITUTION -->
+    <div class="flow-item c-constitution" id="cmd-constitution">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-constitution">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.constitution</div>
+            <div class="flow-meta">
+              <div class="flow-title">Project Constitution</div>
+              <div class="flow-timing">Once at the start — and whenever a core rule changes</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <ul>
+                <li>Architecture rules (Clean Arch, SOLID, etc.)</li>
+                <li>Quality and testing standards</li>
+                <li>UX and security rules</li>
+                <li>Code and naming conventions</li>
+                <li>Performance constraints</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <div class="output-files">
+                <span class="output-file">.specify/memory/constitution.md</span>
+              </div>
+              <p style="margin-top: 12px; font-size: 13px; color: var(--muted)">The permanent laws of the project. Every subsequent command will respect these rules.</p>
+            </div>
+          </div>
+          <div class="code-example">
+            <div class="code-header">
+              <div class="code-dot code-dot-r"></div>
+              <div class="code-dot code-dot-y"></div>
+              <div class="code-dot code-dot-g"></div>
+              <span class="code-filename">example.txt</span>
+            </div>
+            <div class="code-body"><span class="cmd">/speckit.constitution</span>
+<span class="comment"># Project laws — fullstack</span>
+<span class="str">No business logic in controllers, visual components, or infrastructure.
+Backend exposes clear, versioned, and documented contracts.
+Frontend consumes APIs through isolated services/hooks.
+Every important behavior must have test coverage.
+No feature creates a duplicate concept without checking existing ones.
+UX prioritizes empty states, loading, error, and clear feedback.
+Security: validate on the backend, protect routes, handle permissions.
+Performance: avoid N+1, large payloads, and unnecessary renders.</span></div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar" title="thinking: high">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">At the start of any new project, before any other command</li>
+                <li class="usual">When resuming an old project with no defined constitution</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The stack or architecture changes significantly</li>
+                <li class="also">The team adopts a new testing or security standard</li>
+                <li class="also">A new team member joins and needs to understand the project rules</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPECIFY -->
+    <div class="flow-item c-specify" id="cmd-specify">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-specify">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.specify</div>
+            <div class="flow-meta">
+              <div class="flow-title">Feature Specification</div>
+              <div class="flow-timing">For each new feature or project — no tech stack mentions here</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <ul>
+                <li><strong style="color: var(--text)">WHAT</strong> the system must do</li>
+                <li><strong style="color: var(--text)">WHY</strong> — business motivation</li>
+                <li>Unambiguous business rules</li>
+                <li>Measurable success criteria</li>
+                <li>Edge cases and key constraints</li>
+              </ul>
+              <p style="margin-top: 12px; font-size: 12px; color: var(--accent3); font-style: italic">⚠ No React, Spring, PostgreSQL here. The stack goes in /plan.</p>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <div class="output-files">
+                <span class="output-file">specs/001-feature-name/spec.md</span>
+                <span class="output-file">branch created</span>
+                <span class="output-file">feature folder</span>
+              </div>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After the constitution, to describe the first module or feature</li>
+                <li class="usual">Start of each new development cycle</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">A demand arises outside current scope — update the spec before implementing</li>
+                <li class="also">The business rule changes and needs to be reflected in the documentation</li>
+                <li class="also">You want to split a large module into smaller, independent specs</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLARIFY -->
+    <div class="flow-item c-clarify" id="cmd-clarify">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-clarify">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.clarify</div>
+            <div class="flow-meta">
+              <div class="flow-title">Spec Refinement</div>
+              <div class="flow-timing">Before the plan — when ambiguities still exist in the spec</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <ul>
+                <li>Non-obvious business rule points</li>
+                <li>Edge cases to detail</li>
+                <li>Security and permission questions</li>
+                <li>Minimum screens/flows for MVP</li>
+                <li>Behavior for similar values</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <p>Update and refinement of <code style="font-family: Space Mono; font-size: 11px; color: var(--accent)">spec.md</code> — forces the agent not to assume implicit things.</p>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After /specify, before moving on to /plan</li>
+                <li class="usual">When the spec has vague points the agent could misinterpret</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The domain is complex and involves financial, legal, or security rules</li>
+                <li class="also">There are multiple possible behaviors for the same use case</li>
+                <li class="also">You want to ensure edge cases are covered before technical planning</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="flow-item c-checklist" id="cmd-checklist">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-checklist">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.checklist</div>
+            <div class="flow-meta">
+              <div class="flow-title">Quality Validation</div>
+              <div class="flow-timing">Before the plan — unit test for your requirements</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <ul>
+                <li>Can be empty (uses default criteria)</li>
+                <li>Domain focus: "validate security requirements"</li>
+                <li>Validation of error/loading/empty states</li>
+                <li>Check of measurable criteria</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <p>Requirements quality checklist. Points out gaps before spending time on technical planning.</p>
+            </div>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After /clarify (or directly after /specify in lean flows)</li>
+                <li class="usual">As a quality gate before investing time in technical planning</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The spec was written by someone else and you want to validate completeness</li>
+                <li class="also">The scope grew and you want to check if acceptance criteria still make sense</li>
+                <li class="also">You want to focus the validation on a specific domain, such as security or UX</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLAN -->
+    <div class="flow-item c-plan" id="cmd-plan">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-plan">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.plan</div>
+            <div class="flow-meta">
+              <div class="flow-title">Technical Planning</div>
+              <div class="flow-timing">After the validated spec — this is where the stack and architecture come in</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <ul>
+                <li>Full stack (framework, language, database)</li>
+                <li>Architecture (monorepo, microservices, etc.)</li>
+                <li>Authentication and authorization</li>
+                <li>Main libs and dependencies</li>
+                <li>Mandatory technical patterns</li>
+                <li>Testing strategy</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <div class="output-files">
+                <span class="output-file">plan.md</span>
+                <span class="output-file">research.md</span>
+                <span class="output-file">data-model.md</span>
+                <span class="output-file">contracts/</span>
+                <span class="output-file">quickstart.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot" style="opacity:0.5"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: medium-high</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After spec validated by /checklist, to define how to build technically</li>
+                <li class="usual">Once per feature or module, before generating tasks</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The stack changes and the previous plan needs to be redone</li>
+                <li class="also">A new integration or external service is added to the scope</li>
+                <li class="also">The data model needs a deep architectural revision</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS -->
+    <div class="flow-item c-tasks" id="cmd-tasks">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-tasks">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.tasks</div>
+            <div class="flow-meta">
+              <div class="flow-title">Task Breakdown</div>
+              <div class="flow-timing">After the plan — reads plan.md automatically</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <p>Usually <strong style="color: var(--text)">empty</strong>. The agent reads <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">plan.md</code>, <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">data-model.md</code>, <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">contracts/</code> and <code style="font-family: Space Mono; font-size: 11px; color: #ff6b6b">research.md</code> automatically.</p>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <div class="output-files">
+                <span class="output-file">tasks.md</span>
+              </div>
+              <p style="margin-top: 8px; font-size: 13px; color: var(--muted)">Implementable tasks with dependencies, parallelism markers, and execution order.</p>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot" style="opacity:0.2"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: medium</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">Right after /plan has been reviewed and approved</li>
+                <li class="usual">To turn the architecture into concrete, implementable steps</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The plan was updated and the old tasks became outdated</li>
+                <li class="also">You want to identify which tasks can be parallelized across devs</li>
+                <li class="also">You need to export the work to GitHub Issues with /taskstoissues</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ANALYZE -->
+    <div class="flow-item c-analyze" id="cmd-analyze">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-analyze">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.analyze</div>
+            <div class="flow-meta">
+              <div class="flow-title">Contradiction Detector</div>
+              <div class="flow-timing">After tasks — before implementing anything</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <p>Usually <strong style="color: var(--text)">empty</strong>. The agent cross-checks spec, plan, and tasks automatically.</p>
+            </div>
+            <div class="flow-col">
+              <h4>What it detects</h4>
+              <ul>
+                <li>Spec mentions X but tasks didn't create an endpoint</li>
+                <li>Plan uses PostgreSQL but tasks didn't create a migration</li>
+                <li>Constitution requires tests but tasks don't include them</li>
+                <li>Model missing fields needed by the spec</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After generating tasks, as the last gate before /implement</li>
+                <li class="usual">To ensure spec, plan, and tasks are consistent with each other</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The spec or plan changed after the tasks were already generated</li>
+                <li class="also">You suspect some requirement wasn't covered by the tasks</li>
+                <li class="also">You want an audit before a big PR or sprint delivery</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMPLEMENT -->
+    <div class="flow-item c-implement" id="cmd-implement">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-implement">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.implement</div>
+            <div class="flow-meta">
+              <div class="flow-title">Real Implementation</div>
+              <div class="flow-timing">Only after reviewing everything — executes tasks.md</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <p>Usually <strong style="color: var(--text)">empty</strong>. The agent executes tasks from <code style="font-family: Space Mono; font-size: 11px; color: var(--accent)">tasks.md</code> in sequence.</p>
+              <p style="margin-top: 8px; font-size: 12px; color: var(--accent3); font-style: italic">⚠ The agent may run npm, dotnet, and other local commands. Make sure you have the required tools installed.</p>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <p>Real code. File structure, entities, migrations, endpoints, screens, tests — all according to spec + plan + tasks.</p>
+            </div>
+          </div>
+          <div class="model-rec">
+            <span>GPT-5.5</span>
+            <div class="thinking-bar">
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot on"></div>
+              <div class="thinking-dot" style="opacity:0.2"></div>
+            </div>
+            <span style="color: var(--muted)">thinking: medium</span>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After /analyze confirms consistency — this is the moment to code</li>
+                <li class="usual">To execute tasks in sequence, generating real code</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">You want to implement only a subset of tasks (specify which ones)</li>
+                <li class="also">Resuming a paused implementation from a specific task</li>
+                <li class="also">You need to re-implement a task that caused a bug or was incomplete</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TASKS TO ISSUES (optional) -->
+    <div class="flow-item c-t2i" id="cmd-t2i">
+      <div class="flow-step-col">
+        <div class="step-dot"></div>
+      </div>
+      <div class="flow-card c-t2i">
+        <div class="flow-card-inner">
+          <div class="flow-header">
+            <div class="cmd-pill">/speckit.taskstoissues</div>
+            <div class="flow-meta">
+              <div class="flow-title">Export to GitHub Issues</div>
+              <div class="flow-timing">Optional — when you want to turn tasks into GitHub Issues</div>
+            </div>
+          </div>
+          <div class="flow-body">
+            <div class="flow-col">
+              <h4>What you provide</h4>
+              <ul>
+                <li>Target repository</li>
+                <li>Labels to apply</li>
+                <li>Milestone and priority</li>
+              </ul>
+            </div>
+            <div class="flow-col">
+              <h4>What is generated</h4>
+              <p>GitHub Issues created from <code style="font-family: Space Mono; font-size: 11px; color: #a29bfe">tasks.md</code>, ready for triage and assignment.</p>
+            </div>
+          </div>
+
+          <div class="when-usar">
+            <div class="when-usar-col">
+              <h4>Typical use</h4>
+              <ul>
+                <li class="usual">After /tasks, when the project is managed via GitHub Issues</li>
+                <li class="usual">To sync the Spec Kit backlog with the team's board</li>
+              </ul>
+            </div>
+            <div class="when-usar-col">
+              <h4>Also use when...</h4>
+              <ul>
+                <li class="also">The team doesn't use Spec Kit directly but follows along via GitHub</li>
+                <li class="also">You want to assign milestones, labels, or priorities before implementing</li>
+                <li class="also">You need to recreate the issues after a major task revision</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TERMINAL COMMANDS -->
+<section class="terminal-section" id="sec-terminal">
+  <div class="section-label">Terminal Layer</div>
+  <h2 class="section-title"><code style="font-family: Space Mono; font-size: clamp(20px,3vw,36px); color: var(--accent4)">specify</code> commands</h2>
+
+  <div class="terminal-tabs">
+    <button class="tab-btn active" data-tab="install">Installation</button>
+    <button class="tab-btn" data-tab="integration">Integrations</button>
+    <button class="tab-btn" data-tab="extension">Extensions</button>
+    <button class="tab-btn" data-tab="preset">Presets</button>
+    <button class="tab-btn" data-tab="workflow">Workflows</button>
+  </div>
+
+  <div id="tab-install" class="tab-panel active">
+    <table class="cmd-table">
+      <thead><tr><th>Command</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@v0.8.13</td><td class="cmd-desc">Install globally the current version (0.8.13)</td></tr>
+        <tr><td class="cmd-mono">uvx --from git+https://github.com/github/spec-kit.git specify init &lt;project&gt;</td><td class="cmd-desc">Run without installing globally</td></tr>
+        <tr><td class="cmd-mono">specify init &lt;project&gt; --integration opencode</td><td class="cmd-desc">Create new project already configured with OpenCode</td></tr>
+        <tr><td class="cmd-mono">specify init --here --integration opencode</td><td class="cmd-desc">Initialize in the current folder (existing project)</td></tr>
+        <tr><td class="cmd-mono">specify init --here --force --integration opencode</td><td class="cmd-desc">Initialize in existing folder, overwriting</td></tr>
+        <tr><td class="cmd-mono">specify init &lt;project&gt; --script sh</td><td class="cmd-desc">Force Bash/Zsh scripts</td></tr>
+        <tr><td class="cmd-mono">specify init &lt;project&gt; --script ps</td><td class="cmd-desc">Force PowerShell scripts</td></tr>
+        <tr><td class="cmd-mono">specify check</td><td class="cmd-desc">Check if all required tools are installed</td></tr>
+        <tr><td class="cmd-mono">specify version</td><td class="cmd-desc">View current CLI version</td></tr>
+        <tr><td class="cmd-mono">specify version --features</td><td class="cmd-desc">View features supported in this version</td></tr>
+        <tr><td class="cmd-mono">specify self check</td><td class="cmd-desc">Check if a newer version is available</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="tab-integration" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Command</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify integration list</td><td class="cmd-desc">View all supported AI agents</td></tr>
+        <tr><td class="cmd-mono">specify integration install &lt;key&gt;</td><td class="cmd-desc">Add integration (e.g.: opencode, claude, copilot, cursor-agent)</td></tr>
+        <tr><td class="cmd-mono">specify integration uninstall [key]</td><td class="cmd-desc">Remove installed integration</td></tr>
+        <tr><td class="cmd-mono">specify integration switch &lt;key&gt;</td><td class="cmd-desc">Switch the active default integration</td></tr>
+        <tr><td class="cmd-mono">specify integration use &lt;key&gt;</td><td class="cmd-desc">Use already installed integration without changing the default</td></tr>
+        <tr><td class="cmd-mono">specify integration upgrade [key]</td><td class="cmd-desc">Update integration files to the newer version</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(79,255,176,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      Supported agents: <code style="color: var(--accent); font-family: Space Mono; font-size: 11px">copilot · claude · codex · gemini · roo · opencode · qwen · cursor-agent · windsurf</code>
+    </div>
+  </div>
+
+  <div id="tab-extension" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Command</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify extension search [query]</td><td class="cmd-desc">Search for available extensions in the catalog</td></tr>
+        <tr><td class="cmd-mono">specify extension add &lt;name&gt;</td><td class="cmd-desc">Install an extension (Jira, GitHub Issues, Security Review, etc.)</td></tr>
+        <tr><td class="cmd-mono">specify extension remove &lt;name&gt;</td><td class="cmd-desc">Remove an installed extension</td></tr>
+        <tr><td class="cmd-mono">specify extension list</td><td class="cmd-desc">List extensions installed in the project</td></tr>
+        <tr><td class="cmd-mono">specify extension info &lt;name&gt;</td><td class="cmd-desc">View details of a specific extension</td></tr>
+        <tr><td class="cmd-mono">specify extension update [name]</td><td class="cmd-desc">Update one or all extensions</td></tr>
+        <tr><td class="cmd-mono">specify extension enable &lt;name&gt;</td><td class="cmd-desc">Enable a disabled extension</td></tr>
+        <tr><td class="cmd-mono">specify extension disable &lt;name&gt;</td><td class="cmd-desc">Disable without removing</td></tr>
+        <tr><td class="cmd-mono">specify extension set-priority &lt;name&gt; &lt;priority&gt;</td><td class="cmd-desc">Resolve priority conflict between extensions</td></tr>
+        <tr><td class="cmd-mono">specify extension catalog list</td><td class="cmd-desc">List available extension catalogs</td></tr>
+        <tr><td class="cmd-mono">specify extension catalog add &lt;url&gt;</td><td class="cmd-desc">Add an external extension catalog</td></tr>
+        <tr><td class="cmd-mono">specify extension catalog remove &lt;name&gt;</td><td class="cmd-desc">Remove a catalog</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(124,109,250,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      💡 Extension = <strong style="color: var(--text)">add new capability</strong> to the flow (Jira, GitHub Issues, wireframe, QA, architecture, security review, etc.)
+    </div>
+  </div>
+
+  <div id="tab-preset" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Command</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify preset search [query]</td><td class="cmd-desc">Search for available presets</td></tr>
+        <tr><td class="cmd-mono">specify preset add [preset_id]</td><td class="cmd-desc">Install a preset</td></tr>
+        <tr><td class="cmd-mono">specify preset remove &lt;preset_id&gt;</td><td class="cmd-desc">Remove an installed preset</td></tr>
+        <tr><td class="cmd-mono">specify preset list</td><td class="cmd-desc">List installed presets</td></tr>
+        <tr><td class="cmd-mono">specify preset info &lt;preset_id&gt;</td><td class="cmd-desc">View details of a preset</td></tr>
+        <tr><td class="cmd-mono">specify preset resolve &lt;name&gt;</td><td class="cmd-desc">See which template will be used for a given command</td></tr>
+        <tr><td class="cmd-mono">specify preset enable &lt;preset_id&gt;</td><td class="cmd-desc">Enable a disabled preset</td></tr>
+        <tr><td class="cmd-mono">specify preset disable &lt;preset_id&gt;</td><td class="cmd-desc">Disable without removing</td></tr>
+        <tr><td class="cmd-mono">specify preset set-priority &lt;preset_id&gt; &lt;priority&gt;</td><td class="cmd-desc">Set priority between conflicting presets</td></tr>
+        <tr><td class="cmd-mono">specify preset catalog list</td><td class="cmd-desc">List preset catalogs</td></tr>
+        <tr><td class="cmd-mono">specify preset catalog add &lt;url&gt;</td><td class="cmd-desc">Add an external preset catalog</td></tr>
+        <tr><td class="cmd-mono">specify preset catalog remove &lt;name&gt;</td><td class="cmd-desc">Remove a catalog</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(255,214,102,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      💡 Preset = <strong style="color: var(--text)">change the format and behavior of existing templates</strong> (e.g.: compliance preset, company preset, preset for a specific architecture)
+    </div>
+  </div>
+
+  <div id="tab-workflow" class="tab-panel">
+    <table class="cmd-table">
+      <thead><tr><th>Command</th><th>When to use</th></tr></thead>
+      <tbody>
+        <tr><td class="cmd-mono">specify workflow run &lt;source&gt;</td><td class="cmd-desc">Run automated flow (e.g.: Full SDD Cycle)</td></tr>
+        <tr><td class="cmd-mono">specify workflow resume &lt;run_id&gt;</td><td class="cmd-desc">Resume a flow that paused or failed</td></tr>
+        <tr><td class="cmd-mono">specify workflow status [run_id]</td><td class="cmd-desc">View current status of a workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow list</td><td class="cmd-desc">List installed workflows</td></tr>
+        <tr><td class="cmd-mono">specify workflow add &lt;source&gt;</td><td class="cmd-desc">Install a new workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow remove &lt;workflow_id&gt;</td><td class="cmd-desc">Remove a workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow search [query]</td><td class="cmd-desc">Search for available workflows in the catalog</td></tr>
+        <tr><td class="cmd-mono">specify workflow info &lt;workflow_id&gt;</td><td class="cmd-desc">View details of a workflow</td></tr>
+        <tr><td class="cmd-mono">specify workflow catalog list</td><td class="cmd-desc">List workflow catalogs</td></tr>
+        <tr><td class="cmd-mono">specify workflow catalog add &lt;url&gt;</td><td class="cmd-desc">Add an external catalog</td></tr>
+        <tr><td class="cmd-mono">specify workflow catalog remove &lt;index&gt;</td><td class="cmd-desc">Remove a catalog</td></tr>
+      </tbody>
+    </table>
+    <div style="padding: 16px 20px; background: rgba(38,222,129,0.04); border-top: 1px solid var(--border); font-size: 12px; color: var(--muted)">
+      💡 Workflow = <strong style="color: var(--text)">automate a sequence of commands</strong> with gates and checkpoints. The "Full SDD Cycle" chains specify → plan → tasks → implement with review points.
+    </div>
+  </div>
+</section>
+
+<!-- GOLDEN RULE -->
+<section class="golden-section" id="sec-regra">
+  <div class="section-label">Golden Rule</div>
+  <h2 class="section-title">The ideal flow for<br>real projects</h2>
+
+  <div class="golden-flow">
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(255,209,102,0.1)">⚖️</div>
+      <div class="step-name">constitution</div>
+      <div class="step-desc">Permanent laws</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(79,255,176,0.1)">📋</div>
+      <div class="step-name">specify</div>
+      <div class="step-desc">Problem &amp; business rules</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(168,237,234,0.1)">🔍</div>
+      <div class="step-name">clarify</div>
+      <div class="step-desc">Removes ambiguities</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(124,109,250,0.1)">✅</div>
+      <div class="step-name">checklist</div>
+      <div class="step-desc">Validates requirements</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(247,183,49,0.1)">🏗️</div>
+      <div class="step-name">plan</div>
+      <div class="step-desc">Stack &amp; architecture</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(255,107,107,0.1)">📝</div>
+      <div class="step-name">tasks</div>
+      <div class="step-desc">Implementable steps</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(253,150,68,0.1)">🔎</div>
+      <div class="step-name">analyze</div>
+      <div class="step-desc">Detects contradictions</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="golden-step">
+      <div class="step-icon" style="background: rgba(38,222,129,0.1)">⚡</div>
+      <div class="step-name">implement</div>
+      <div class="step-desc">Real code</div>
+    </div>
+  </div>
+
+  <div class="pattern-box">
+    <div class="pattern-title">🔄 New out-of-scope demand? Never implement directly.</div>
+    <p style="font-size: 14px; color: var(--muted); margin-bottom: 16px">Whenever something new comes up, always run first:</p>
+    <div class="code-example" style="margin: 0;">
+      <div class="code-body"><span class="cmd">/speckit.specify</span>
+<span class="str">Update the current spec to include the new demand below, without creating
+duplicate concepts and keeping compatibility with the existing architecture:
+
+[new demand]</span>
+
+<span class="comment"># Then continue normally:</span>
+<span class="cmd">/speckit.plan</span> → <span class="cmd">/speckit.tasks</span> → <span class="cmd">/speckit.analyze</span> → <span class="cmd">/speckit.implement</span></div>
+    </div>
+  </div>
+
+  <div class="warning-box">
+    <div class="warning-title">⚠ Vibe coding anti-patterns</div>
+    <ul class="warning-list">
+      <li>Asking "do everything at once" in a giant prompt with no spec, plan, or tasks</li>
+      <li>Implementing directly without going through the flow (duplicate entities guaranteed)</li>
+      <li>Putting the tech stack in <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">/speckit.specify</code> — it belongs in <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">/speckit.plan</code></li>
+      <li>Skipping <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">/speckit.analyze</code> and going straight to implement — contradictions turn into bugs</li>
+      <li>Not using <code style="font-family: Space Mono; font-size: 11px; color: var(--accent3)">constitution</code> — without global rules the agent invents new patterns on every feature</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Spec Kit <span>0.8.13</span> · github/spec-kit · <span>Spec-Driven Development</span></p>
+  <p style="margin-top: 8px; opacity: 0.5">Guide generated from the official documentation — May 2026</p>
+</footer>
+
+<style is:global>
+:root {
+    --bg: #080b12;
+    --surface: #0e1422;
+    --surface2: #141926;
+    --border: rgba(255,255,255,0.07);
+    --accent: #4fffb0;
+    --accent2: #7c6dfa;
+    --accent3: #ff6b6b;
+    --accent4: #ffd166;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --code-bg: #0a0d16;
+    --glow: rgba(79,255,176,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,255,176,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,255,176,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+  }
+  .hero-orb-1 { width: 600px; height: 600px; background: rgba(79,255,176,0.08); top: -100px; left: -200px; }
+  .hero-orb-2 { width: 500px; height: 500px; background: rgba(124,109,250,0.1); bottom: -100px; right: -150px; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(79,255,176,0.08);
+    border: 1px solid rgba(79,255,176,0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeSlideDown 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(48px, 8vw, 100px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    animation: fadeSlideDown 0.6s 0.1s ease both;
+  }
+
+  .hero h1 span.grad {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 60%, var(--accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    max-width: 600px;
+    margin: 24px auto 0;
+    font-size: 17px;
+    color: var(--muted);
+    font-weight: 300;
+    animation: fadeSlideDown 0.6s 0.2s ease both;
+  }
+
+  .hero-version {
+    margin-top: 40px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    animation: fadeSlideDown 0.6s 0.3s ease both;
+  }
+
+  .hero-version span { color: var(--accent4); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 11px;
+    font-family: 'Geist Mono', monospace;
+    letter-spacing: 0.1em;
+    animation: fadeSlideDown 0.6s 0.5s ease both;
+  }
+
+  .scroll-arrow {
+    width: 24px; height: 24px;
+    border: 1.5px solid var(--muted);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    animation: bounce 2s infinite;
+  }
+
+  /* LAYERS */
+  .layers-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 200px;
+  }
+
+  .section-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    line-height: 1.1;
+  }
+
+  .layers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .layer-card {
+    background: var(--surface);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .layer-card:hover { background: var(--surface2); }
+  .layer-card::before {
+    content: attr(data-num);
+    position: absolute;
+    top: -20px; right: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.02);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .layer-tag {
+    display: inline-block;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .layer-tag.terminal { background: rgba(255,214,102,0.1); color: var(--accent4); border: 1px solid rgba(255,214,102,0.2); }
+  .layer-tag.agent { background: rgba(79,255,176,0.1); color: var(--accent); border: 1px solid rgba(79,255,176,0.2); }
+
+  .layer-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .layer-code {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--accent4);
+    background: var(--code-bg);
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin-top: 16px;
+    border-left: 2px solid var(--accent4);
+    word-break: break-all;
+  }
+  .layer-card.agent-layer .layer-code { color: var(--accent); border-color: var(--accent); }
+
+  /* MAIN FLOW */
+  .flow-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .flow-timeline {
+    position: relative;
+    margin-top: 16px;
+  }
+
+  .flow-timeline::before {
+    content: '';
+    position: absolute;
+    left: 32px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent3));
+    opacity: 0.3;
+  }
+
+  .flow-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0 24px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+
+  .flow-step-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+  }
+
+  .step-dot {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    box-shadow: 0 0 16px var(--glow);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .flow-item:hover .step-dot {
+    transform: scale(1.4);
+    box-shadow: 0 0 24px var(--accent);
+  }
+
+  .flow-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin-bottom: 4px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: default;
+  }
+
+  .flow-card:hover {
+    border-color: rgba(79,255,176,0.25);
+    background: var(--surface2);
+    transform: translateX(6px);
+    box-shadow: -4px 0 0 var(--accent), 0 16px 48px rgba(0,0,0,0.3);
+  }
+
+  .flow-card-inner { position: relative; z-index: 1; }
+
+  .flow-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cmd-pill {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .flow-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .flow-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .flow-timing {
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .flow-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .flow-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-weight: 400;
+  }
+
+  .flow-col p {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #c0c4d4;
+  }
+
+  .flow-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .flow-col ul li {
+    font-size: 13px;
+    color: #c0c4d4;
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .flow-col ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+  }
+
+  .code-example {
+    margin-top: 16px;
+    background: var(--code-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .code-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .code-dot-r { background: #ff6b6b; }
+  .code-dot-y { background: var(--accent4); }
+  .code-dot-g { background: var(--accent); }
+
+  .code-filename {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+
+  .code-body {
+    padding: 16px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.8;
+    color: #9aa3c0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    word-break: break-word;
+  }
+
+  .code-body .cmd { color: var(--accent); font-weight: 700; }
+  .code-body .comment { color: #4a5270; }
+  .code-body .str { color: var(--accent4); }
+  .code-body .kw { color: var(--accent2); }
+
+  .output-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .output-file {
+    font-family: 'Geist Mono', monospace;
+    font-size: 10.5px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(79,255,176,0.06);
+    color: var(--accent);
+    border: 1px solid rgba(79,255,176,0.15);
+  }
+
+  .model-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: rgba(124,109,250,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(124,109,250,0.2);
+    font-family: 'Geist Mono', monospace;
+    margin-top: 10px;
+  }
+
+  .thinking-bar { display: flex; gap: 3px; align-items: center; }
+  .thinking-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent2); opacity: 0.3; }
+  .thinking-dot.on { opacity: 1; box-shadow: 0 0 6px var(--accent2); }
+
+  /* TERMINAL */
+  .terminal-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .terminal-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+    padding: 8px 20px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .tab-btn:hover { background: var(--surface2); color: var(--text); }
+  .tab-btn.active { background: var(--surface2); color: var(--accent); border-color: rgba(79,255,176,0.2); }
+
+  .tab-panel {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 0 12px 12px 12px;
+    overflow: hidden;
+  }
+  .tab-panel.active { display: block; }
+
+  .cmd-table { width: 100%; border-collapse: collapse; }
+  .cmd-table thead tr { background: var(--code-bg); }
+  .cmd-table th {
+    padding: 12px 20px;
+    text-align: left;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    border-bottom: 1px solid var(--border);
+  }
+  .cmd-table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .cmd-table tr:last-child td { border-bottom: none; }
+  .cmd-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .cmd-mono { font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--accent4); line-height: 1.6; word-break: break-all; }
+  .cmd-desc { color: #b0b8cc; }
+
+  /* GOLDEN */
+  .golden-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .golden-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 40px;
+  }
+
+  .golden-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    flex: 1;
+    min-width: 90px;
+    padding: 20px 8px;
+    border-radius: 12px;
+    transition: all 0.25s;
+    position: relative;
+  }
+
+  .golden-step:hover { background: rgba(255,255,255,0.04); transform: translateY(-4px); }
+
+  .step-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .step-name { font-family: 'Geist Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 0.05em; }
+  .step-desc { font-size: 11px; color: var(--muted); line-height: 1.4; max-width: 80px; }
+
+  .step-arrow { color: var(--muted); font-size: 16px; padding: 0 4px; margin-top: -20px; flex-shrink: 0; }
+
+  .warning-box {
+    background: rgba(255,107,107,0.06);
+    border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .warning-box::before {
+    content: '⚠';
+    position: absolute;
+    top: -20px; right: 20px;
+    font-size: 100px;
+    opacity: 0.04;
+    line-height: 1;
+  }
+  .warning-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent3);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .warning-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .warning-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: #c0c4d4;
+  }
+  .warning-list li::before { content: '✗'; color: var(--accent3); flex-shrink: 0; font-weight: 700; }
+
+  .pattern-box {
+    background: rgba(79,255,176,0.04);
+    border: 1px solid rgba(79,255,176,0.15);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-top: 32px;
+  }
+  .pattern-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  footer {
+    position: relative;
+    text-align: center;
+    padding: 60px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Geist Mono', monospace;
+    font-size: 11px;
+  }
+  footer span { color: var(--accent); }
+
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+  /* COLOR SCHEMES PER STEP */
+  .c-constitution { --step-color: #ffd166; }
+  .c-specify      { --step-color: #4fffb0; }
+  .c-clarify      { --step-color: #a8edea; }
+  .c-checklist    { --step-color: #7c6dfa; }
+  .c-plan         { --step-color: #f7b731; }
+  .c-tasks        { --step-color: #ff6b6b; }
+  .c-analyze      { --step-color: #fd9644; }
+  .c-implement    { --step-color: #26de81; }
+  .c-t2i          { --step-color: #a29bfe; }
+
+  .flow-card.c-constitution:hover { border-color: rgba(255,209,102,0.35); box-shadow: -4px 0 0 #ffd166, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-specify:hover      { border-color: rgba(79,255,176,0.35);  box-shadow: -4px 0 0 #4fffb0, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-clarify:hover      { border-color: rgba(168,237,234,0.35); box-shadow: -4px 0 0 #a8edea, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-checklist:hover    { border-color: rgba(124,109,250,0.35); box-shadow: -4px 0 0 #7c6dfa, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-plan:hover         { border-color: rgba(247,183,49,0.35);  box-shadow: -4px 0 0 #f7b731, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-tasks:hover        { border-color: rgba(255,107,107,0.35); box-shadow: -4px 0 0 #ff6b6b, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-analyze:hover      { border-color: rgba(253,150,68,0.35);  box-shadow: -4px 0 0 #fd9644, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-implement:hover    { border-color: rgba(38,222,129,0.35);  box-shadow: -4px 0 0 #26de81, 0 16px 48px rgba(0,0,0,0.3); }
+  .flow-card.c-t2i:hover          { border-color: rgba(162,155,254,0.35); box-shadow: -4px 0 0 #a29bfe, 0 16px 48px rgba(0,0,0,0.3); }
+
+  .flow-item:hover .step-dot { border-color: var(--step-color); box-shadow: 0 0 20px var(--step-color); }
+  .cmd-pill { background: rgba(255,255,255,0.05); color: var(--step-color); border: 1px solid rgba(255,255,255,0.1); }
+  .step-icon { background: rgba(255,255,255,0.04); }
+
+  /* NAV STICKY */
+  .sticky-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    height: 52px;
+    background: rgba(8,11,18,0.88);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+    transition: transform 0.3s ease;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 100%;
+    max-width: 1100px;
+  }
+  .nav-logo {
+    font-family: 'Geist Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-right: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-sep { width: 1px; height: 20px; background: var(--border); margin-right: 12px; flex-shrink: 0; }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 5px 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    background: none;
+    text-decoration: none;
+    display: block;
+  }
+  .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-link.active { color: var(--accent); background: rgba(79,255,176,0.08); border-color: rgba(79,255,176,0.2); }
+  section[id] { scroll-margin-top: 64px; }
+
+  /* QUICK STRIP */
+  .quick-strip { position: relative; z-index: 1; padding: 0 24px 64px; }
+  .quick-strip-inner { max-width: 900px; margin: 0 auto; }
+  .quick-strip-label {
+    text-align: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .quick-grid { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .quick-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'Geist Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 400;
+    transition: all 0.2s cubic-bezier(0.23,1,0.32,1);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .quick-btn:hover { background: var(--surface2); color: var(--text); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+  .quick-btn .qi { font-size: 14px; line-height: 1; flex-shrink: 0; }
+  .quick-btn .ql { color: inherit; opacity: 0.7; transition: opacity 0.2s; }
+  .quick-btn:hover .ql { opacity: 1; }
+
+  .quick-btn[data-cmd="constitution"] { --qc: #ffd166; }
+  .quick-btn[data-cmd="specify"]      { --qc: #4fffb0; }
+  .quick-btn[data-cmd="clarify"]      { --qc: #a8edea; }
+  .quick-btn[data-cmd="checklist"]    { --qc: #7c6dfa; }
+  .quick-btn[data-cmd="plan"]         { --qc: #f7b731; }
+  .quick-btn[data-cmd="tasks"]        { --qc: #ff6b6b; }
+  .quick-btn[data-cmd="analyze"]      { --qc: #fd9644; }
+  .quick-btn[data-cmd="implement"]    { --qc: #26de81; }
+  .quick-btn[data-cmd="t2i"]          { --qc: #a29bfe; }
+  .quick-btn:hover { border-color: color-mix(in srgb, var(--qc) 40%, transparent); color: var(--qc); box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 0 1px color-mix(in srgb, var(--qc) 20%, transparent); }
+  .quick-btn:hover .ql { color: var(--qc); opacity: 0.7; }
+
+  /* WHEN TO USE */
+  .when-usar {
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+  }
+  .when-usar-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-family: 'Geist Mono', monospace;
+    font-weight: 400;
+  }
+  .when-usar-col ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .when-usar-col ul li { font-size: 13px; color: #b0b8cc; padding-left: 16px; position: relative; line-height: 1.5; }
+  .when-usar-col ul li.usual::before { content: '●'; position: absolute; left: 0; color: var(--step-color, var(--accent)); font-size: 7px; top: 5px; }
+  .when-usar-col ul li.also::before { content: '◇'; position: absolute; left: 0; color: var(--muted); font-size: 9px; top: 3px; }
+
+  /* ============================================
+     RESPONSIVE — 500px (small tablet / large mobile)
+  ============================================ */
+  @media (max-width: 500px) {
+    /* NAV */
+    .sticky-nav { padding: 0 10px; height: 48px; }
+    .nav-logo, .nav-sep { display: none; }
+    .nav-link { padding: 4px 8px; font-size: 10px; }
+
+    /* SECTIONS */
+    .layers-section,
+    .flow-section,
+    .terminal-section,
+    .golden-section { padding: 48px 16px; }
+
+    /* HERO */
+    .hero { padding: 72px 16px 60px; }
+    .hero-badge { font-size: 9px; padding: 5px 12px; }
+    .hero-sub { font-size: 14px; }
+    .hero-version { font-size: 11px; margin-top: 28px; }
+
+    /* GRIDS → 1 column */
+    .layers-grid { grid-template-columns: 1fr; }
+    .flow-body { grid-template-columns: 1fr; }
+    .when-usar { grid-template-columns: 1fr; }
+
+    /* FLOW */
+    .flow-item { grid-template-columns: 40px 1fr; gap: 0 12px; }
+    .flow-timeline::before { left: 12px; }
+    .flow-card { padding: 20px 16px; }
+    .flow-title { font-size: 16px; }
+    .flow-timing { font-size: 11px; }
+    .cmd-pill { font-size: 10px; padding: 5px 10px; }
+    .flow-meta { min-width: unset; }
+
+    /* LAYER CARDS */
+    .layer-card { padding: 24px 20px; }
+    .layer-title { font-size: 18px; }
+    .layer-code { font-size: 10px; word-break: break-all; }
+
+    /* TABLE */
+    .cmd-table th:last-child,
+    .cmd-table td:last-child { display: none; }
+    .cmd-table td, .cmd-table th { padding: 10px 12px; }
+    .cmd-mono { font-size: 10px; }
+
+    /* TABS */
+    .tab-btn { font-size: 10px; padding: 6px 12px; }
+
+    /* GOLDEN FLOW */
+    .golden-flow { justify-content: center; gap: 4px; }
+    .step-arrow { display: none; }
+    .golden-step { min-width: 72px; padding: 12px 4px; }
+    .step-icon { width: 36px; height: 36px; font-size: 16px; }
+    .step-name { font-size: 9px; }
+    .step-desc { font-size: 10px; max-width: 64px; }
+
+    /* PATTERN / WARNING */
+    .pattern-box { padding: 20px 16px; }
+    .warning-box { padding: 20px 16px; }
+    .pattern-title, .warning-title { font-size: 14px; }
+
+    /* CODE */
+    .code-body { font-size: 10px; }
+
+    /* QUICK STRIP */
+    .quick-strip { padding: 0 12px 40px; }
+    .quick-btn { font-size: 10px; padding: 7px 10px; gap: 5px; }
+    .quick-btn .ql { display: none; }
+
+    /* SECTION TITLE */
+    .section-title { font-size: clamp(22px, 6vw, 36px); margin-bottom: 28px; }
+  }
+
+  /* ============================================
+     RESPONSIVE — 400px (medium phone)
+  ============================================ */
+  @media (max-width: 400px) {
+    /* NAV */
+    .sticky-nav { height: 44px; padding: 0 8px; }
+    .nav-link { font-size: 9.5px; padding: 3px 6px; }
+
+    /* HERO */
+    .hero { padding: 60px 12px 50px; }
+    .hero-badge { font-size: 8px; padding: 4px 10px; letter-spacing: 0.06em; }
+    .hero-sub { font-size: 13px; }
+    .hero-version { font-size: 10px; }
+    .scroll-hint { font-size: 9px; }
+
+    /* SECTIONS */
+    .layers-section,
+    .flow-section,
+    .terminal-section,
+    .golden-section { padding: 36px 12px; }
+
+    /* FLOW */
+    .flow-item { grid-template-columns: 32px 1fr; gap: 0 8px; }
+    .flow-timeline::before { left: 8px; }
+    .flow-step-col { padding-top: 18px; }
+    .step-dot { width: 12px; height: 12px; }
+    .flow-card { padding: 16px 12px; border-radius: 10px; }
+    .flow-card:hover { transform: none; }
+    .flow-title { font-size: 14px; }
+    .flow-timing { font-size: 10px; }
+    .flow-header { gap: 8px; }
+    .cmd-pill { font-size: 9px; padding: 4px 8px; border-radius: 5px; }
+    .flow-col h4 { font-size: 9px; }
+    .flow-col ul li { font-size: 12px; }
+    .flow-col p { font-size: 12px; }
+
+    /* OUTPUT FILES */
+    .output-file { font-size: 9px; padding: 2px 7px; }
+
+    /* MODEL REC */
+    .model-rec { font-size: 9px; padding: 2px 7px; }
+
+    /* LAYER CARDS */
+    .layer-card { padding: 20px 14px; }
+    .layer-title { font-size: 16px; }
+    .layer-tag { font-size: 9px; }
+    .layer-code { font-size: 9px; padding: 6px 10px; }
+
+    /* TABLE: command column only */
+    .cmd-table thead { display: none; }
+    .cmd-table tbody tr { display: block; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+    .cmd-table td { display: block; padding: 0; border: none; }
+    .cmd-mono { font-size: 9.5px; margin-bottom: 4px; display: block; }
+    .cmd-desc { font-size: 11px; color: var(--muted); }
+
+    /* TABS */
+    .tab-btn { font-size: 9px; padding: 5px 9px; }
+
+    /* GOLDEN */
+    .golden-step { min-width: 60px; }
+    .step-icon { width: 30px; height: 30px; font-size: 13px; border-radius: 8px; }
+    .step-name { font-size: 8px; }
+    .step-desc { font-size: 9px; max-width: 56px; }
+
+    /* QUICK STRIP */
+    .quick-btn { font-size: 9.5px; padding: 6px 8px; }
+    .quick-grid { gap: 5px; }
+
+    /* SECTION TITLE */
+    .section-title { font-size: clamp(18px, 5.5vw, 26px); margin-bottom: 20px; }
+
+    /* PATTERN / WARNING */
+    .pattern-box, .warning-box { padding: 16px 12px; border-radius: 10px; }
+    .pattern-title, .warning-title { font-size: 13px; }
+    .warning-list li { font-size: 12px; }
+    .code-body { font-size: 9.5px; padding: 12px; }
+  }
+
+  /* ============================================
+     RESPONSIVE — 300px (very small phone)
+  ============================================ */
+  @media (max-width: 300px) {
+    /* NAV — show only logo */
+    .sticky-nav { height: 40px; padding: 0 6px; }
+    .nav-logo { display: block; font-size: 10px; margin-right: 6px; }
+    .nav-sep { display: none; }
+    .nav-links { gap: 0; }
+    .nav-link { font-size: 8.5px; padding: 2px 4px; }
+
+    /* HERO — heavily compressed */
+    .hero { padding: 50px 10px 44px; min-height: auto; }
+    .hero-badge { display: none; }
+    .hero h1 { font-size: clamp(32px, 11vw, 42px); }
+    .hero-sub { font-size: 11.5px; margin-top: 14px; }
+    .hero-version { font-size: 9px; margin-top: 18px; }
+    .scroll-hint { display: none; }
+    .hero-orb-1, .hero-orb-2 { display: none; }
+
+    /* SECTIONS */
+    .layers-section,
+    .flow-section,
+    .terminal-section,
+    .golden-section { padding: 28px 8px; }
+
+    .section-title { font-size: clamp(16px, 6.5vw, 22px); margin-bottom: 16px; line-height: 1.2; }
+    .section-label { font-size: 8px; letter-spacing: 0.1em; }
+
+    /* FLOW — no dot column, full-width card */
+    .flow-item { grid-template-columns: 0 1fr; gap: 0; }
+    .flow-step-col { display: none; }
+    .flow-timeline::before { display: none; }
+    .flow-card { padding: 14px 10px; border-radius: 8px; margin-bottom: 8px; }
+    .flow-card:hover { transform: none; box-shadow: none; }
+    .flow-title { font-size: 13px; }
+    .flow-timing { font-size: 9.5px; }
+    .flow-header { gap: 6px; margin-bottom: 10px; }
+    .cmd-pill { font-size: 8.5px; padding: 3px 6px; border-radius: 4px; white-space: normal; word-break: break-word; }
+    .flow-meta { min-width: unset; gap: 2px; }
+    .flow-col h4 { font-size: 8px; margin-bottom: 5px; }
+    .flow-col ul li { font-size: 11px; padding-left: 12px; }
+    .flow-col p { font-size: 11px; }
+
+    /* LAYER CARDS */
+    .layer-card { padding: 14px 10px; }
+    .layer-title { font-size: 14px; }
+    .layer-tag { font-size: 8px; padding: 3px 7px; }
+    .layer-code { font-size: 8.5px; padding: 5px 8px; }
+
+    /* OUTPUT FILES */
+    .output-file { font-size: 8.5px; padding: 2px 5px; }
+    .output-files { gap: 4px; }
+
+    /* MODEL REC */
+    .model-rec { font-size: 8px; padding: 2px 6px; }
+    .thinking-dot { width: 4px; height: 4px; }
+
+    /* TABLE */
+    .cmd-table thead { display: none; }
+    .cmd-table tbody tr { display: block; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .cmd-table td { display: block; padding: 0; border: none; }
+    .cmd-mono { font-size: 8.5px; margin-bottom: 3px; display: block; }
+    .cmd-desc { font-size: 10px; color: var(--muted); }
+
+    /* TABS */
+    .terminal-tabs { gap: 1px; }
+    .tab-btn { font-size: 8px; padding: 4px 7px; }
+
+    /* GOLDEN */
+    .golden-flow { gap: 3px; }
+    .golden-step { min-width: 48px; padding: 8px 2px; }
+    .step-icon { width: 26px; height: 26px; font-size: 11px; border-radius: 6px; }
+    .step-name { font-size: 7.5px; }
+    .step-desc { font-size: 8.5px; max-width: 48px; }
+
+    /* QUICK STRIP */
+    .quick-strip { padding: 0 8px 28px; }
+    .quick-grid { gap: 4px; }
+    .quick-btn { font-size: 9px; padding: 5px 7px; gap: 4px; border-radius: 7px; }
+    .quick-btn .ql { display: none; }
+    .quick-btn strong { font-size: 8.5px; }
+    .quick-strip-label { font-size: 8px; letter-spacing: 0.1em; margin-bottom: 12px; }
+
+    /* PATTERN / WARNING */
+    .pattern-box, .warning-box { padding: 12px 10px; border-radius: 8px; }
+    .pattern-title, .warning-title { font-size: 12px; }
+    .warning-list li { font-size: 11px; gap: 7px; }
+    .code-body { font-size: 8.5px; padding: 10px; line-height: 1.6; }
+    .code-header { padding: 8px 10px; }
+    .code-filename { font-size: 8.5px; }
+
+    /* WHEN TO USE */
+    .when-usar { padding-top: 12px; margin-top: 12px; gap: 10px 0; }
+    .when-usar-col h4 { font-size: 8px; }
+    .when-usar-col ul li { font-size: 11px; }
+
+    footer { padding: 32px 10px; font-size: 9px; }
+  }
+</style>
+
+<script is:inline>
+function switchTab(id, target) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (target instanceof HTMLElement) target.classList.add('active');
+}
+
+document.querySelectorAll('.tab-btn[data-tab]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const id = button.getAttribute('data-tab');
+    if (id) switchTab(id, button);
+  });
+});
+
+const navLinks = document.querySelectorAll('.nav-link');
+const secIds = ['sec-hero','sec-camadas','sec-fluxo','sec-terminal','sec-regra'];
+const spyObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+secIds.forEach(id => { const el = document.getElementById(id); if (el) spyObs.observe(el); });
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.flow-card, .layer-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>

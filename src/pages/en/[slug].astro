@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ data }) => data.language === 'en');
 
   return pages.map((page) => ({
-    params: { slug: page.slug },
+    params: { slug: page.data.slug },
     props: { page },
   }));
 }
@@ -17,7 +17,7 @@ const { page } = Astro.props;
 const { Content, headings } = await render(page);
 ---
 
-<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={pagePath(page.slug, 'en')} lang="en-US" locale="en_US">
+<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={pagePath(page.data.slug, 'en')} lang="en-US" locale="en_US">
   <div class="article-grid">
     <aside class="rail sticky-rail">
       <InPageNav headings={headings} title="in this page" />
