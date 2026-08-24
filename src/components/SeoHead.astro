@@ -1,11 +1,19 @@
 ---
 import { absoluteUrl, SITE } from '../lib/routes';
 
+type Hreflang = 'pt-BR' | 'en-US';
+
+export interface SeoAlternate {
+  hreflang: Hreflang;
+  path: string;
+}
+
 interface Props {
   title: string;
   description: string;
   path: string;
   locale?: string;
+  alternates?: SeoAlternate[];
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -17,6 +25,7 @@ const {
   description,
   path,
   locale = 'pt_BR',
+  alternates = [],
   image = '/og-default.svg',
   type = 'website',
   publishedTime,
@@ -26,13 +35,22 @@ const {
 const site = Astro.site?.toString() ?? SITE.url;
 const canonical = absoluteUrl(path, site);
 const imageUrl = absoluteUrl(image, site);
+const currentHreflang: Hreflang = locale === 'en_US' ? 'en-US' : 'pt-BR';
+const alternateLinks = noindex
+  ? []
+  : [
+      { hreflang: currentHreflang, path },
+      ...alternates.filter((alternate) => alternate.hreflang !== currentHreflang),
+    ];
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
-<link rel="alternate" hreflang={locale.replace('_', '-')} href={canonical} />
-<link rel="alternate" hreflang="x-default" href={canonical} />
+{alternateLinks.map((alternate) => (
+  <link rel="alternate" hreflang={alternate.hreflang} href={absoluteUrl(alternate.path, site)} />
+))}
+{!noindex && <link rel="alternate" hreflang="x-default" href={absoluteUrl('/pt/', SITE.url)} />}
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />

@@ -31,4 +31,4 @@
 
 ## Notes
 
-- All items validated successfully; ready for `/speckit.clarify` or `/speckit.plan`
+- Os itens acima registram critérios documentais da especificação. A implementação ainda precisa de validação independente no navegador, com `npm run check` e `npm run build`; este checklist não afirma que esses comandos foram executados.

@@ -6,7 +6,7 @@
 
 ## Summary
 
-Estruturar um blog estático com página inicial, páginas de publicação individuais, mensagem de estado vazio, página de não encontrado e base visual consistente, tudo servido como conteúdo estático sob `/pt/`.
+Estruturar um blog estático bilíngue com páginas iniciais, publicações individuais, guias, páginas institucionais, mensagem de estado vazio, páginas de não encontrado e base visual consistente, tudo servido como conteúdo estático sob `/pt/` e `/en/`.
 
 ## Technical Context
 
@@ -24,7 +24,7 @@ Estruturar um blog estático com página inicial, páginas de publicação indiv
 
 **Performance Goals**: Páginas públicas devem carregar rapidamente com JavaScript mínimo e renderização estática
 
-**Constraints**: Sem backend, sem banco, sem autenticação, sem CMS em tempo de execução, com rotas públicas canônicas em `/pt/`
+**Constraints**: Sem backend, sem banco, sem autenticação, sem CMS em tempo de execução, com rotas públicas canônicas bilíngues em `/pt/` e `/en/`
 
 **Scale/Scope**: Blog pessoal inicial com páginas principais, publicações e navegação básica
 
@@ -34,7 +34,7 @@ Estruturar um blog estático com página inicial, páginas de publicação indiv
 
 - Static-first: Pass. O MVP depende apenas de conteúdo versionado e geração estática.
 - Content model: Pass. Publicações e páginas institucionais serão modeladas como conteúdo com frontmatter consistente.
-- Bilingual routing: Pass para o MVP. Todas as páginas públicas ficam em `/pt/`; `/en/` fica reservado para futuras traduções.
+- Bilingual routing: Pass. O projeto já expõe rotas públicas em `/pt/` e `/en/`, com conteúdo traduzido quando disponível.
 - SEO: Pass. Título, descrição, canonical, Open Graph, Twitter/X, sitemap, robots e RSS entram no escopo onde aplicável.
 - Reading experience: Pass. Layout prioriza leitura, cronologia, navegação por conteúdo e HTML semântico.
 - Amazing boundaries: N/A. Esta feature não inclui páginas Amazing.
@@ -65,9 +65,17 @@ src/
 │   └── pages/
 ├── layouts/
 ├── pages/
-│   └── pt/
+│   ├── pt/
+│   │   ├── index.astro
+│   │   ├── posts/
+│   │   ├── guides/
+│   │   ├── tags/
+│   │   ├── archive/
+│   │   └── 404.astro
+│   └── en/
 │       ├── index.astro
 │       ├── posts/
+│       ├── guides/
 │       ├── tags/
 │       ├── archive/
 │       └── 404.astro
@@ -77,7 +85,7 @@ src/
 public/
 ```
 
-**Structure Decision**: Um único site Astro estático com conteúdo versionado no repositório, páginas públicas sob `/pt/`, componentes compartilhados para apresentação e saída estática para assets e páginas técnicas.
+**Structure Decision**: Um único site Astro estático com conteúdo versionado no repositório, páginas públicas sob `/pt/` e `/en/`, componentes compartilhados para apresentação e saída estática para assets e páginas técnicas.
 
 ## Complexity Tracking
 

@@ -2,31 +2,33 @@
 
 ## Objetivo
 
-Subir e validar a estrutura inicial do blog estático.
+Subir e verificar a estrutura atual do blog estático bilíngue.
 
 ## Fluxo sugerido
 
 1. Instalar dependências do projeto.
 2. Executar a aplicação em modo local.
-3. Abrir a página inicial em `/pt/`.
-4. Validar uma publicação individual.
-5. Validar o estado vazio e a página de não encontrado.
-6. Gerar o build estático final.
+3. Abrir as páginas iniciais em `/pt/` e `/en/`.
+4. Conferir uma publicação e um guia em cada idioma, quando houver conteúdo publicado.
+5. Conferir tags, arquivo, páginas institucionais, RSS e páginas de não encontrado.
+6. Executar as checagens do projeto e gerar o build estático final.
 
 ## Comandos esperados
 
 ```bash
 npm install
 npm run dev
+npm run check
 npm run build
 npm run preview
 ```
 
 ## O que verificar
 
-- Página inicial com introdução e lista de publicações recentes.
-- Página de publicação com leitura legível.
-- Navegação entre home e conteúdo.
-- Mensagem útil quando não houver publicações.
-- Página de não encontrado com saída clara para continuar navegando.
-- Layout responsivo e uso confortável por teclado.
+- As homes PT e EN carregam o conteúdo do respectivo idioma.
+- Publicações, guias, tags, arquivo e páginas institucionais usam os padrões do contrato de rotas.
+- A raiz encaminha para `/pt/` e `/rss.xml` está disponível.
+- As páginas 404 oferecem uma saída clara para continuar navegando.
+- O layout é responsivo e utilizável por teclado.
+
+Os comandos acima são o fluxo canônico de verificação; este documento não registra que tenham sido executados.

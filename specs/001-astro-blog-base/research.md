@@ -14,9 +14,9 @@
 
 ## 3. Roteamento público
 
-- Decision: Publicar todas as páginas visíveis em `/pt/` no MVP e reservar `/en/` para uma futura tradução.
-- Rationale: cumpre a regra de escopo linguístico canônico sem forçar duplicação prematura de conteúdo.
-- Alternatives considered: expor o site sem prefixo de idioma, ou lançar `/pt/` e `/en/` simultaneamente. Rejeitados por conflito com a constituição ou por ampliar o escopo cedo demais.
+- Decision: Publicar as páginas visíveis nas duas árvores linguísticas existentes, `/pt/` e `/en/`, usando conteúdo traduzido quando disponível.
+- Rationale: o estado atual do projeto já possui homes, publicações, guias, páginas institucionais, tags, arquivo e páginas de erro para os dois idiomas.
+- Alternatives considered: expor o site sem prefixo de idioma, ou manter apenas uma árvore linguística. Rejeitados por conflitar com o roteamento bilíngue já existente ou reduzir a cobertura atual.
 
 ## 4. SEO e descoberta
 

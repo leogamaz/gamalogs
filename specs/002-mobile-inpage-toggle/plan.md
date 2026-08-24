@@ -6,17 +6,17 @@
 
 ## Summary
 
-Adicionar um toggle simples no menu superior para abrir e fechar o componente `Nesta página` no mobile, sem mudar a navegação de desktop e sem introduzir novas dependências.
+Adicionar um toggle simples no menu superior para abrir e fechar o componente `Nesta página` no mobile, sem mudar a navegação de desktop e sem introduzir novas dependências. O controlador do toggle fica concentrado em `SiteNav`; o painel continua em `InPageNav`.
 
 ## Technical Context
 
 **Language/Version**: TypeScript + Astro + CSS existente
 
-**Primary Dependencies**: Stack atual do projeto (`Astro`, componentes `.astro`, CSS global)
+**Primary Dependencies**: Stack atual do projeto (`Astro`, componentes `.astro` e CSS existente, incluindo estilos escopados dos componentes)
 
 **Storage**: N/A
 
-**Testing**: Verificação manual no navegador e build do projeto existente
+**Testing**: Verificação manual no navegador, seguida dos comandos canônicos `npm run check` e `npm run build`
 
 **Target Platform**: Site web estático responsivo
 
@@ -24,7 +24,7 @@ Adicionar um toggle simples no menu superior para abrir e fechar o componente `N
 
 **Performance Goals**: Alternância imediata do componente sem impacto perceptível na leitura
 
-**Constraints**: Manter a solução pequena, reaproveitar `InPageNav`, evitar estado global ou infraestrutura extra
+**Constraints**: Manter a solução pequena, reaproveitar `InPageNav`, evitar infraestrutura extra e manter o estado mínimo no controlador existente
 
 **Scale/Scope**: Mudança localizada em componentes de navegação e estilos responsivos
 
@@ -63,12 +63,13 @@ src/
 ├── layouts/
 │   └── PostLayout.astro
 ├── pages/
-│   └── pt/
+│   ├── pt/
+│   └── en/
 └── styles/
     └── global.css
 ```
 
-**Structure Decision**: A mudança fica restrita a `src/components`, `src/layouts` e `src/styles/global.css`, reaproveitando o componente existente de navegação interna.
+**Structure Decision**: A mudança fica restrita aos componentes e layouts que já renderizam a navegação. `SiteNav.astro` concentra o controlador; `InPageNav.astro` concentra o painel e pode conter seus estilos responsivos. `global.css` só deve receber regras compartilhadas quando necessário.
 
 ## Complexity Tracking
 

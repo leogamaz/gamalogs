@@ -1,7 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import type { SeoAlternate } from '../components/SeoHead.astro';
 import InPageNav from '../components/InPageNav.astro';
-import { slugifyTag, tagPath } from '../lib/routes';
+import { homePath, slugifyTag, tagPath } from '../lib/routes';
 import type { Language } from '../lib/content';
 
 interface HeadingItem {
@@ -24,6 +25,11 @@ interface Props {
 const { title, description, path, publishDate, tags = [], headings = [], language = 'pt', languageHref } = Astro.props;
 const locale = language === 'en' ? 'en_US' : 'pt_BR';
 const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
+const alternateLanguage = language === 'en' ? 'pt-BR' : 'en-US';
+const alternateHomePath = homePath(language === 'en' ? 'pt' : 'en');
+const alternates: SeoAlternate[] = languageHref && languageHref !== alternateHomePath
+  ? [{ hreflang: alternateLanguage, path: languageHref }]
+  : [];
 ---
 
 <BaseLayout
@@ -34,6 +40,7 @@ const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
   publishedTime={publishDate.toISOString()}
   lang={htmlLang}
   locale={locale}
+  alternates={alternates}
 >
   <div class="article-grid">
     <aside class="rail sticky-rail">

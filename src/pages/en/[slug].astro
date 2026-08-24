@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import InPageNav from '../../components/InPageNav.astro';
-import { pagePath, SITE } from '../../lib/routes';
+import { pagePath, SITE, toggleLanguagePath } from '../../lib/routes';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', ({ data }) => data.language === 'en');
@@ -15,9 +15,13 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content, headings } = await render(page);
+const path = pagePath(page.data.slug, 'en');
+const alternates = page.data.kind === 'about'
+  ? [{ hreflang: 'pt-BR' as const, path: toggleLanguagePath(path) }]
+  : [];
 ---
 
-<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={pagePath(page.data.slug, 'en')} lang="en-US" locale="en_US">
+<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={path} lang="en-US" locale="en_US" alternates={alternates}>
   <div class="article-grid">
     <aside class="rail sticky-rail">
       <InPageNav headings={headings} title="in this page" />

@@ -4,7 +4,7 @@
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, quickstart.md
 
-**Tests**: Não foram solicitados testes automatizados. Como a feature afeta páginas públicas, a validação responsiva e de acessibilidade deve ser feita no navegador e com build do projeto.
+**Tests**: Não foram solicitados testes automatizados. Como a feature afeta páginas públicas, a validação responsiva e de acessibilidade deve ser feita no navegador, seguida de `npm run check` e `npm run build`.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -18,7 +18,7 @@
 
 **Purpose**: Align the work with the existing component boundaries and keep the change small.
 
-- [x] T001 Review the current `src/components/InPageNav.astro`, `src/layouts/PostLayout.astro`, and `src/components/RecentPosts.astro` usage so the mobile toggle stays inside the existing navigation component boundary
+- [x] T001 Review the current `src/components/SiteNav.astro`, `src/components/InPageNav.astro`, `src/layouts/PostLayout.astro`, and `src/components/RecentPosts.astro` usage so the mobile toggle stays inside the existing navigation component boundary
 
 ---
 
@@ -26,7 +26,7 @@
 
 **Purpose**: Core styling and layout hooks that MUST be ready before the story-specific behavior is finished.
 
-- [x] T002 Add the minimal mobile-only toggle and panel styling hooks in `src/styles/global.css` for the in-page navigation
+- [x] T002 Add the minimal mobile-only toggle and panel styling hooks in `src/components/SiteNav.astro` and `src/components/InPageNav.astro`; use `src/styles/global.css` only for shared page state when needed
 
 **Checkpoint**: Base styles are ready and the story work can now be completed without widening scope.
 
@@ -40,7 +40,7 @@
 
 ### Implementation for User Story 1
 
-- [x] T003 [US1] Implement the open/close button, accessible state, and collapsible mobile behavior in `src/components/InPageNav.astro`
+- [x] T003 [US1] Implement the open/close button, accessible state, and collapsible mobile behavior with the controller in `src/components/SiteNav.astro` and the panel in `src/components/InPageNav.astro`
 
 **Checkpoint**: User Story 1 is functional and can be demonstrated independently.
 
@@ -54,7 +54,7 @@
 
 ### Implementation for User Story 2
 
-- [x] T004 [US2] Fine-tune the closed-state spacing, overflow, and visibility behavior in `src/styles/global.css` so the content area stays readable on mobile
+- [x] T004 [US2] Fine-tune the closed-state spacing, overflow, and visibility behavior in the responsive styles of `src/components/InPageNav.astro` and `src/components/SiteNav.astro`, using `src/styles/global.css` only for shared state, so the content area stays readable on mobile
 
 **Checkpoint**: User Story 2 is independently usable without changing the desktop layout.
 
@@ -68,8 +68,8 @@
 
 ### Implementation for User Story 3
 
-- [x] T005 [P] [US3] Confirm the desktop article layout remains unchanged in `src/layouts/PostLayout.astro` and `src/pages/pt/[slug].astro`
-- [x] T006 [P] [US3] Confirm the archive/home usage of `InPageNav` remains unchanged in `src/components/RecentPosts.astro`
+- [ ] T005 [P] [US3] Validate that the desktop article layout remains unchanged in `src/layouts/PostLayout.astro`, `src/pages/pt/[slug].astro`, and `src/pages/en/[slug].astro`
+- [ ] T006 [P] [US3] Validate that the archive/home usage of `InPageNav` remains unchanged in `src/components/RecentPosts.astro`
 
 **Checkpoint**: Desktop and larger-screen behavior stays intact.
 
@@ -79,8 +79,8 @@
 
 **Purpose**: Final validation for a public-facing responsive change.
 
-- [x] T007 Validate the mobile open/close flow, keyboard access, and desktop parity in the browser, then run the existing build command defined in `package.json`
-- [x] T008 Fix any regressions found during validation in `src/components/InPageNav.astro`, `src/styles/global.css`, `src/layouts/PostLayout.astro`, `src/pages/pt/[slug].astro`, and `src/components/RecentPosts.astro`
+- [ ] T007 Validate the mobile open/close flow, keyboard access, and desktop parity in the browser, then run `npm run check` and `npm run build`
+- [ ] T008 Fix any regressions found during validation in `src/components/SiteNav.astro`, `src/components/InPageNav.astro`, `src/layouts/PostLayout.astro`, `src/pages/pt/[slug].astro`, `src/pages/en/[slug].astro`, and `src/components/RecentPosts.astro`
 
 ---
 
@@ -101,8 +101,8 @@
 
 ### Within Each User Story
 
-- Keep the mobile toggle logic inside `src/components/InPageNav.astro`
-- Keep responsive spacing rules inside `src/styles/global.css`
+- Keep the mobile toggle controller inside `src/components/SiteNav.astro` and the panel behavior inside `src/components/InPageNav.astro`
+- Keep responsive rules in the component that owns the affected markup; use `src/styles/global.css` only for shared rules
 - Keep desktop layout checks localized to the files that already render the component
 - Validate each story before moving to the next one
 
@@ -116,8 +116,8 @@
 ## Parallel Example: User Story 3
 
 ```bash
-Task: "Confirm the desktop article layout remains unchanged in src/layouts/PostLayout.astro and src/pages/pt/[slug].astro"
-Task: "Confirm the archive/home usage of InPageNav remains unchanged in src/components/RecentPosts.astro"
+Task: "Validate the desktop article layout in src/layouts/PostLayout.astro, src/pages/pt/[slug].astro, and src/pages/en/[slug].astro"
+Task: "Validate the archive/home usage of InPageNav in src/components/RecentPosts.astro"
 ```
 
 ---
@@ -135,18 +135,18 @@ Task: "Confirm the archive/home usage of InPageNav remains unchanged in src/comp
 ### Incremental Delivery
 
 1. Complete Setup + Foundational
-2. Add User Story 1 and verify the toggle works on mobile
+2. Add User Story 1 and validate the toggle on mobile
 3. Add User Story 2 to keep the reading experience clean
 4. Add User Story 3 to confirm desktop parity
-5. Finish with the validation and regression pass
+5. Finish with the validation and regression pass using `npm run check` and `npm run build`
 
 ### Parallel Team Strategy
 
 With multiple developers:
 
-1. One developer handles `src/components/InPageNav.astro`
-2. Another handles `src/styles/global.css`
-3. Another verifies desktop parity in `src/layouts/PostLayout.astro`, `src/pages/pt/[slug].astro`, and `src/components/RecentPosts.astro`
+1. One developer handles the controller in `src/components/SiteNav.astro`
+2. Another handles the panel and responsive styles in `src/components/InPageNav.astro`
+3. Another verifies desktop parity in `src/layouts/PostLayout.astro`, `src/pages/pt/[slug].astro`, `src/pages/en/[slug].astro`, and `src/components/RecentPosts.astro`
 
 ---
 
@@ -155,4 +155,4 @@ With multiple developers:
 - [P] tasks = different files, no dependencies
 - [Story] label maps task to specific user story for traceability
 - This feature is intentionally small: reuse the existing navigation component instead of creating a new system
-- Verify the browser behavior on a mobile viewport before considering the story complete
+- Verify the browser behavior on a mobile viewport and run the canonical checks before considering the story validated

@@ -3,12 +3,20 @@ import SeoHead from '../components/SeoHead.astro';
 import SiteNav from '../components/SiteNav.astro';
 import '../styles/global.css';
 
+type Hreflang = 'pt-BR' | 'en-US';
+
+interface Alternate {
+  hreflang: Hreflang;
+  path: string;
+}
+
 interface Props {
   title: string;
   description: string;
   path: string;
   lang?: string;
   locale?: string;
+  alternates?: Alternate[];
   image?: string;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -23,6 +31,7 @@ const {
   path,
   lang = 'pt-BR',
   locale = 'pt_BR',
+  alternates = [],
   image,
   type,
   publishedTime,
@@ -42,10 +51,11 @@ const {
         title={title}
         description={description}
         path={path}
-      locale={locale}
-      image={image}
-      type={type}
-      publishedTime={publishedTime}
+        locale={locale}
+        alternates={alternates}
+        image={image}
+        type={type}
+        publishedTime={publishedTime}
         noindex={noindex}
       />
       <slot name="head" />
