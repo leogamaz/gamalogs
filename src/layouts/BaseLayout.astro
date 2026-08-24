@@ -1,6 +1,8 @@
 ---
 import SeoHead from '../components/SeoHead.astro';
 import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 
 type Hreflang = 'pt-BR' | 'en-US';
@@ -60,11 +62,13 @@ const {
         noindex={noindex}
       />
       <slot name="head" />
+      <Analytics />
     </head>
   <body>
     <main class:list={["page-stack", { "page-stack-full": fullBleed }]}>
       {showSiteNav && <SiteNav />}
       <slot />
+      <SiteFooter />
     </main>
   </body>
 </html>
