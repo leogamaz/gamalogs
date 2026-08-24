@@ -33,3 +33,5 @@ npm run preview
 - `/:lang/:slug/` atende páginas institucionais, como `/pt/sobre/` e `/en/about/`
 - `/:lang/tags/`, `/:lang/tags/:slug/` e `/:lang/archive/` oferecem descoberta do conteúdo
 - `/rss.xml` fornece o feed; `/404/` e `/:lang/404/` fornecem páginas de erro
+
+
