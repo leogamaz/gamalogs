@@ -1,7 +1,7 @@
 export {};
 
-const MOBILE_QUERY = '(max-width: 599px)';
-const mediaQuery = window.matchMedia(MOBILE_QUERY);
+const MENU_QUERY = '(max-width: 920px)';
+const mediaQuery = window.matchMedia(MENU_QUERY);
 const buttons = document.querySelectorAll<HTMLButtonElement>('[data-site-nav-toggle]');
 const searchForms = document.querySelectorAll<HTMLFormElement>('[data-site-search]');
 
@@ -9,7 +9,7 @@ searchForms.forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const input = form.elements.namedItem('term');
+    const input = form.elements.namedItem('q');
     if (!(input instanceof HTMLInputElement)) return;
 
     const term = input.value.trim();
@@ -20,7 +20,7 @@ searchForms.forEach((form) => {
 
     const searchUrl = new URL(form.action);
     searchUrl.searchParams.set('q', `site:gamalogs.com ${term}`);
-    window.location.assign(searchUrl.toString());
+    window.open(searchUrl.toString(), '_blank', 'noopener,noreferrer');
   });
 });
 

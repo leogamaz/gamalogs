@@ -1,8 +1,10 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import type { SeoAlternate } from '../components/SeoHead.astro';
+import GiscusComments from '../components/GiscusComments.astro';
 import InPageNav from '../components/InPageNav.astro';
-import { homePath, slugifyTag, tagPath } from '../lib/routes';
+import { getPostPath, homePath, slugifyTag, tagPath } from '../lib/routes';
 import type { Language } from '../lib/content';
 
 interface HeadingItem {
@@ -20,9 +22,23 @@ interface Props {
   headings?: HeadingItem[];
   language?: Language;
   languageHref?: string;
+  translationKey?: string;
 }
 
-const { title, description, path, publishDate, tags = [], headings = [], language = 'pt', languageHref } = Astro.props;
+const {
+  title,
+  description,
+  path,
+  publishDate,
+  tags = [],
+  headings = [],
+  language = 'pt',
+  languageHref,
+  translationKey,
+} = Astro.props;
+const posts = await getCollection('posts', ({ data }) => data.language === language && !data.draft);
+const currentPost = posts.find((post) => getPostPath(post) === path);
+const giscusTranslationKey = translationKey ?? currentPost?.data.translationKey ?? currentPost?.data.slug ?? path;
 const locale = language === 'en' ? 'en_US' : 'pt_BR';
 const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
 const alternateLanguage = language === 'en' ? 'pt-BR' : 'en-US';
@@ -71,6 +87,8 @@ const alternates: SeoAlternate[] = languageHref && languageHref !== alternateHom
       <div class="prose">
         <slot />
       </div>
+
+      <GiscusComments translationKey={giscusTranslationKey} language={language} />
     </article>
   </div>
 </BaseLayout>

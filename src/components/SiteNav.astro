@@ -18,6 +18,8 @@ const ui = language === 'en'
       inPageLabel: 'in this page',
       open: 'Open',
       close: 'Close',
+      searchLabel: 'Search Gama Logs',
+      searchPlaceholder: 'Enter a topic or term',
     }
   : {
       navLabel: 'Navegacao principal',
@@ -25,6 +27,8 @@ const ui = language === 'en'
       inPageLabel: 'nesta página',
       open: 'Abrir',
       close: 'Fechar',
+      searchLabel: 'Pesquisar no Gama Logs',
+      searchPlaceholder: 'Digite um assunto ou termo',
     };
 
 const links: Array<{ href: string; label: string; icon: IconName }> = [
@@ -71,6 +75,9 @@ const inPageIcons = {
   close: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
   `,
+  search: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+  `,
 } as const;
 ---
 
@@ -83,7 +90,24 @@ const inPageIcons = {
     </a>
 
     <div class="links">
-      <div class="primary-links" id="site-nav-menu" data-site-nav-menu>
+      <div class="mobile-nav-menu" id="site-nav-menu" data-site-nav-menu>
+        <form class="site-search" action="https://www.google.com/search" method="get" target="_blank" data-site-search>
+          <label for="site-search-input" class="sr-only">{ui.searchLabel}</label>
+          <div class="site-search-field">
+            <span class="site-search-icon" aria-hidden="true" set:html={inPageIcons.search} />
+            <input
+              id="site-search-input"
+              name="q"
+              type="search"
+              aria-label={ui.searchLabel}
+              placeholder={ui.searchPlaceholder}
+              autocomplete="off"
+              required
+            />
+          </div>
+        </form>
+
+        <div class="primary-links">
       {links.map((link) => (
         <a
           class:list={[isActive(link.href) && 'active']}
@@ -105,6 +129,7 @@ const inPageIcons = {
           />
         </a>
       ))}
+        </div>
       </div>
 
       <LanguageSwitch href={languageHref} currentLanguage={language} variant="header" />
@@ -203,6 +228,64 @@ const inPageIcons = {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.4rem;
+  }
+
+  .mobile-nav-menu {
+    display: contents;
+  }
+
+  .site-search {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: clamp(12rem, 22vw, 18rem);
+  }
+
+  .site-search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .site-search-icon {
+    position: absolute;
+    left: 0.7rem;
+    display: inline-flex;
+    width: 1rem;
+    height: 1rem;
+    color: var(--muted);
+    pointer-events: none;
+  }
+
+  .site-search-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .site-search input {
+    width: 100%;
+    min-width: 0;
+    height: 2.6rem;
+    padding: 0 0.65rem 0 2.15rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    outline: none;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.03);
+    font: inherit;
+    font-size: 0.78rem;
+  }
+
+  .site-search input::placeholder {
+    color: var(--muted);
+    opacity: 1;
+  }
+
+  .site-search input:focus-visible {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(124, 255, 114, 0.14);
   }
 
   .primary-links {
@@ -332,7 +415,20 @@ const inPageIcons = {
 
     .site-nav-inner {
       width: 100%;
+      flex-wrap: wrap;
       padding: 0.9rem 1.1rem;
+    }
+
+    .links {
+      flex: 1;
+      flex-wrap: wrap;
+    }
+
+    .site-search {
+      flex: 0 1 100%;
+      width: 100%;
+      max-width: 24rem;
+      order: 2;
     }
 
     .primary-links a {
@@ -347,9 +443,31 @@ const inPageIcons = {
     }
   }
 
-  @media (max-width: 599px) {
+  @media (min-width: 600px) and (max-width: 920px) {
+    .site-nav-inner {
+      flex-wrap: nowrap;
+    }
+
     .links {
       position: relative;
+      display: grid;
+      grid-template-columns: minmax(10rem, 1fr) auto auto auto;
+      align-items: center;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .site-menu-toggle {
+      display: inline-flex;
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    :global(.language-switch-header) {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      min-width: max-content;
     }
 
     .primary-links {
@@ -362,6 +480,7 @@ const inPageIcons = {
       padding: 0.45rem;
       flex-direction: column;
       flex-wrap: nowrap;
+      gap: 0.45rem;
       border: 1px solid var(--line);
       border-radius: 0.15rem;
       background: rgba(10, 14, 18, 0.96);
@@ -369,8 +488,86 @@ const inPageIcons = {
       backdrop-filter: blur(16px);
     }
 
-    .primary-links[data-open='true'] {
+    .primary-links a {
+      width: 100%;
+      justify-content: flex-start;
+      gap: 0.7rem;
+      padding-inline: 0.75rem;
+    }
+
+    .primary-links a .sr-only {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .mobile-nav-menu[data-open='true'] .primary-links {
       display: flex;
+    }
+
+    .inpage-toggle {
+      grid-column: 4;
+      grid-row: 1;
+    }
+
+    .site-search {
+      grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      margin-top: 0;
+      justify-self: stretch;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .links {
+      position: relative;
+    }
+
+    .mobile-nav-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.65rem);
+      right: 0;
+      z-index: 2;
+      min-width: 13rem;
+      padding: 0.45rem;
+      flex-direction: column;
+      gap: 0.45rem;
+      border: 1px solid var(--line);
+      border-radius: 0.15rem;
+      background: rgba(10, 14, 18, 0.96);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .mobile-nav-menu[data-open='true'] {
+      display: flex;
+    }
+
+    .site-search {
+      display: flex;
+      width: 100%;
+      order: 0;
+    }
+
+    .site-search input {
+      height: 2.5rem;
+    }
+
+    .primary-links {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
     }
 
     .primary-links a {
@@ -403,6 +600,22 @@ const inPageIcons = {
 
     .site-menu-toggle {
       order: 2;
+    }
+  }
+
+  @media (min-width: 400px) and (max-width: 599px) {
+    .links {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 2.5rem 2.5rem;
+      align-items: center;
+      min-width: 0;
+      gap: 0.4rem;
+    }
+
+    .site-menu-toggle,
+    .inpage-toggle {
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 
@@ -452,6 +665,55 @@ const inPageIcons = {
     .site-menu-icon {
       width: 1rem;
       height: 1rem;
+    }
+  }
+
+  @media (min-width: 250px) and (max-width: 358px) {
+    .site-nav-inner {
+      flex-wrap: nowrap;
+      gap: 0.3rem;
+    }
+
+    .brand {
+      flex: 0 1 auto;
+      font-size: 0.78rem;
+    }
+
+    .brand strong {
+      max-width: 4.5rem;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 2.25rem 2.25rem;
+      align-items: center;
+      flex: 1 1 auto;
+      min-width: 0;
+      gap: 0.2rem;
+    }
+
+    :global(.language-switch-header) {
+      min-width: 0;
+      padding: 0;
+    }
+
+    :global(.language-switch-header .switch-copy span) {
+      font-size: 0.44rem;
+      letter-spacing: 0.06em;
+    }
+
+    :global(.language-switch-header .switch-copy strong) {
+      overflow: hidden;
+      font-size: 0.62rem;
+      letter-spacing: 0;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .inpage-toggle,
+    .site-menu-toggle {
+      width: 2.25rem;
+      height: 2.25rem;
     }
   }
 
