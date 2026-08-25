@@ -24,6 +24,7 @@ interface Props {
   publishedTime?: string;
   noindex?: boolean;
   showSiteNav?: boolean;
+  languageHref?: string;
   fullBleed?: boolean;
 }
 
@@ -39,6 +40,7 @@ const {
   publishedTime,
   noindex = false,
   showSiteNav = true,
+  languageHref,
   fullBleed = false,
 } = Astro.props;
 ---
@@ -66,7 +68,7 @@ const {
     </head>
   <body>
     <main class:list={["page-stack", { "page-stack-full": fullBleed }]}>
-      {showSiteNav && <SiteNav />}
+      {showSiteNav && <SiteNav languageHref={languageHref} />}
       <slot />
       <SiteFooter />
     </main>

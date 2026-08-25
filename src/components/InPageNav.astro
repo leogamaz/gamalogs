@@ -1,9 +1,4 @@
 ---
-import { toggleLanguagePath } from '../lib/routes';
-import LanguageSwitch from './LanguageSwitch.astro';
-
-const pathname = Astro.url.pathname;
-const actualLanguage = pathname.startsWith('/en') ? 'en' : 'pt';
 
 interface HeadingItem {
   depth: number;
@@ -16,11 +11,9 @@ interface Props {
   headings?: HeadingItem[];
   title?: string;
   includeTopLevel?: boolean;
-  languageHref?: string;
 }
 
-const { items: providedItems, headings = [], title = 'nesta página', includeTopLevel = false, languageHref: providedLanguageHref } = Astro.props;
-const languageHref = providedLanguageHref ?? toggleLanguagePath(pathname);
+const { items: providedItems, headings = [], title = 'nesta página', includeTopLevel = false } = Astro.props;
 
 const navItems = [
   { slug: 'topo', text: 'Topo', depth: 1 },
@@ -31,7 +24,6 @@ const navItems = [
 <nav class="toc surface" id="in-page-nav-panel" aria-label={title} data-in-page-nav data-open="false" tabindex="-1">
   <div class="toc-panel">
     <div class="toc-head">
-      <LanguageSwitch href={languageHref} currentLanguage={actualLanguage} />
       <span style="margin-top: 0.9rem;" class="eyebrow">{title}</span>
     </div>
 
@@ -48,7 +40,7 @@ const navItems = [
 <style>
   .toc {
     padding: 0.95rem;
-    border-radius: 12px;
+    border-radius: 3px;
   }
 
   .toc-head {
@@ -87,7 +79,9 @@ const navItems = [
     .toc {
       position: fixed;
       inset: 0;
-      z-index: 15;
+      /* Above the article layer, while remaining below the sticky header. */
+      z-index: 25;
+      background: var(--surface-strong);
       height: 100dvh;
       padding: 5.8rem 1rem 1.25rem;
       border-radius: 0;

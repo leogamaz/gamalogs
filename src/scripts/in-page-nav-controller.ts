@@ -1,3 +1,5 @@
+export {};
+
 const MOBILE_QUERY = '(max-width: 920px)';
 const FOCUSABLE_SELECTOR = [
   'a[href]',

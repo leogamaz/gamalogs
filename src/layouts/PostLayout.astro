@@ -41,10 +41,11 @@ const alternates: SeoAlternate[] = languageHref && languageHref !== alternateHom
   lang={htmlLang}
   locale={locale}
   alternates={alternates}
+  languageHref={languageHref}
 >
   <div class="article-grid">
     <aside class="rail sticky-rail">
-      <InPageNav headings={headings} title={language === 'en' ? 'in this page' : 'nesta página'} languageHref={languageHref} />
+      <InPageNav headings={headings} title={language === 'en' ? 'in this page' : 'nesta página'} />
     </aside>
 
     <article class="reading-flow surface article-shell" id="topo">

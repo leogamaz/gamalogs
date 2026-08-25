@@ -21,7 +21,7 @@ const alternates = page.data.kind === 'about'
   : [];
 ---
 
-<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={path} lang="pt-BR" locale="pt_BR" alternates={alternates}>
+<BaseLayout title={`${page.data.title} | ${SITE.name}`} description={page.data.summary ?? SITE.description} path={path} lang="pt-BR" locale="pt_BR" alternates={alternates} languageHref={alternates[0]?.path}>
   <div class="article-grid">
     <aside class="rail sticky-rail">
       <InPageNav headings={headings} title="nesta página" />

@@ -13,8 +13,8 @@
   --accent-deep: #9dff83;
   --highlight: #d4b7ff;
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-  --radius: 18px;
-  --radius-sm: 12px;
+  --radius: 0.15rem;
+  --radius-sm: 0.15rem;
   --content: 72rem;
   --reading: 44rem;
   color-scheme: dark;
@@ -165,6 +165,15 @@ main {
   overflow: auto;
 }
 
+@media (max-width: 920px) {
+  .sticky-rail {
+    position: static;
+    top: auto;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
 .meta-row {
   display: flex;
   flex-wrap: wrap;
@@ -251,10 +260,6 @@ main {
   }
 
   .sticky-rail {
-    position: static;
-    top: auto;
-    max-height: none;
-    overflow: visible;
     margin-bottom: 0.85rem;
   }
 }

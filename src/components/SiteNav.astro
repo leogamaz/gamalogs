@@ -1,7 +1,13 @@
 ---
 import { archivePath, guidesPath, homePath, pagePath } from '../lib/routes';
+import LanguageSwitch from './LanguageSwitch.astro';
+
+interface Props {
+  languageHref?: string;
+}
 
 const pathname = Astro.url.pathname;
+const { languageHref } = Astro.props as Props;
 type IconName = 'archive' | 'guides' | 'tags' | 'rss' | 'about';
 const language = pathname.startsWith('/en') ? 'en' : 'pt';
 const aboutSlug = language === 'en' ? 'about' : 'sobre';
@@ -57,7 +63,10 @@ const icons: Record<IconName, string> = {
 
 const inPageIcons = {
   menu: `
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-icon lucide-grip"><circle cx="12" cy="5" r="1"/><circle cx="19" cy="5" r="1"/><circle cx="5" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="19" cy="19" r="1"/><circle cx="5" cy="19" r="1"/></svg>
+  `,
+  index: `
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-list-filter-icon lucide-list-filter"><path d="M2 5h20"/><path d="M6 12h12"/><path d="M9 19h6"/></svg>
   `,
   close: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -74,6 +83,7 @@ const inPageIcons = {
     </a>
 
     <div class="links">
+      <div class="primary-links" id="site-nav-menu" data-site-nav-menu>
       {links.map((link) => (
         <a
           class:list={[isActive(link.href) && 'active']}
@@ -95,6 +105,24 @@ const inPageIcons = {
           />
         </a>
       ))}
+      </div>
+
+      <LanguageSwitch href={languageHref} currentLanguage={language} variant="header" />
+
+      <button
+        class="site-menu-toggle"
+        type="button"
+        aria-label={language === 'en' ? 'Open main menu' : 'Abrir menu principal'}
+        aria-expanded="false"
+        aria-controls="site-nav-menu"
+        data-site-nav-toggle
+        data-open-label={language === 'en' ? 'Open main menu' : 'Abrir menu principal'}
+        data-close-label={language === 'en' ? 'Close main menu' : 'Fechar menu principal'}
+      >
+        <span class="sr-only">{language === 'en' ? 'Main menu' : 'Menu principal'}</span>
+        <span class="site-menu-icon site-menu-icon-open" aria-hidden="true" set:html={inPageIcons.menu} />
+        <span class="site-menu-icon site-menu-icon-close" aria-hidden="true" set:html={inPageIcons.close} />
+      </button>
 
       <button
         class="inpage-toggle"
@@ -109,7 +137,7 @@ const inPageIcons = {
         data-in-page-target-text={ui.inPageLabel}
       >
         <span class="sr-only">{ui.inPageLabel}</span>
-        <span class="inpage-icon inpage-icon-menu" aria-hidden="true" set:html={inPageIcons.menu} />
+        <span class="inpage-icon inpage-icon-index" aria-hidden="true" set:html={inPageIcons.index} />
         <span class="inpage-icon inpage-icon-close" aria-hidden="true" set:html={inPageIcons.close} />
       </button>
     </div>
@@ -117,6 +145,7 @@ const inPageIcons = {
 </nav>
 
 <script src="../scripts/in-page-nav-controller.ts"></script>
+<script src="../scripts/site-nav-controller.ts"></script>
 
 <style>
   .site-nav {
@@ -172,16 +201,23 @@ const inPageIcons = {
   .links {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.4rem;
   }
 
-  .links a {
+  .primary-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .primary-links a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 2.6rem;
     height: 2.6rem;
-    border-radius: 0.75rem;
+    border-radius: 0.15rem;
     text-decoration: none;
     color: var(--muted);
     border: 1px solid transparent;
@@ -200,13 +236,40 @@ const inPageIcons = {
     justify-content: center;
     width: 2.6rem;
     height: 2.6rem;
-    border-radius: 0.75rem;
+    border-radius: 0.15rem;
     color: var(--muted);
     border: 1px solid transparent;
     background: transparent;
     transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
     cursor: pointer;
     padding: 0;
+  }
+
+  .site-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.15rem;
+    color: var(--muted);
+    border: 1px solid transparent;
+    background: transparent;
+    transition: border-color 140ms ease, color 140ms ease, background 140ms ease;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .site-menu-icon {
+    display: none;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .site-menu-icon :global(svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   .inpage-icon {
@@ -224,22 +287,33 @@ const inPageIcons = {
     height: 100%;
   }
 
-  .links a.active,
-  .links a:hover,
-  .links a:focus-visible {
+  .primary-links a.active,
+  .primary-links a:hover,
+  .primary-links a:focus-visible {
     color: var(--accent);
     border-color: rgba(124, 255, 114, 0.2);
     background: rgba(124, 255, 114, 0.05);
   }
 
   .inpage-toggle:hover,
-  .inpage-toggle:focus-visible {
+  .inpage-toggle:focus-visible,
+  .site-menu-toggle:hover,
+  .site-menu-toggle:focus-visible {
     color: var(--accent);
     border-color: rgba(124, 255, 114, 0.2);
     background: rgba(124, 255, 114, 0.05);
   }
 
-  .inpage-toggle[aria-expanded='false'] .inpage-icon-menu,
+  .site-menu-toggle[aria-expanded='false'] .site-menu-icon-open,
+  .site-menu-toggle[aria-expanded='true'] .site-menu-icon-close {
+    display: inline-flex;
+  }
+
+  .site-menu-toggle[aria-expanded='true'] {
+    color: var(--accent);
+  }
+
+  .inpage-toggle[aria-expanded='false'] .inpage-icon-index,
   .inpage-toggle[aria-expanded='true'] .inpage-icon-close {
     display: inline-flex;
   }
@@ -261,7 +335,7 @@ const inPageIcons = {
       padding: 0.9rem 1.1rem;
     }
 
-    .links a {
+    .primary-links a {
       width: 2.5rem;
       height: 2.5rem;
     }
@@ -270,6 +344,65 @@ const inPageIcons = {
       display: inline-flex;
       width: 2.5rem;
       height: 2.5rem;
+    }
+  }
+
+  @media (max-width: 599px) {
+    .links {
+      position: relative;
+    }
+
+    .primary-links {
+      display: none;
+      position: absolute;
+      top: calc(100% + 0.65rem);
+      right: 0;
+      z-index: 2;
+      min-width: 13rem;
+      padding: 0.45rem;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      border: 1px solid var(--line);
+      border-radius: 0.9rem;
+      background: rgba(10, 14, 18, 0.96);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .primary-links[data-open='true'] {
+      display: flex;
+    }
+
+    .primary-links a {
+      width: 100%;
+      justify-content: flex-start;
+      gap: 0.7rem;
+      padding-inline: 0.75rem;
+    }
+
+    .primary-links a .sr-only {
+      position: static;
+      width: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      clip: auto;
+      white-space: normal;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-menu-toggle {
+      display: inline-flex;
+    }
+
+    .inpage-toggle {
+      order: 1;
+    }
+
+    .site-menu-toggle {
+      order: 2;
     }
   }
 
@@ -297,15 +430,26 @@ const inPageIcons = {
       gap: 0.2rem;
     }
 
-    .links a,
+    .primary-links {
+      min-width: 11rem;
+    }
+
+    .primary-links a,
     .inpage-toggle {
       width: 2.25rem;
       height: 2.25rem;
       border-radius: 0.62rem;
     }
 
+    .site-menu-toggle {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.62rem;
+    }
+
     .nav-icon,
-    .inpage-icon {
+    .inpage-icon,
+    .site-menu-icon {
       width: 1rem;
       height: 1rem;
     }
