@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import InPageNav from '../../components/InPageNav.astro';
+import GiscusComments from '../../components/GiscusComments.astro';
 import { pagePath, SITE, toggleLanguagePath } from '../../lib/routes';
 
 export async function getStaticPaths() {
@@ -33,6 +34,7 @@ const alternates = page.data.kind === 'about'
         {page.data.summary && <p class="lede">{page.data.summary}</p>}
       </header>
       <Content />
+      {page.data.kind === 'about' && <GiscusComments translationKey="about" language="pt" />}
     </article>
   </div>
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import EmptyState from '../../../components/EmptyState.astro';
 import GuideCard from '../../../components/GuideCard.astro';
+import GiscusComments from '../../../components/GiscusComments.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getPublishedGuides } from '../../../lib/content';
 import { getGuidePath, guidesPath, SITE } from '../../../lib/routes';
@@ -38,6 +39,7 @@ const guides = await getPublishedGuides('en');
       <EmptyState title="No guides published yet" description="Future special guides will appear here." />
     )}
   </section>
+  <GiscusComments translationKey="guides-index" language="en" />
 </BaseLayout>
 
 <style>

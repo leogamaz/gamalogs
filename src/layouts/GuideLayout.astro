@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import type { SeoAlternate } from '../components/SeoHead.astro';
 import LanguageSwitch from '../components/LanguageSwitch.astro';
+import GiscusComments from '../components/GiscusComments.astro';
 import type { Language } from '../lib/content';
 import { homePath } from '../lib/routes';
 
@@ -10,11 +11,12 @@ interface Props {
   description: string;
   path: string;
   publishDate: Date;
+  translationKey: string;
   language?: Language;
   languageHref?: string;
 }
 
-const { title, description, path, publishDate, language = 'pt', languageHref } = Astro.props;
+const { title, description, path, publishDate, translationKey, language = 'pt', languageHref } = Astro.props;
 const locale = language === 'en' ? 'en_US' : 'pt_BR';
 const htmlLang = language === 'en' ? 'en-US' : 'pt-BR';
 const alternateLanguage = language === 'en' ? 'pt-BR' : 'en-US';
@@ -43,4 +45,5 @@ const alternates: SeoAlternate[] = languageHref && languageHref !== alternateHom
   </Fragment>
   <LanguageSwitch href={languageHref} currentLanguage={language} variant="floating" />
   <slot />
+  <GiscusComments translationKey={translationKey} language={language} />
 </BaseLayout>

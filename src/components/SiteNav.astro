@@ -8,7 +8,7 @@ interface Props {
 
 const pathname = Astro.url.pathname;
 const { languageHref } = Astro.props as Props;
-type IconName = 'archive' | 'guides' | 'tags' | 'rss' | 'about';
+type IconName = 'archive' | 'guides' | 'github' | 'rss' | 'about';
 const language = pathname.startsWith('/en') ? 'en' : 'pt';
 const aboutSlug = language === 'en' ? 'about' : 'sobre';
 const ui = language === 'en'
@@ -31,16 +31,15 @@ const ui = language === 'en'
       searchPlaceholder: 'Digite um assunto ou termo',
     };
 
-const links: Array<{ href: string; label: string; icon: IconName }> = [
+const links: Array<{ href: string; label: string; icon: IconName; external?: boolean }> = [
   { href: archivePath(language), label: 'archive', icon: 'archive' },
   { href: guidesPath(language), label: 'guides', icon: 'guides' },
-  { href: `/${language}/tags/`, label: 'tags', icon: 'tags' },
+  { href: 'https://github.com/leogamaz', label: 'GitHub', icon: 'github', external: true },
   { href: '/rss.xml', label: 'rss', icon: 'rss' },
   { href: pagePath(aboutSlug, language), label: 'about', icon: 'about' },
 ];
 
 function isActive(href: string) {
-  if (href.endsWith('/tags/')) return pathname.startsWith(`/${language}/tags`);
   if (href.endsWith('/guides/')) return pathname.startsWith(`/${language}/guides`);
   if (href.endsWith('/archive/')) return pathname.startsWith(`/${language}/archive`);
   if (href.endsWith('/about/') || href.endsWith('/sobre/')) return pathname.startsWith(`/${language}/${aboutSlug}`);
@@ -54,8 +53,8 @@ const icons: Record<IconName, string> = {
   guides: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
   `,
-  tags: `
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  github: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.084-.729.084-.729 1.205.084 1.838 1.237 1.838 1.237 1.07 1.835 2.809 1.305 3.495.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.63-5.373-12-12-12"></path></svg>
   `,
   rss: `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rss-icon lucide-rss"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
@@ -112,10 +111,12 @@ const inPageIcons = {
         <a
           class:list={[isActive(link.href) && 'active']}
           href={link.href}
-          aria-label={link.label}
+          aria-label={link.external ? `${link.label} (${language === 'en' ? 'external link' : 'link externo'})` : link.label}
           aria-current={isActive(link.href) ? 'page' : undefined}
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
         >
-          <span class="sr-only">{link.label}</span>
+          <span class="sr-only">{link.external ? `${link.label} (${language === 'en' ? 'external link' : 'link externo'})` : link.label}</span>
           <svg
             class="nav-icon"
             viewBox="0 0 24 24"
