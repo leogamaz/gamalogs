@@ -11,3 +11,8 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+.serena/
+.specify/
+.playwright-mcp/
+.opencode/
+.openchamber/
