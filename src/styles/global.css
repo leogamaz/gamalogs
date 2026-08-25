@@ -266,8 +266,8 @@ main {
 
 @media (max-width: 399px) {
   :root {
-    --radius: 14px;
-    --radius-sm: 10px;
+    --radius: 0.15rem;
+    --radius-sm: 0.15rem;
   }
 
   main {
