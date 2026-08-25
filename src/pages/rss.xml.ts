@@ -4,7 +4,10 @@ import { getPublishedPosts } from '../lib/content';
 import { getPostPath, SITE } from '../lib/routes';
 
 export const GET: APIRoute = async (context) => {
-  const posts = await getPublishedPosts();
+  const posts = [
+    ...(await getPublishedPosts('pt')),
+    ...(await getPublishedPosts('en')),
+  ].sort((left, right) => right.data.publishDate.valueOf() - left.data.publishDate.valueOf());
 
   return rss({
     title: SITE.name,

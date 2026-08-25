@@ -29,9 +29,14 @@ export async function getPublishedGuides(language: Language = 'pt') {
 export async function getPostTranslationPath(post: PostEntry, targetLanguage: Language) {
   const posts = await getCollection('posts', ({ data }) => data.language === targetLanguage && !data.draft);
 
-  const translatedPost = post.data.translationKey
-    ? posts.find((candidate) => candidate.data.translationKey === post.data.translationKey)
-    : posts.find((candidate) => candidate.data.slug === post.data.slug);
+  const translatedPost = post.data.translationAvailable
+    ? post.data.translationKey
+      ? posts.find(
+          (candidate) =>
+            candidate.data.translationAvailable && candidate.data.translationKey === post.data.translationKey
+        )
+      : posts.find((candidate) => candidate.data.translationAvailable && candidate.data.slug === post.data.slug)
+    : undefined;
 
   return translatedPost ? getPostPath(translatedPost) : homePath(targetLanguage);
 }
