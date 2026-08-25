@@ -39,7 +39,9 @@ const guides = await getPublishedGuides('en');
       <EmptyState title="No guides published yet" description="Future special guides will appear here." />
     )}
   </section>
-  <GiscusComments translationKey="guides-index" language="en" />
+  <div class="reading-flow guides-comments">
+    <GiscusComments translationKey="guides-index" language="en" />
+  </div>
 </BaseLayout>
 
 <style>
@@ -67,6 +69,16 @@ const guides = await getPublishedGuides('en');
     display: grid;
   }
 
+  :global(.guides-comments) {
+    box-sizing: border-box;
+    padding-inline: calc(1.25rem + 1px);
+    margin-top: 2rem;
+  }
+
+  :global(.guides-comments .giscus-comments) {
+    margin-top: 0;
+  }
+
   @media (max-width: 399px) {
     .guides-shell {
       gap: 0.95rem;
@@ -76,6 +88,10 @@ const guides = await getPublishedGuides('en');
     .guides-head {
       gap: 0.55rem;
       padding-bottom: 0.85rem;
+    }
+
+    :global(.guides-comments) {
+      padding-inline: calc(0.8rem + 1px);
     }
 
     h1 {
