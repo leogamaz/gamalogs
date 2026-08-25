@@ -1,9 +1,9 @@
 ---
 
-title: Testing with SDD?
+title: Testing with SDD 001
 slug: testing-with-sdd
 summary: Analyze the actual effectiveness of using AI in development with simple SDD.
-publishDate: 2026-06-05
+publishDate: 2026-06-09
 language: en
 translationKey: teste-com-sdd-001
 tags:
@@ -16,13 +16,13 @@ draft: false
 
 ---
 
-**Spec Driven Development Structure - 001**
+## Spec Driven Development Structure - 001
 
 Here we will take a simpler approach, without initially using GitHub Speckit, to analyze the real efficiency of using AI in development.
 
----
 
-**The Idea**
+
+## The Idea
 
 Use `AGENTS.md` with hierarchy — one file per responsibility: UI/UX, database, API, front-end framework, as needed.
 
@@ -55,7 +55,7 @@ To create specs, plans, and tasks, I used the `/grill-me` skill precisely to cov
 
 ---
 
-**First spec: Monorepo structure**
+## First spec: Monorepo structure
 
 Spec created. Plan created. Tasks created.
 
@@ -89,7 +89,7 @@ A directory tree. With **nothing** implemented.
 
 ---
 
-**Where the real problem lies**
+## Where the real problem lies
 
 You must be thinking: *"but that's obvious, why not just ask to create the structure directly?"*
 
@@ -103,7 +103,7 @@ Now think: we have a specification about our monorepo, right? Technically, that'
 
 Do you understand the cycle? The more you specify in this way, the more tokens it consumes. The more context the model needs to carry. The greater the chance of hallucination. And this is **just one example**—now imagine more comprehensive requests, one-prompt attempts to obtain an entire feature, people using SDD in any way, generating specs from AI and not from their own knowledge. ---
 
-**What this reveals about SDD in practice**
+## What this reveals about SDD in practice
 
 The `tasks.md` file was the most straightforward—basically saying: *"create the directory and the file in `apps/api/README.md`"*. This made me realize that the most effective approach here would be to use **only plan and tasks** to actually create something. Furthermore, the content of these two files could be drastically reduced to *"create this structure"*—it wouldn't even require a spec for this request.
 

@@ -16,13 +16,13 @@ draft: false
 
 ---
 
-**Estrutura Spec Driven Development - 001**
 
+## Estrutura Spec Driven Development - 001
 Aqui vamos fazer uma abordagem mais simples, sem o uso de github speckit inicialmente, para analisar a eficiência real do uso de IA no desenvolvimento.
 
----
 
-**A ideia**
+
+## A ideia
 
 Usar `AGENTS.md` com hierarquia — um arquivo por responsabilidade: ui/ux, banco de dados, api, framework front end, conforme a necessidade aparecer.
 
@@ -52,7 +52,7 @@ Para elaborar specs, plans e tasks, usei a skill `/grill-me` justamente pra cobr
 
 ---
 
-**Primeira spec: estrutura do monorepo**
+## Primeira spec: estrutura do monorepo
 
 Spec criada. Plan criado. Tasks criado.
 
@@ -85,7 +85,7 @@ Uma árvore de diretórios. Sem **nada** implementado.
 
 ---
 
-**Onde mora o problema real**
+## Onde mora o problema real
 
 Você deve estar pensando: *"mas isso é óbvio, por que não pedir direto pra criar a estrutura?"*
 
@@ -101,7 +101,7 @@ Entende o ciclo? Quanto mais você especifica dessa forma, mais tokens consome. 
 
 ---
 
-**O que isso revela sobre SDD na prática**
+## O que isso revela sobre SDD na prática
 
 O `tasks.md` foi o mais direto ao ponto — basicamente dizia: *"crie o diretório e o arquivo em `apps/api/README.md`"*. Isso me fez perceber que o mais efetivo aqui seria usar **apenas plan e tasks** para realmente criar algo. E mais: o conteúdo desses dois arquivos poderia ser drasticamente reduzido a *"crie essa estrutura"* — nem precisaria de spec pra essa solicitação.
 
